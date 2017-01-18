@@ -1,0 +1,3 @@
+x11vnc-macosxCG.o: macosxCG.c /usr/include/stdc-predef.h
+
+/usr/include/stdc-predef.h:

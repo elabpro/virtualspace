@@ -1,0 +1,3 @@
+x11vnc-macosx_opengl.o: macosx_opengl.c /usr/include/stdc-predef.h
+
+/usr/include/stdc-predef.h:

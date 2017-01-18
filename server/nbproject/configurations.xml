@@ -1,0 +1,908 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="97">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="rfb" displayName="rfb" projectFiles="true" root="../rfb">
+      <itemPath>../rfb/default8x16.h</itemPath>
+      <itemPath>../rfb/rfb.h</itemPath>
+      <itemPath>../rfb/rfbclient.h</itemPath>
+      <itemPath>../rfb/rfbproto.h</itemPath>
+      <itemPath>../rfb/rfbregion.h</itemPath>
+    </logicalFolder>
+    <df root="." name="0">
+      <in>8to24.c</in>
+      <in>appshare.c</in>
+      <in>avahi.c</in>
+      <in>cleanup.c</in>
+      <in>connections.c</in>
+      <in>cursor.c</in>
+      <in>gui.c</in>
+      <in>help.c</in>
+      <in>inet.c</in>
+      <in>keyboard.c</in>
+      <in>linuxfb.c</in>
+      <in>macosx.c</in>
+      <in>macosxCG.c</in>
+      <in>macosxCGP.c</in>
+      <in>macosxCGS.c</in>
+      <in>macosx_opengl.c</in>
+      <in>options.c</in>
+      <in>pm.c</in>
+      <in>pointer.c</in>
+      <in>rates.c</in>
+      <in>remote.c</in>
+      <in>scan.c</in>
+      <in>screen.c</in>
+      <in>selection.c</in>
+      <in>solid.c</in>
+      <in>sslcmds.c</in>
+      <in>sslhelper.c</in>
+      <in>uinput.c</in>
+      <in>unixpw.c</in>
+      <in>user.c</in>
+      <in>userinput.c</in>
+      <in>util.c</in>
+      <in>v4l.c</in>
+      <in>win_utils.c</in>
+      <in>x11vnc.c</in>
+      <in>x11vnc_defs.c</in>
+      <in>xdamage.c</in>
+      <in>xevents.c</in>
+      <in>xinerama.c</in>
+      <in>xkb_bell.c</in>
+      <in>xrandr.c</in>
+      <in>xrecord.c</in>
+      <in>xwrappers.c</in>
+    </df>
+    <logicalFolder name="x11vnc" displayName="x11vnc" projectFiles="true" root="..">
+      <logicalFolder name="libvncclient"
+                     displayName="libvncclient"
+                     projectFiles="true">
+        <itemPath>../libvncclient/corre.c</itemPath>
+        <itemPath>../libvncclient/cursor.c</itemPath>
+        <itemPath>../libvncclient/hextile.c</itemPath>
+        <itemPath>../libvncclient/listen.c</itemPath>
+        <itemPath>../libvncclient/lzoconf.h</itemPath>
+        <itemPath>../libvncclient/minilzo.h</itemPath>
+        <itemPath>../libvncclient/rfbproto.c</itemPath>
+        <itemPath>../libvncclient/rre.c</itemPath>
+        <itemPath>../libvncclient/sockets.c</itemPath>
+        <itemPath>../libvncclient/tight.c</itemPath>
+        <itemPath>../libvncclient/tls.h</itemPath>
+        <itemPath>../libvncclient/ultra.c</itemPath>
+        <itemPath>../libvncclient/vncviewer.c</itemPath>
+        <itemPath>../libvncclient/zlib.c</itemPath>
+        <itemPath>../libvncclient/zrle.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="libvncserver"
+                     displayName="libvncserver"
+                     projectFiles="true">
+        <logicalFolder name="tightvnc-filetransfer"
+                       displayName="tightvnc-filetransfer"
+                       projectFiles="true">
+          <itemPath>../libvncserver/tightvnc-filetransfer/filelistinfo.c</itemPath>
+          <itemPath>../libvncserver/tightvnc-filetransfer/filelistinfo.h</itemPath>
+          <itemPath>../libvncserver/tightvnc-filetransfer/filetransfermsg.c</itemPath>
+          <itemPath>../libvncserver/tightvnc-filetransfer/filetransfermsg.h</itemPath>
+          <itemPath>../libvncserver/tightvnc-filetransfer/handlefiletransferrequest.c</itemPath>
+          <itemPath>../libvncserver/tightvnc-filetransfer/handlefiletransferrequest.h</itemPath>
+          <itemPath>../libvncserver/tightvnc-filetransfer/rfbtightproto.h</itemPath>
+          <itemPath>../libvncserver/tightvnc-filetransfer/rfbtightserver.c</itemPath>
+        </logicalFolder>
+        <itemPath>../libvncserver/auth.c</itemPath>
+        <itemPath>../libvncserver/cargs.c</itemPath>
+        <itemPath>../libvncserver/corre.c</itemPath>
+        <itemPath>../libvncserver/cursor.c</itemPath>
+        <itemPath>../libvncserver/d3des.c</itemPath>
+        <itemPath>../libvncserver/d3des.h</itemPath>
+        <itemPath>../libvncserver/font.c</itemPath>
+        <itemPath>../libvncserver/hextile.c</itemPath>
+        <itemPath>../libvncserver/httpd.c</itemPath>
+        <itemPath>../libvncserver/lzoconf.h</itemPath>
+        <itemPath>../libvncserver/main.c</itemPath>
+        <itemPath>../libvncserver/minilzo.c</itemPath>
+        <itemPath>../libvncserver/minilzo.h</itemPath>
+        <itemPath>../libvncserver/private.h</itemPath>
+        <itemPath>../libvncserver/rfbregion.c</itemPath>
+        <itemPath>../libvncserver/rfbserver.c</itemPath>
+        <itemPath>../libvncserver/rre.c</itemPath>
+        <itemPath>../libvncserver/scale.c</itemPath>
+        <itemPath>../libvncserver/scale.h</itemPath>
+        <itemPath>../libvncserver/sockets.c</itemPath>
+        <itemPath>../libvncserver/stats.c</itemPath>
+        <itemPath>../libvncserver/tableinit24.c</itemPath>
+        <itemPath>../libvncserver/tableinitcmtemplate.c</itemPath>
+        <itemPath>../libvncserver/tableinittctemplate.c</itemPath>
+        <itemPath>../libvncserver/tabletrans24template.c</itemPath>
+        <itemPath>../libvncserver/tabletranstemplate.c</itemPath>
+        <itemPath>../libvncserver/tight.c</itemPath>
+        <itemPath>../libvncserver/translate.c</itemPath>
+        <itemPath>../libvncserver/ultra.c</itemPath>
+        <itemPath>../libvncserver/vncauth.c</itemPath>
+        <itemPath>../libvncserver/zlib.c</itemPath>
+        <itemPath>../libvncserver/zrle.c</itemPath>
+        <itemPath>../libvncserver/zrleencodetemplate.c</itemPath>
+        <itemPath>../libvncserver/zrleoutstream.c</itemPath>
+        <itemPath>../libvncserver/zrleoutstream.h</itemPath>
+        <itemPath>../libvncserver/zrlepalettehelper.c</itemPath>
+        <itemPath>../libvncserver/zrlepalettehelper.h</itemPath>
+        <itemPath>../libvncserver/zrletypes.h</itemPath>
+        <itemPath>../libvncserver/zywrletemplate.c</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Важные файлы"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+      <itemPath>nbproject/private/launcher.properties</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <flagsDictionary>
+        <element flagsID="0" commonFlags="-g -O2"/>
+        <element flagsID="1"
+                 commonFlags="-mtune=generic -march=x86-64 -g -O2 -fstack-protector-strong"/>
+      </flagsDictionary>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath>x11vnc</executablePath>
+        </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
+      </makefileType>
+      <item path="../libvncclient/corre.c" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="../libvncclient/cursor.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncclient</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncclient/hextile.c" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="../libvncclient/listen.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncclient</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncclient/rfbproto.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../libvncserver</pElem>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncclient</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncclient/rre.c" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="../libvncclient/sockets.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncclient</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncclient/tight.c" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="../libvncclient/ultra.c" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="../libvncclient/vncviewer.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncclient</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncclient/zlib.c" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="../libvncclient/zrle.c" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="../libvncserver/auth.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/cargs.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/corre.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/cursor.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/d3des.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/font.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/hextile.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/httpd.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/main.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/minilzo.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/rfbregion.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/rfbserver.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/rre.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/scale.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/sockets.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/stats.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/tableinit24.c" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="../libvncserver/tableinitcmtemplate.c"
+            ex="true"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../libvncserver/tableinittctemplate.c"
+            ex="true"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../libvncserver/tabletrans24template.c"
+            ex="true"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../libvncserver/tabletranstemplate.c"
+            ex="true"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../libvncserver/tight.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/tightvnc-filetransfer/filelistinfo.c"
+            ex="false"
+            tool="0"
+            flavor2="3">
+        <cTool flags="1">
+        </cTool>
+      </item>
+      <item path="../libvncserver/tightvnc-filetransfer/filetransfermsg.c"
+            ex="false"
+            tool="0"
+            flavor2="3">
+        <cTool flags="1">
+        </cTool>
+      </item>
+      <item path="../libvncserver/tightvnc-filetransfer/handlefiletransferrequest.c"
+            ex="false"
+            tool="0"
+            flavor2="3">
+        <cTool flags="1">
+        </cTool>
+      </item>
+      <item path="../libvncserver/tightvnc-filetransfer/rfbtightserver.c"
+            ex="false"
+            tool="0"
+            flavor2="3">
+        <cTool flags="1">
+        </cTool>
+      </item>
+      <item path="../libvncserver/translate.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/ultra.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/vncauth.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/zlib.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/zrle.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../libvncserver</pElem>
+            <pElem>../rfb</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/zrleencodetemplate.c"
+            ex="true"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../libvncserver/zrleoutstream.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/zrlepalettehelper.c"
+            ex="false"
+            tool="0"
+            flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="../libvncserver/zywrletemplate.c" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="8to24.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="appshare.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>../rfb</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="avahi.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="cleanup.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>/usr/include/X11/extensions</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="connections.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="cursor.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>/usr/include/X11/extensions</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <folder path="x11vnc/libvncserver/tightvnc-filetransfer">
+        <cTool>
+          <incDir>
+            <pElem>../libvncserver/tightvnc-filetransfer</pElem>
+            <pElem>../rfb</pElem>
+            <pElem>../libvncserver</pElem>
+          </incDir>
+        </cTool>
+      </folder>
+      <item path="gui.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="help.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="inet.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="keyboard.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>/usr/include/X11/extensions</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="linuxfb.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="macosx.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="macosxCG.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="macosxCGP.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="macosxCGS.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="macosx_opengl.c" ex="false" tool="0" flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>HAVE_CONFIG_H</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
+      <item path="options.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>..</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="pm.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>/usr/include/X11/extensions</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="pointer.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="0">
+          <incDir>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>HAVE_CONFIG_H</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
+      <item path="rates.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="remote.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="scan.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>/usr/include/X11/extensions</pElem>
+            <pElem>..</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="screen.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>..</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="selection.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="solid.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="sslcmds.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="sslhelper.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="uinput.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="unixpw.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>..</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="user.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="userinput.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>..</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="util.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="v4l.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="win_utils.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="x11vnc.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>/usr/include/X11/extensions</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="x11vnc_defs.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>/usr/include/X11/extensions</pElem>
+            <pElem>..</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="xdamage.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>/usr/include/X11/extensions</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="xevents.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="xinerama.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="xkb_bell.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="xrandr.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="xrecord.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="xwrappers.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <incDir>
+            <pElem>../rfb</pElem>
+            <pElem>/usr/include/X11</pElem>
+            <pElem>/usr/include/X11/extensions</pElem>
+            <pElem>.</pElem>
+            <pElem>..</pElem>
+          </incDir>
+        </cTool>
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
