@@ -1,0 +1,581 @@
+/*
+ * Copyright (C) 2010 - 2014 GlavSoft LLC.
+ * All rights reserved.
+ *
+ * -----------------------------------------------------------------------
+ * This file is part of the TightVNC software.  Please visit our Web site:
+ *
+ *                       http://www.tightvnc.com/
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * -----------------------------------------------------------------------
+ *
+ */
+apply plugin: 'java'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+version = '2.8.3'
+
+project.ext.baseName = 'tightvnc-jviewer'
+project.ext.distributionArchivesBaseName = 'tvnjviewer'
+def distDir = "$projectDir/dist"
+def classifier_postfix = '-gnugpl'
+if (classifier_postfix.startsWith('%')) classifier_postfix = ''
+
+defaultTasks 'clean', 'dist'
+
+configurations {
+    main
+    viewer_api
+    viewer_swing_api
+    viewer_swing
+
+    simple_swing_viewer_example
+}
+
+sourceSets {
+//   core_api.java.srcDirs = main.java.srcDirs
+    viewer_api
+    viewer_swing_api
+    viewer_swing
+
+    simple_swing_viewer_example {
+        java {
+            srcDir 'examples/simple_swing_viewer/src/main/java'
+        }
+    }
+}
+
+def sshLib = 'org.jenkins-ci:trilead-ssh2:build217-jenkins-8@jar'
+def sshLibLicenseFileName = 'LICENSE_trilead-ssh2.txt'
+def sshLibLicenseFileNameOrig = 'trilead-ssh2.license.txt'
+def sshLibRepository = 'http://maven.jenkins-ci.org/content/repositories/releases/'
+
+repositories {
+    flatDir {
+        dirs 'src/libs/'
+    }
+    mavenCentral()
+    maven {
+        url sshLibRepository
+    }
+}
+
+dependencies {
+    viewer_apiCompile sourceSets.main.output
+    viewer_swing_apiCompile sourceSets.main.output, sourceSets.viewer_api.output, sshLib
+    viewer_swingCompile sourceSets.main.output, sourceSets.viewer_api.output, sourceSets.viewer_swing_api.output
+    viewer_swingRuntime sshLib
+
+    testCompile group: 'junit', name: 'junit', version: '4.+', sourceSets.main.output, sourceSets.viewer_swing.output
+
+    simple_swing_viewer_exampleCompile sourceSets.main.output, sourceSets.viewer_api.output, sourceSets.viewer_swing_api.output, sshLib
+    simple_swing_viewer_exampleRuntime sshLib
+}
+
+def manifestAttributes = ['Main-Class': 'com.glavsoft.viewer.Viewer',
+        'Implementation-Version': "${project.version}",
+        'Implementation-Title': 'TightVNC Viewer',
+        'Implementation-Vendor': 'GlavSoft LLC.',
+        'Application-Name': 'TightVNC Viewer',
+        'Permissions': 'all-permissions',
+        'Codebase': '*']
+def runtimeDeps = configurations.viewer_swingRuntime.filter {it.exists() && ! it.isDirectory()}
+
+jar {
+    dependsOn = [classes, viewer_apiClasses, viewer_swing_apiClasses, viewer_swingClasses]
+    baseName = project.baseName
+    version = null
+    manifest {
+        attributes manifestAttributes
+    }
+    def runtimeDepsUnzipped = runtimeDeps.collect {
+        it.isDirectory() ? it : zipTree(it)
+    }
+    from(runtimeDepsUnzipped) {
+        exclude 'META-INF/**'
+    }
+    from sourceSets.main.output, sourceSets.viewer_api.output, sourceSets.viewer_swing_api.output, sourceSets.viewer_swing.output
+}
+
+task noSshJar(type: Jar, dependsOn: jar) {
+    baseName = 'nossh/' + project.baseName
+    version = null
+    manifest {
+        attributes manifestAttributes
+    }
+    from sourceSets.main.output, sourceSets.viewer_api.output, sourceSets.viewer_swing_api.output, sourceSets.viewer_swing.output
+}
+
+task core_apiJar(type: Jar, dependsOn: classes) {
+    baseName = project.distributionArchivesBaseName
+    appendix = 'core-api'
+    from sourceSets.main.output
+}
+
+task viewer_apiJar(type: Jar, dependsOn: [core_apiJar, viewer_apiClasses]) {
+    baseName = project.distributionArchivesBaseName
+    appendix = 'viewer-api'
+    from sourceSets.viewer_api.output
+}
+task viewer_swing_apiJar(type: Jar, dependsOn: [core_apiJar, viewer_apiJar, viewer_swingClasses]) {
+    baseName = project.distributionArchivesBaseName
+    appendix = 'viewer-swing-api'
+    from sourceSets.viewer_swing_api.output
+}
+
+task api(dependsOn: [core_apiJar, viewer_apiJar, viewer_swing_apiJar])
+
+artifacts {
+    archives file('src/web/viewer-applet-example.html')
+    archives noSshJar
+}
+
+uploadArchives {
+    repositories {
+        ivy {
+            artifactPattern "${distDir}/${project.baseName}-${project.version}/[artifact].[ext]"
+        }
+    }
+    uploadDescriptor = false
+}
+
+task dist(dependsOn: uploadArchives) {
+    doLast {
+        delete fileTree(dir: "${distDir}/${project.baseName}-${project.version}", include: '**/*.sha1')
+    }
+}
+
+task distBin(type: Zip, dependsOn: assemble) {
+    classifier = "bin${classifier_postfix}"
+
+    baseName = distributionArchivesBaseName
+    destinationDir = new File(distDir)
+
+    from libsDir
+    from(projectDir) {
+        include 'README.txt', 'LICENSE.txt'
+    }
+    from("${projectDir}/src/libs/") {
+        include sshLibLicenseFileName
+    }
+    from("${projectDir}/src/web/") {
+        include 'viewer-applet-example.html'
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14'
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
