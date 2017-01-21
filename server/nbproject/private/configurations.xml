@@ -110,6 +110,49 @@
       <df name="x11vnc">
         <df name=".deps">
         </df>
+        <df name="build-manager2-Desktop_Qt_5_7_0_GCC_64bit-По умолчанию">
+          <df name="CMakeFiles">
+            <df name="3.5.1">
+              <df name="CompilerIdC">
+                <in>CMakeCCompilerId.c</in>
+              </df>
+              <df name="CompilerIdCXX">
+                <in>CMakeCXXCompilerId.cpp</in>
+              </df>
+            </df>
+            <df name="CMakeTmp">
+            </df>
+            <df name="manager2.dir">
+            </df>
+            <in>feature_tests.c</in>
+            <in>feature_tests.cxx</in>
+          </df>
+        </df>
+        <df name="manager">
+          <in>main.cpp</in>
+          <in>managersocket.cpp</in>
+        </df>
+        <df name="manager2">
+          <df name="CMakeFiles">
+            <df name="3.5.1">
+              <df name="CompilerIdC">
+                <in>CMakeCCompilerId.c</in>
+              </df>
+              <df name="CompilerIdCXX">
+                <in>CMakeCXXCompilerId.cpp</in>
+              </df>
+            </df>
+            <df name="CMakeTmp">
+            </df>
+            <df name="manager2.dir">
+            </df>
+            <in>feature_tests.c</in>
+            <in>feature_tests.cxx</in>
+          </df>
+          <in>main.cpp</in>
+          <in>managersocket.cpp</in>
+          <in>managersocket.h</in>
+        </df>
         <df name="misc">
           <df name="turbovnc">
             <in>tight.c</in>

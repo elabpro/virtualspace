@@ -1,0 +1,3 @@
+/home/glebmillenium/virtualspace/server/x11vnc/build-manager2-Desktop_Qt_5_7_0_GCC_64bit-По умолчанию/CMakeFiles/edit_cache.dir
+/home/glebmillenium/virtualspace/server/x11vnc/build-manager2-Desktop_Qt_5_7_0_GCC_64bit-По умолчанию/CMakeFiles/rebuild_cache.dir
+/home/glebmillenium/virtualspace/server/x11vnc/build-manager2-Desktop_Qt_5_7_0_GCC_64bit-По умолчанию/CMakeFiles/manager2.dir
