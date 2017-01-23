@@ -13,15 +13,24 @@
 
 #include <cstdlib>
 #include "ManagerSocket.h"
+#include "SequenceTreatmenter.h"
 
 using namespace std;
 
 /*
  * 
  */
-int main(int argc, char** argv) {
+int main(int argc, char** argv) 
+{
     ManagerSocket *p = new ManagerSocket();
     p->run();
+    /*vector<string> input;
+    input.push_back("Запуск браузера");
+    input.push_back("Запуск приложения");
+    input.push_back("Запуск браузера");
+    input.push_back("Запуск приложения");
+    SequenceTreatmenter *p = new SequenceTreatmenter(input);
+    p->run();*/
     return 0;
 }
 
