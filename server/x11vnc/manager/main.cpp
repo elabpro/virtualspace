@@ -22,15 +22,10 @@ using namespace std;
  */
 int main(int argc, char** argv) 
 {
-    ManagerSocket *p = new ManagerSocket();
-    p->run();
-    /*vector<string> input;
-    input.push_back("Запуск браузера");
-    input.push_back("Запуск приложения");
-    input.push_back("Запуск браузера");
-    input.push_back("Запуск приложения");
-    SequenceTreatmenter *p = new SequenceTreatmenter(input);
-    p->run();*/
+    //ManagerSocket *p = new ManagerSocket();
+    //p->run();
+    vector<string> input {"CallFirefox", "CallApp", "CallFirefox", 
+            "CallApp", "CallFirefox", "CallNote", "CallApp", "CallFirefox"};
+    tuple<int, vector<string>> test = SequenceTreatmenter::run(input, 2);
     return 0;
 }
-

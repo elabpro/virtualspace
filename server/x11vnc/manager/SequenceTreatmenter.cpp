@@ -13,40 +13,56 @@
 
 #include "SequenceTreatmenter.h"
 
-SequenceTreatmenter::SequenceTreatmenter() 
+/**
+ * run - статический метод для получения часто 
+ * повторяющейся под последовательности в заданной 
+ * последовательности команд сервера
+ * 
+ * @param sequence - массив последовательных команд
+ * @param window - длина последовательности 
+ *                  (по умолчанию выбирается поиск 
+ *                  подпоследовательности длиной в 2 команды)
+ * @return tuple<int, vector<string>> кортеж следующего вида: 
+ *          количество повторений в заданной последовательности, 
+ *          массив найденной подпоследовательности команд
+ */
+tuple<int, vector<string>> SequenceTreatmenter::run(vector<string> sequence, int window = 2)
 {
-}
+    vector<tuple<int, vector<string>>> result;
 
-SequenceTreatmenter::SequenceTreatmenter(vector<string> sequence) 
-{
-    this->sequence = sequence;
-}
-
-void SequenceTreatmenter::run()
-{
-    vector<tuple<int, vector<string>, int>> result;
-    for(int i = 1; i <= this->sequence.size(); i++)
+    for(int j = 0; j < sequence.size() - window + 1; j++)
     {
-        for(int j = 0; j < this->sequence.size() - i + 1; j++)
+        vector<string> temporarySubSequence;
+        for(int k = j; k <= j + window - 1; k++)
         {
-            vector<string> temp;
-            for(int k = j; k <= j + i - 1; k++)
-            {
-                temp.push_back(sequence[j]);
-            }
-            int ka = countRepeat(sequence, temp);
-            
-           //tuple<int, vector<string>, int> iter(i, temp, countRepeat(sequence, temp));
-            //result.push_back(iter);
+            temporarySubSequence.push_back(sequence[k]);
+        }
+        result.push_back(
+            std::make_tuple(countRepeat(sequence, temporarySubSequence), 
+                temporarySubSequence));
+    }
+    
+    int maxCountRepeat = std::get<0>(result[0]);
+    vector<string> sequenceMaxCountRepeat = std::get<1>(result[0]);
+    
+    for(int j = 0; j < result.size(); j++)
+    {
+        if(std::get<0>(result[j]) > maxCountRepeat) {
+            maxCountRepeat = std::get<0>(result[j]);
+            sequenceMaxCountRepeat = std::get<1>(result[j]);
         }
     }
-    result;
+    return std::make_tuple(maxCountRepeat, sequenceMaxCountRepeat);
 }
 
-SequenceTreatmenter::SequenceTreatmenter(const SequenceTreatmenter& orig) 
-{
-}
-
+/**
+ * countRepeat - статический метод подсчитывает количество 
+ * повторения подпоследовательности subseq в заданной последовательности seq
+ * 
+ * @param seq - последовательность
+ * @param subseq - искомая подпоследовательность
+ * @return int - количество повторений subseq в seq
+ */
 int SequenceTreatmenter::countRepeat(vector<string> seq, vector<string> subseq)
 {
     int count = 0;
@@ -54,7 +70,7 @@ int SequenceTreatmenter::countRepeat(vector<string> seq, vector<string> subseq)
     {
         int j = 0;
         do{
-            if(seq[i] == subseq[j])
+            if(seq[i + j] == subseq[j])
                 j++;
             else
                 break;
@@ -63,8 +79,3 @@ int SequenceTreatmenter::countRepeat(vector<string> seq, vector<string> subseq)
     }
     return count;
 }
-
-SequenceTreatmenter::~SequenceTreatmenter() 
-{
-}
-

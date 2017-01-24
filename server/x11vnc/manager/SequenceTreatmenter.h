@@ -21,14 +21,9 @@ using namespace std;
 
 class SequenceTreatmenter {
 public:
-    SequenceTreatmenter();
-    SequenceTreatmenter(const SequenceTreatmenter& orig);
-    SequenceTreatmenter(vector<string> sequence);
-    virtual ~SequenceTreatmenter();
-    void run();
+    static tuple<int, vector<string>> run(vector<string> sequence, int i);
 private:
-    vector<string> sequence;
-    int countRepeat(vector<string> seq, vector<string> subseq);
+    static int countRepeat(vector<string> seq, vector<string> subseq);
 };
 
 #endif /* SEQUENCETREATMENTER_H */
