@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package test_client;
-import java.net.*;
-import java.io.*;
 
 /**
  *

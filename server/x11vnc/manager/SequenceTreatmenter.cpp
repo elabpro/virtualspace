@@ -6,7 +6,7 @@
 
 /* 
  * File:   SequenceTreatmenter.cpp
- * Author: glebmillenium
+ * Author: sketch
  * 
  * Created on 22 января 2017 г., 12:56
  */

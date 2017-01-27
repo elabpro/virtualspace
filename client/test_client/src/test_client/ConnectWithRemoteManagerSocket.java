@@ -8,10 +8,10 @@ package test_client;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.lang.Thread;
 import java.net.InetAddress;
 import java.net.Socket;
 
@@ -22,32 +22,32 @@ import java.net.Socket;
 public class ConnectWithRemoteManagerSocket extends Thread
 {
 
-    int serverPort;
-    String address;
-
-    ConnectWithRemoteManagerSocket()
+    private int serverPort;
+    private String address;
+    private TreatmenterVoiceCommand treatmenterVoiceCommand = 
+            new TreatmenterVoiceCommand();
+    private TreatmenterVisualCommand treatmenterVisualCommand = 
+            new TreatmenterVisualCommand();
+    private Socket socket;
+    
+    ConnectWithRemoteManagerSocket() throws IOException
     {
         this.serverPort = 3425;
         this.address = "127.0.0.1";
+        socket = new Socket(InetAddress.getByName(address), serverPort);
     }
 
-    ConnectWithRemoteManagerSocket(String ip, int port)
+    ConnectWithRemoteManagerSocket(String ip, int port) throws IOException
     {
         this.serverPort = port;
         this.address = ip;
+        socket = new Socket(InetAddress.getByName(address), serverPort);
     }
 
     public void run()
     {
-
         try
         {
-            InetAddress ipAddress = InetAddress.getByName(address); // создаем объект который отображает вышеописанный IP-адрес.
-            System.out.println("Any of you heard of a socket with IP address " + address + " and port " + serverPort + "?");
-            Socket socket = new Socket(ipAddress, serverPort); // создаем сокет используя IP-адрес и порт сервера.
-            System.out.println("Yes! I just got hold of the program.");
-
-            // Берем входной и выходной потоки сокета, теперь можем получать и отсылать данные клиентом. 
             InputStream sin = socket.getInputStream();
             OutputStream sout = socket.getOutputStream();
 
@@ -58,15 +58,17 @@ public class ConnectWithRemoteManagerSocket extends Thread
             // Создаем поток для чтения с клавиатуры.
             BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
             String line = null;
-            System.out.println("Type in something and press enter. Will send it to the server and tell ya what it thinks.");
-            System.out.println();
-
-            while (true)
+            treatmenterVoiceCommand.start();
+            treatmenterVisualCommand.start();
+            
+            /*while (this.isAlive())
             {
-                //------
                 line = keyboard.readLine(); // ждем пока пользователь введет что-то и нажмет кнопку Enter.
                 if (line.equals(":x"))
                 {
+                    treatmenterVoiceCommand.stopping();
+                    treatmenterVisualCommand.stopping();
+                    stopping();
                     break;
                 }
                 System.out.println("Sending this line to the server...");
@@ -84,12 +86,17 @@ public class ConnectWithRemoteManagerSocket extends Thread
                 System.out.println("The server was very polite. It sent me this : " + str);
                 System.out.println("Looks like the server is pleased with us. Go ahead and enter more lines.");
                 System.out.println();
-                //-------
-            }
+            }*/
         } catch (Exception x)
         {
             x.printStackTrace();
         }
     }
-
+    
+    public void stopping()
+    {
+        treatmenterVoiceCommand.stopping();
+        treatmenterVisualCommand.stopping();
+        this.stop();
+    }
 }
