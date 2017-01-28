@@ -24,10 +24,8 @@ public class ConnectWithRemoteManagerSocket extends Thread
 
     private int serverPort;
     private String address;
-    private TreatmenterVoiceCommand treatmenterVoiceCommand = 
-            new TreatmenterVoiceCommand();
-    private TreatmenterVisualCommand treatmenterVisualCommand = 
-            new TreatmenterVisualCommand();
+    private TreatmenterVoiceCommand treatmenterVoiceCommand;
+    private TreatmenterVisualCommand treatmenterVisualCommand;
     private Socket socket;
     
     ConnectWithRemoteManagerSocket() throws IOException
@@ -58,6 +56,8 @@ public class ConnectWithRemoteManagerSocket extends Thread
             // Создаем поток для чтения с клавиатуры.
             BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
             String line = null;
+            treatmenterVoiceCommand =  new TreatmenterVoiceCommand(in, out);
+            treatmenterVisualCommand = new TreatmenterVisualCommand(in, out);
             treatmenterVoiceCommand.start();
             treatmenterVisualCommand.start();
             
@@ -91,6 +91,10 @@ public class ConnectWithRemoteManagerSocket extends Thread
         {
             x.printStackTrace();
         }
+    }
+    
+    public void sendMessage(){
+        
     }
     
     public void stopping()

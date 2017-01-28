@@ -11,6 +11,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -38,16 +40,20 @@ public class TreatmenterVisualCommand extends Thread
     MainFrame app = null;
     Mat webcamMatImage;
     private boolean state = false;
+    DataInputStream in;
+    DataOutputStream out;
 
     static
     {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
 
-    TreatmenterVisualCommand()
+    TreatmenterVisualCommand(DataInputStream in, DataOutputStream out)
     {
         this.webcamMatImage = new Mat();
         this.app = new MainFrame();
+        this.in = in;
+        this.out = out;
     }
 
     @Override

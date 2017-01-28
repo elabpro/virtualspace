@@ -7,6 +7,8 @@ package test_client;
 
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +27,14 @@ public class TreatmenterVoiceCommand extends Thread
     private static final String GRAMMAR_PATH
             = "resources/";
     private boolean state = false;
+    DataInputStream in;
+    DataOutputStream out;
 
+    TreatmenterVoiceCommand(DataInputStream in, DataOutputStream out){
+        this.in = in;
+        this.out = out;
+    }
+    
     @Override
     public void run()
     {
@@ -48,6 +57,7 @@ public class TreatmenterVoiceCommand extends Thread
             {
                 utterance = recognizer.getResult().getHypothesis();
                 System.out.println(utterance);
+                if(utterance.equals("покер")) sendMessageToServer("poker");
             }
             recognizer.stopRecognition();
         } catch (IOException ex)
@@ -59,5 +69,11 @@ public class TreatmenterVoiceCommand extends Thread
     public void stopping()
     {
         this.state = false;
+    }
+    
+    private void sendMessageToServer(String text) throws IOException{
+        text += '\0';
+        out.write(text.getBytes()); // отсылаем введенную строку текста серверу.
+        out.flush(); // заставляем поток закончить передачу данных.
     }
 }

@@ -100,9 +100,10 @@ void ManagerSocket::run()
             char *data_client = new char[size];
             // Поступили данные от клиента, читаем их
             bytes_read = recv(*it, data_client, 1024, 0);
-            const char *comp = "hello";
-            if(strcmp(data_client, comp) == 0)   
-                data_client[0];
+            const char *comp = "poker";
+            if(strcmp(data_client, comp) == 0)   {
+                system("pokerth");
+            }
             if(bytes_read <= 0)
             {
                     // Соединение разорвано, удаляем сокет из множества
