@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -33,15 +34,16 @@ import org.opencv.videoio.Videoio;
 public class TreatmenterVisualCommand extends Thread
 {
 
-    Image tempImage;
-    CascadeClassifier Detector;
-    MatOfRect rect;
-    ImageIcon imageIcon = null;
-    MainFrame app = null;
-    Mat webcamMatImage;
+    private Image tempImage;
+    private CascadeClassifier Detector;
+    private MatOfRect rect;
+    private ImageIcon imageIcon = null;
+    private MainFrame app = null;
+    private Mat webcamMatImage;
     private boolean state = false;
-    DataInputStream in;
-    DataOutputStream out;
+    private boolean isLastLeft = false;
+    private DataInputStream in;
+    private DataOutputStream out;
 
     static
     {
@@ -77,6 +79,21 @@ public class TreatmenterVisualCommand extends Thread
                         //Rect[] var = new Rect[var1.length];
                         //System.arraycopy(var1, 0, var, 0, var1.length);
                         //System.arraycopy(var2, 0, var, var1.length, var2.length);
+                        if ((rect.empty()) && (rect == null))
+                        {
+                            if (var1[0].x + var1[0].width / 2 < 200)
+                            {
+                                if (isLastLeft)
+                                {
+                                    sendMessageToServer("left");
+                                    isLastLeft = !isLastLeft;
+                                }
+                            } else if (!isLastLeft)
+                            {
+                                sendMessageToServer("right");
+                                isLastLeft = !isLastLeft;
+                            }
+                        }
                         app.printPhoto(imageIcon, new MatOfRect(var1));
                     } else
                     {
@@ -89,6 +106,12 @@ public class TreatmenterVisualCommand extends Thread
         } catch (InterruptedException ex)
         {
             Logger.getLogger(TreatmenterVisualCommand.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(TreatmenterVisualCommand.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ArrayIndexOutOfBoundsException ex)
+        {
+
         }
     }
 
@@ -123,6 +146,13 @@ public class TreatmenterVisualCommand extends Thread
     public void stopping()
     {
         this.state = false;
+    }
+
+    private void sendMessageToServer(String text) throws IOException
+    {
+        text += '\0';
+        out.write(text.getBytes()); // отсылаем введенную строку текста серверу.
+        out.flush(); // заставляем поток закончить передачу данных.
     }
 }
 

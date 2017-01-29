@@ -20,11 +20,11 @@ import java.util.logging.Logger;
 public class TreatmenterVoiceCommand extends Thread
 {
 
-    private static final String ACOUSTIC_MODEL
+    private final String ACOUSTIC_MODEL
             = "resources/ru-ru/";
-    private static final String DICTIONARY_PATH
+    private final String DICTIONARY_PATH
             = "resources/command.dict";
-    private static final String GRAMMAR_PATH
+    private final String GRAMMAR_PATH
             = "resources/";
     private boolean state = false;
     DataInputStream in;
@@ -58,6 +58,8 @@ public class TreatmenterVoiceCommand extends Thread
                 utterance = recognizer.getResult().getHypothesis();
                 System.out.println(utterance);
                 if(utterance.equals("покер")) sendMessageToServer("poker");
+                if(utterance.equals("новости")) sendMessageToServer("news");
+                if(utterance.equals("почта")) sendMessageToServer("mail");
             }
             recognizer.stopRecognition();
         } catch (IOException ex)

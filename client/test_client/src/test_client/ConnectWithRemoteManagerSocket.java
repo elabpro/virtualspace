@@ -60,33 +60,6 @@ public class ConnectWithRemoteManagerSocket extends Thread
             treatmenterVisualCommand = new TreatmenterVisualCommand(in, out);
             treatmenterVoiceCommand.start();
             treatmenterVisualCommand.start();
-            
-            /*while (this.isAlive())
-            {
-                line = keyboard.readLine(); // ждем пока пользователь введет что-то и нажмет кнопку Enter.
-                if (line.equals(":x"))
-                {
-                    treatmenterVoiceCommand.stopping();
-                    treatmenterVisualCommand.stopping();
-                    stopping();
-                    break;
-                }
-                System.out.println("Sending this line to the server...");
-                out.write(line.getBytes()); // отсылаем введенную строку текста серверу.
-                out.flush(); // заставляем поток закончить передачу данных.
-                System.out.println("Waiting answer from server");
-                line += '\0';
-                byte[] answer = new byte[line.length()];
-                int count_get_byte = in.read(answer); // ждем пока сервер отошлет строку текста.
-                String str = "";
-                for (int i = 0; i < count_get_byte; i++)
-                {
-                    str += (char) answer[i];
-                }
-                System.out.println("The server was very polite. It sent me this : " + str);
-                System.out.println("Looks like the server is pleased with us. Go ahead and enter more lines.");
-                System.out.println();
-            }*/
         } catch (Exception x)
         {
             x.printStackTrace();

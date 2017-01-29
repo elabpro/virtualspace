@@ -104,6 +104,22 @@ void ManagerSocket::run()
             if(strcmp(data_client, comp) == 0)   {
                 system("pokerth");
             }
+            comp = "left";
+            if(strcmp(data_client, comp) == 0)   {
+                system("xdotool key alt+tab");
+            }
+            comp = "right";
+            if(strcmp(data_client, comp) == 0)   {
+                system("xdotool key alt+tab");
+            }
+            comp = "news";
+            if(strcmp(data_client, comp) == 0)   {
+                system("firefox https://news.yandex.ru/");
+            }
+            comp = "mail";
+            if(strcmp(data_client, comp) == 0)   {
+                system("firefox https://mail.yandex.ru/");
+            }
             if(bytes_read <= 0)
             {
                     // Соединение разорвано, удаляем сокет из множества

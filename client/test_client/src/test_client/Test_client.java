@@ -5,6 +5,8 @@
  */
 package test_client;
 
+import java.io.IOException;
+
 /**
  *
  * @author glebmillenium
@@ -14,7 +16,7 @@ public class Test_client {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) 
+    public static void main(String[] args) throws IOException 
     {
         ConnectWithRemoteManagerSocket socket = new ConnectWithRemoteManagerSocket();
         socket.start();
