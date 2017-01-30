@@ -23,6 +23,7 @@
 //
 package com.glavsoft.viewer.swing.gui;
 
+
 import com.glavsoft.viewer.mvp.View;
 import com.glavsoft.viewer.settings.ConnectionParams;
 import com.glavsoft.viewer.settings.WrongParameterException;
@@ -30,13 +31,19 @@ import com.glavsoft.viewer.swing.ConnectionPresenter;
 import com.glavsoft.viewer.swing.Utils;
 import com.glavsoft.viewer.swing.ViewerEventsListener;
 import com.glavsoft.viewer.swing.ssh.SshConnectionManager;
+import interactive.ConnectWithRemoteManagerSocket;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.opencv.core.Core;
+
 
 /**
  * Dialog window for connection parameters get from.
@@ -50,7 +57,8 @@ public class ConnectionDialogView extends JPanel implements View, ConnectionView
     private static final String CANCEL = "Cancel";
     private ViewerEventsListener onCloseListener;
 	private final boolean hasSshSupport;
-    private final JTextField serverPortField;
+    private final JTextField serverVncPortField;
+    private final JTextField serverInteractivePortField;
 	private JCheckBox useSshTunnelingCheckbox;
 	private final JComboBox serverNameCombo;
     private JTextField sshUserField;
@@ -67,7 +75,10 @@ public class ConnectionDialogView extends JPanel implements View, ConnectionView
     private final StatusBar statusBar;
     private boolean connectionInProgress;
     private JButton closeCancelButton;
-
+    static
+    {
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    }
     public ConnectionDialogView(final ViewerEventsListener onCloseListener,
                                 final ConnectionPresenter presenter) {
         this.onCloseListener = onCloseListener;
@@ -98,9 +109,12 @@ public class ConnectionDialogView extends JPanel implements View, ConnectionView
         addFormFieldRow(optionsPane, gridRow, new JLabel("Remote Host:"), serverNameCombo, true);
         ++gridRow;
 
-        serverPortField = new JTextField(COLUMNS_PORT_USER_FIELD);
+        serverVncPortField = new JTextField(COLUMNS_PORT_USER_FIELD);
+        serverInteractivePortField = new JTextField("3425");
 
-        addFormFieldRow(optionsPane, gridRow, new JLabel("Port:"), serverPortField, false);
+        addFormFieldRow(optionsPane, gridRow, new JLabel("VNC Port:"), serverVncPortField, false);
+        ++gridRow;
+        addFormFieldRow(optionsPane, gridRow, new JLabel("Interactive Port:"), serverInteractivePortField, false);
         ++gridRow;
 
         if (this.hasSshSupport) {
@@ -201,6 +215,11 @@ public class ConnectionDialogView extends JPanel implements View, ConnectionView
                         ((ConnectionParams) item).hostName :
                         (String) item;
                 try {
+                    ConnectWithRemoteManagerSocket connect;
+                    connect = new ConnectWithRemoteManagerSocket(
+                            serverNameCombo.getSelectedItem().toString(), 
+                            Integer.parseInt(serverInteractivePortField.getText()));
+                    connect.start();
                     setConnectionInProgress(true);
                     presenter.submitConnection(hostName);
                 } catch (WrongParameterException wpe) {
@@ -208,10 +227,13 @@ public class ConnectionDialogView extends JPanel implements View, ConnectionView
                         serverNameCombo.requestFocusInWindow();
                     }
                     if (ConnectionPresenter.PROPERTY_RFB_PORT_NUMBER.equals(wpe.getPropertyName())) {
-                        serverPortField.requestFocusInWindow();
+                        serverVncPortField.requestFocusInWindow();
                     }
                     showConnectionErrorDialog(wpe.getMessage());
                     setConnectionInProgress(false);
+                } catch (IOException ex)
+                {
+                    Logger.getLogger(ConnectionDialogView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -315,12 +337,12 @@ public class ConnectionDialogView extends JPanel implements View, ConnectionView
 
     @SuppressWarnings("UnusedDeclaration")
     public void setPortNumber(int portNumber) {
-        serverPortField.setText(String.valueOf(portNumber));
+        serverVncPortField.setText(String.valueOf(portNumber));
     }
 
     @SuppressWarnings("UnusedDeclaration")
     public String getPortNumber() {
-        return serverPortField.getText();
+        return serverVncPortField.getText();
     }
 
     @SuppressWarnings("UnusedDeclaration")

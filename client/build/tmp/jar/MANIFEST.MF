@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Application-Name: TightVNC Viewer
-Implementation-Title: TightVNC Viewer
-Implementation-Version: 2.8.3
-Permissions: all-permissions
-Codebase: *
-Main-Class: com.glavsoft.viewer.Viewer
-Implementation-Vendor: GlavSoft LLC.
-
