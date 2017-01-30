@@ -57,6 +57,7 @@ private:
     int bytes_read;
 public:
     ManagerSocket();
+    ManagerSocket(int port);
     ManagerSocket(int ip, int port, int sock, int type_sock, int type_protocol = 0);
     ~ManagerSocket();
     void run();

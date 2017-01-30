@@ -110,7 +110,7 @@ public class ConnectionDialogView extends JPanel implements View, ConnectionView
         ++gridRow;
 
         serverVncPortField = new JTextField(COLUMNS_PORT_USER_FIELD);
-        serverInteractivePortField = new JTextField("3425");
+        serverInteractivePortField = new JTextField("5901");
 
         addFormFieldRow(optionsPane, gridRow, new JLabel("VNC Port:"), serverVncPortField, false);
         ++gridRow;

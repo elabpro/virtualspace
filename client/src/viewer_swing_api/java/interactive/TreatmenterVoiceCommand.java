@@ -57,7 +57,9 @@ public class TreatmenterVoiceCommand extends Thread
             {
                 utterance = recognizer.getResult().getHypothesis();
                 System.out.println(utterance);
-                if(utterance.equals("покер")) sendMessageToServer("poker");
+                if(utterance.equals("новости")) sendMessageToServer("news");
+                if(utterance.equals("почта")) sendMessageToServer("mail");
+                if(utterance.equals("офис")) sendMessageToServer("office");
             }
             recognizer.stopRecognition();
         } catch (IOException ex)

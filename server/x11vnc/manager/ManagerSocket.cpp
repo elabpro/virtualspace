@@ -17,7 +17,15 @@ ManagerSocket::ManagerSocket()
 {
     this->listener = socket(AF_INET, SOCK_STREAM, 0);
     this->addr.sin_family = AF_INET;
-    this->addr.sin_port = htons(3425);
+    this->addr.sin_port = htons(5901);
+    this->addr.sin_addr.s_addr = INADDR_ANY;
+}
+
+ManagerSocket::ManagerSocket(int port)
+{
+    this->listener = socket(AF_INET, SOCK_STREAM, 0);
+    this->addr.sin_family = AF_INET;
+    this->addr.sin_port = htons(port);
     this->addr.sin_addr.s_addr = INADDR_ANY;
 }
 
@@ -100,25 +108,25 @@ void ManagerSocket::run()
             char *data_client = new char[size];
             // Поступили данные от клиента, читаем их
             bytes_read = recv(*it, data_client, 1024, 0);
-            const char *comp = "poker";
+            const char *comp = "news";
             if(strcmp(data_client, comp) == 0)   {
-                system("pokerth");
-            }
-            comp = "left";
-            if(strcmp(data_client, comp) == 0)   {
-                system("xdotool key alt+tab");
-            }
-            comp = "right";
-            if(strcmp(data_client, comp) == 0)   {
-                system("xdotool key alt+tab");
-            }
-            comp = "news";
-            if(strcmp(data_client, comp) == 0)   {
-                system("firefox https://news.yandex.ru/");
+                system("firefox http://news.yandex.ru");
             }
             comp = "mail";
             if(strcmp(data_client, comp) == 0)   {
-                system("firefox https://mail.yandex.ru/");
+                system("firefox http://mail.ru");
+            }
+            comp = "office";
+            if(strcmp(data_client, comp) == 0)   {
+                system("libreoffice");
+            }
+            comp = "right";
+            if(strcmp(data_client, comp) == 0)   {
+                system("xdotool mousemove_relative -- 70 0");
+            }
+            comp = "left";
+            if(strcmp(data_client, comp) == 0)   {
+                system("xdotool mousemove_relative -- -70 0");
             }
             if(bytes_read <= 0)
             {

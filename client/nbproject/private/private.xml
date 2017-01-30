@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/glebmillenium/Загрузки/new_project/src/viewer_swing_api/java/interactive/TreatmenterVoiceCommand.java</file>
-            <file>file:/home/glebmillenium/Загрузки/new_project/src/viewer_swing_api/java/interactive/TreatmenterVisualCommand.java</file>
-            <file>file:/home/glebmillenium/Загрузки/new_project/src/viewer_swing/java/com/glavsoft/viewer/Viewer.java</file>
+            <file>file:/home/glebmillenium/virtualspace/client/src/viewer_swing_api/java/interactive/TreatmenterVoiceCommand.java</file>
+            <file>file:/home/glebmillenium/virtualspace/client/src/viewer_swing_api/java/com/glavsoft/viewer/swing/gui/ConnectionDialogView.java</file>
+            <file>file:/home/glebmillenium/virtualspace/client/src/viewer_swing_api/java/interactive/TreatmenterVisualCommand.java</file>
         </group>
     </open-files>
 </project-private>

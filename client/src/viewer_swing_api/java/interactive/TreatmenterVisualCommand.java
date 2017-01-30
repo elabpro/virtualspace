@@ -13,12 +13,12 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
 import org.opencv.core.Rect;
@@ -42,6 +42,7 @@ public class TreatmenterVisualCommand extends Thread
     private boolean state = false;
     DataInputStream in;
     DataOutputStream out;
+    String side = "";
 
     public TreatmenterVisualCommand(DataInputStream in, DataOutputStream out)
     {
@@ -72,6 +73,11 @@ public class TreatmenterVisualCommand extends Thread
                         //Rect[] var = new Rect[var1.length];
                         //System.arraycopy(var1, 0, var, 0, var1.length);
                         //System.arraycopy(var2, 0, var, var1.length, var2.length);
+                        try{
+                            manager(var1[0]);
+                        } catch(ArrayIndexOutOfBoundsException e){
+                            
+                        }
                         app.printPhoto(imageIcon, new MatOfRect(var1));
                     } else
                     {
@@ -82,6 +88,9 @@ public class TreatmenterVisualCommand extends Thread
                 }
             }
         } catch (InterruptedException ex)
+        {
+            Logger.getLogger(TreatmenterVisualCommand.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex)
         {
             Logger.getLogger(TreatmenterVisualCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -118,6 +127,38 @@ public class TreatmenterVisualCommand extends Thread
     public void stopping()
     {
         this.state = false;
+    }
+    
+    private void manager(Rect r) throws IOException
+    {
+        if((rect != null) && !rect.empty()){
+            if(side.equals("")){
+                if(r.x + r.width / 2 < 200){
+                    sendMessageToServer("left");
+                    side = "left";
+                }
+                else {
+                    sendMessageToServer("right");
+                    side = "right";
+                }
+            } else {
+                if(side.equals("right") && (r.x + r.width / 2 + 20 < 200)){
+                    sendMessageToServer("left");
+                    side = "left";
+                } else {
+                    if(side.equals("left") && (r.x + r.width / 2 - 20 > 200)) {
+                        sendMessageToServer("right");
+                        side = "right";
+                    }
+                }
+            }
+        }
+    }
+    
+    private void sendMessageToServer(String text) throws IOException{
+        text += '\0';
+        out.write(text.getBytes()); // отсылаем введенную строку текста серверу.
+        out.flush(); // заставляем поток закончить передачу данных.
     }
 }
 

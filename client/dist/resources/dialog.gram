@@ -2,10 +2,4 @@
 
 grammar dialog;
 
-<digit> = почта  |
-          вконтакте |
-          покер |
-          шахматы |
-	  вверх | вниз | влево | вправо ;
-
-public <command> = <digit>;
+public <command> = новости | офис | почта;

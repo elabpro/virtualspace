@@ -14,6 +14,7 @@
 #include <cstdlib>
 #include "ManagerSocket.h"
 #include "SequenceTreatmenter.h"
+#include <iostream>
 
 using namespace std;
 
@@ -22,7 +23,13 @@ using namespace std;
  */
 int main(int argc, char** argv) 
 {
-    ManagerSocket *p = new ManagerSocket();
+    ManagerSocket *p;
+    if(argc > 1){
+        //cout << "Запускаем сервер по порту: " << atoi(argv[1]);
+        p = new ManagerSocket(atoi(argv[1]));
+    } else {
+        p = new ManagerSocket(); 
+    }
     p->run();
     //vector<string> input {"CallFirefox", "CallApp", "CallFirefox", 
             //"CallApp", "CallFirefox", "CallNote", "CallApp", "CallFirefox"};
