@@ -1,1 +1,0 @@
-/usr/bin/g++      CMakeFiles/manager2.dir/main.cpp.o CMakeFiles/manager2.dir/managersocket.cpp.o  -o manager2 -rdynamic 
