@@ -19,6 +19,17 @@ import java.net.Socket;
  *
  * @author glebmillenium
  */
+
+/**
+ * подключение к удалённому сокету передавая голосовые, а также управление 
+ * с помощью жестов
+ * 
+ * @param serverPort номер порта для подключения
+ * @param address статический ip адрес для поключения сервера к клиенту
+ * @param treatmenterVoiceCommand передача команд, с помощью управления голосом
+ * @param treatmenterVisualCommand передача команд сделанных, с помощью жестов
+ * @param socket создание ip адреса для локального узла
+ */
 public class ConnectWithRemoteManagerSocket extends Thread
 {
 
@@ -46,10 +57,20 @@ public class ConnectWithRemoteManagerSocket extends Thread
     {
         try
         {
+    /**
+     * Берем входной и выходной потоки сокета, 
+     * теперь можем получать и отсылать данные клиенту. 
+     * @param InputStream - входной поток сокета.
+     * @param InputStream - выходной поток сокета.
+     */
             InputStream sin = socket.getInputStream();
             OutputStream sout = socket.getOutputStream();
 
-            // Конвертируем потоки в другой тип, чтоб легче обрабатывать текстовые сообщения.
+/**
+ * Конвертация потоков в другой тип, чтоб легче обрабатывать текстовые сообщения.
+ * @param DataInputStream входной поток данных
+ * @param DataOutputStream выходной поток данных
+ */
             DataInputStream in = new DataInputStream(sin);
             DataOutputStream out = new DataOutputStream(sout);
 
