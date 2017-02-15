@@ -73,6 +73,11 @@ public class TreatmenterVoiceCommand extends Thread
         this.state = false;
     }
     
+    /**
+     * 
+     * @param text
+     * @throws IOException 
+     */
     private void sendMessageToServer(String text) throws IOException{
         text += '\0';
         out.write(text.getBytes()); // отсылаем введенную строку текста серверу.

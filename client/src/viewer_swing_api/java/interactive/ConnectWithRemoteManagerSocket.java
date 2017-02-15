@@ -42,6 +42,15 @@ public class ConnectWithRemoteManagerSocket extends Thread
         socket = new Socket(InetAddress.getByName(address), serverPort);
     }
 
+    /**
+     * run
+     * Метод запускающий реализацию 
+     * сокет соединения по протоколу 
+     * TCP в параллельном треде
+     * 
+     * @param  void
+     * @return void
+     */
     public void run()
     {
         try
@@ -58,7 +67,7 @@ public class ConnectWithRemoteManagerSocket extends Thread
             String line = null;
             treatmenterVoiceCommand =  new TreatmenterVoiceCommand(in, out);
             treatmenterVisualCommand = new TreatmenterVisualCommand(in, out);
-            treatmenterVoiceCommand.start();
+            //treatmenterVoiceCommand.start();
             treatmenterVisualCommand.start();
             
             /*while (this.isAlive())
