@@ -9,14 +9,19 @@ import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * TreatmenterVoiceCommand
+ * Класс для обработки аудиопотока
+ * 
+ * Java version j8
+ * 
+ * @license IrGUPS
  * @author glebmillenium
+ * @link https://github.com/irgups/virtualspace
  */
 public class TreatmenterVoiceCommand extends Thread
 {
@@ -30,12 +35,24 @@ public class TreatmenterVoiceCommand extends Thread
     private boolean state = false;
     DataInputStream in;
     DataOutputStream out;
-
+    
+    /**
+     * TreatmenterVoiceCommand 
+     * Конструктор обеспечивающий передачу результатов 
+     * обработки аудиопотока через сокет
+     * @param in поток входных данных
+     * @param out поток выходных данных
+     */
     public TreatmenterVoiceCommand(DataInputStream in, DataOutputStream out){
         this.in = in;
         this.out = out;
     }
     
+    /**
+     * run запуск обработки голосовых команд 
+     * @param void
+     * @return void
+     */
     @Override
     public void run()
     {
@@ -68,15 +85,21 @@ public class TreatmenterVoiceCommand extends Thread
         }
     }
 
+    /**
+     * stopping остановка обработки голосовых команд
+     * @param void
+     * @return void
+     */
     public void stopping()
     {
         this.state = false;
     }
     
     /**
-     * 
-     * @param text
+     * sendMessageToServer отправка сообщения на сервер
+     * @param String text текстовое сообщение
      * @throws IOException 
+     * @return void
      */
     private void sendMessageToServer(String text) throws IOException{
         text += '\0';
