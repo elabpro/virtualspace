@@ -26,9 +26,16 @@ import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.Videoio;
 
+
 /**
- *
+ * TreatmenterVisualCommand
+ * Класс для обработки видеопотока
+ * 
+ * Java version j8
+ * 
+ * @license IrGUPS
  * @author glebmillenium
+ * @link https://github.com/irgups/virtualspace
  */
 public class TreatmenterVisualCommand extends Thread
 {
@@ -44,6 +51,12 @@ public class TreatmenterVisualCommand extends Thread
     DataOutputStream out;
     String side = "";
 
+    /**
+     * TreatmenterVisualCommand 
+     * Конструктор обеспечивающий передачу видеопотока через сокет
+     * @param in поток входных данных
+     * @param out поток выходных данных
+     */
     public TreatmenterVisualCommand(DataInputStream in, DataOutputStream out)
     {
         this.webcamMatImage = new Mat();
@@ -51,8 +64,15 @@ public class TreatmenterVisualCommand extends Thread
         this.in = in;
         this.out = out;
     }
-
+    
     @Override
+    /**
+     * run
+     * метод обеспечивающий отображение видеозахвата
+     * @var CAP_PROP_FRAME_WIDTH размер фрейма в ширину
+     * @var CAP_PROP_FRAME_HEIGHT размер фрейма в длину
+     * 
+     */
     public void run()
     {
         try
@@ -96,7 +116,12 @@ public class TreatmenterVisualCommand extends Thread
             Logger.getLogger(TreatmenterVisualCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * toBufferedImage двумерный массив заданный в RGB
+     * отображается попиксельно
+     * @param matrix двумерный массив типа Mat
+     * @return image двумерный массив
+     */
     Image toBufferedImage(Mat matrix)
     {
         int type;
@@ -114,7 +139,12 @@ public class TreatmenterVisualCommand extends Thread
         System.arraycopy(buffer, 0, targetPixels, 0, buffer.length);
         return image;
     }
-
+    /**
+     * searchImagein поиск захваченного изображения
+     * @param cascade путь к каскаду в файловой системе 
+     * @return Rect[] 
+     * @throws InterruptedException 
+     */
     private Rect[] searchImage(String cascade) throws InterruptedException
     {
         tempImage = toBufferedImage(webcamMatImage);
@@ -124,12 +154,25 @@ public class TreatmenterVisualCommand extends Thread
         imageIcon = new ImageIcon(tempImage, "Captured video");
         return rect.toArray();
     }
-
+    /**
+     * stopping остановка обработчика видеопотока
+     * 
+     * @param void
+     * @return void
+     * 
+     */
     public void stopping()
     {
         this.state = false;
     }
-    
+    /**
+     * manager 
+     * Анализатор изображения и отправляет соответствующие команды
+     * 
+     * @param Rect r распознанный объект
+     * @return void
+     * @throws IOException 
+     */
     private void manager(Rect r) throws IOException
     {
         if((rect != null) && !rect.empty()){
@@ -155,7 +198,13 @@ public class TreatmenterVisualCommand extends Thread
             }
         }
     }
-    
+    /**
+     * sendMessageToServer 
+     * отправка сообщения на сервер 
+     * @param String text сообщение для отправки на текст
+     * @throws IOException 
+     * @return void
+     */
     private void sendMessageToServer(String text) throws IOException{
         text += '\0';
         out.write(text.getBytes()); // отсылаем введенную строку текста серверу.
@@ -164,15 +213,28 @@ public class TreatmenterVisualCommand extends Thread
 }
 
 /**
- *
+ * ImagePanel
+ * Класс для отображения графического интерфейса
+ * а также вывод изображения с web-камеры
+ * 
+ * Java version j8
+ * 
+ * @license IrGUPS
  * @author Михаил
+ * @link https://github.com/irgups/virtualspace
  */
 class ImagePanel extends JPanel
 {
 
     private Image img;
     private MatOfRect rects;
-
+    
+    /**
+     * 
+     * @param img инициализация картинки
+     * @param rects выделенная область
+     * @return void
+     */
     public void Init(Image img, MatOfRect rects)
     {
         this.rects = rects;
@@ -180,7 +242,13 @@ class ImagePanel extends JPanel
         Dimension size = new Dimension(img.getHeight(null), img.getHeight(null));
         setSize(size);
     }
-
+    
+    /**
+     * paintComponent метод перерисовывающий
+     * под jPanel
+     * @param g формирование отрисовки на изображении
+     * @return void
+     */
     @Override
     public void paintComponent(Graphics g)
     {
@@ -198,13 +266,20 @@ class ImagePanel extends JPanel
 }
 
 /**
- *
+ * MainFrame фрейм отбражающий изображение с web-камеры
+ * Java version j8
+ * 
+ * @license IrGUPS
+ * 
  * @author sleep
+ * 
+ * @link https://github.com/irgups/virtualspace
+ * 
+ * 
  */
 class MainFrame extends JFrame
 {
 
-    static TreatmenterVisualCommand vt;
     private ImagePanel ip;
     MatOfRect rects;
 
