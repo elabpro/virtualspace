@@ -34,22 +34,22 @@ import org.opencv.videoio.Videoio;
  * Java version j8
  * 
  * @license IrGUPS
- * @author glebmillenium
+ * @author sleep (Gerschevich A.S.)
  * @link https://github.com/irgups/virtualspace
  */
 public class TreatmenterVisualCommand extends Thread
 {
 
-    Image tempImage;
-    CascadeClassifier Detector;
-    MatOfRect rect;
-    ImageIcon imageIcon = null;
-    MainFrame app = null;
-    Mat webcamMatImage;
-    private boolean state = false;
-    DataInputStream in;
-    DataOutputStream out;
-    String side = "";
+    private Image tempImage;
+    private CascadeClassifier Detector;
+    private MatOfRect rect;
+    private ImageIcon imageIcon = null;
+    private MainFrame app = null;
+    private Mat webcamMatImage;
+    private DataInputStream in;
+    private DataOutputStream out;
+    private String side = "";
+    private int state;
 
     /**
      * TreatmenterVisualCommand 
@@ -63,6 +63,7 @@ public class TreatmenterVisualCommand extends Thread
         this.app = new MainFrame();
         this.in = in;
         this.out = out;
+        this.state = 1;
     }
     
     @Override
@@ -82,8 +83,8 @@ public class TreatmenterVisualCommand extends Thread
             capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, 300);
             if (capture.isOpened())
             {
-                this.state = true;
-                while (this.state)
+                this.state = 1;
+                while (this.state > 0)
                 {
                     capture.read(webcamMatImage);
                     if (!webcamMatImage.empty())
@@ -163,7 +164,7 @@ public class TreatmenterVisualCommand extends Thread
      */
     public void stopping()
     {
-        this.state = false;
+        this.state = 0;
     }
     /**
      * manager 
@@ -220,7 +221,7 @@ public class TreatmenterVisualCommand extends Thread
  * Java version j8
  * 
  * @license IrGUPS
- * @author Михаил
+ * @author ortaz (Reznitskiy M.A.)
  * @link https://github.com/irgups/virtualspace
  */
 class ImagePanel extends JPanel
@@ -271,10 +272,9 @@ class ImagePanel extends JPanel
  * 
  * @license IrGUPS
  * 
- * @author sleep
+ * @author sleep (Gerschevich A.S.)
  * 
  * @link https://github.com/irgups/virtualspace
- * 
  * 
  */
 class MainFrame extends JFrame
