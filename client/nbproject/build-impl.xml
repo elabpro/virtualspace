@@ -36,6 +36,9 @@ is divided into following sections:
     <target name="-pre-init">
         <!-- Empty placeholder for easier customization. -->
         <!-- You can override this target in the ../build.xml file. -->
+	<copy todir="dist">
+    	  <fileset dir="adding"/>
+	</copy>
     </target>
     <target depends="-pre-init" name="-init-private">
         <property file="nbproject/private/config.properties"/>
