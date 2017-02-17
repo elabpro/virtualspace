@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package interactive;
 
 import java.io.DataInputStream;
@@ -14,11 +10,6 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 /**
- *
- * @author glebmillenium
- */
-
-/**
  * подключение к удалённому сокету передавая голосовые, а также управление 
  * с помощью жестов
  * 
@@ -27,6 +18,8 @@ import java.net.Socket;
  * @param treatmenterVoiceCommand передача команд, с помощью управления голосом
  * @param treatmenterVisualCommand передача команд сделанных, с помощью жестов
  * @param socket создание ip адреса для локального узла
+ * 
+ * @author glebmillenium
  */
 public class ConnectWithRemoteManagerSocket extends Thread
 {

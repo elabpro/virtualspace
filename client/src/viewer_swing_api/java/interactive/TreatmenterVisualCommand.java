@@ -90,7 +90,7 @@ public class TreatmenterVisualCommand extends Thread
                     if (!webcamMatImage.empty())
                     {
                         //Rect[] var1 = searchImage("haarcascade_frontalface_default.xml");
-                        Rect[] var1 = searchImage("hand.xml");
+                        Rect[] var1 = searchImage("haarcascade/hand.xml");
                         //Rect[] var2 = searchImage("haarcascade_eye.xml");
                         //Rect[] var = new Rect[var1.length];
                         //System.arraycopy(var1, 0, var, 0, var1.length);
