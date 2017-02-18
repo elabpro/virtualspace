@@ -128,6 +128,10 @@ void ManagerSocket::run()
             if(strcmp(data_client, comp) == 0)   {
                 system("xdotool mousemove_relative -- -70 0");
             }
+            comp = "проводник открой блокнот";
+            if(strcmp(data_client, comp) == 0)   {
+                system("gedit");
+            }
             if(bytes_read <= 0)
             {
                     // Соединение разорвано, удаляем сокет из множества

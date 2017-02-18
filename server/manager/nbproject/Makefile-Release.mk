@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/ConnectorDB.o \
 	${OBJECTDIR}/ManagerSocket.o \
 	${OBJECTDIR}/SequenceTreatmenter.o \
 	${OBJECTDIR}/main.o
@@ -75,6 +76,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/manager: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/manager ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/ConnectorDB.o: ConnectorDB.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ConnectorDB.o ConnectorDB.cpp
+
 ${OBJECTDIR}/ManagerSocket.o: ManagerSocket.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -113,6 +119,19 @@ ${TESTDIR}/tests/newtestrunner.o: tests/newtestrunner.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/newtestrunner.o tests/newtestrunner.cpp
 
+
+${OBJECTDIR}/ConnectorDB_nomain.o: ${OBJECTDIR}/ConnectorDB.o ConnectorDB.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ConnectorDB.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ConnectorDB_nomain.o ConnectorDB.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ConnectorDB.o ${OBJECTDIR}/ConnectorDB_nomain.o;\
+	fi
 
 ${OBJECTDIR}/ManagerSocket_nomain.o: ${OBJECTDIR}/ManagerSocket.o ManagerSocket.cpp 
 	${MKDIR} -p ${OBJECTDIR}

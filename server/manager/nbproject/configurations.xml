@@ -4,6 +4,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Исходные файлы"
                    projectFiles="true">
+      <itemPath>ConnectorDB.cpp</itemPath>
       <itemPath>ManagerSocket.cpp</itemPath>
       <itemPath>SequenceTreatmenter.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -11,6 +12,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Файлы заголовков"
                    projectFiles="true">
+      <itemPath>ConnectorDB.h</itemPath>
       <itemPath>ManagerSocket.h</itemPath>
       <itemPath>SequenceTreatmenter.h</itemPath>
     </logicalFolder>
@@ -49,8 +51,20 @@
       <compileType>
         <ccTool>
           <standard>8</standard>
+          <incFile>
+            <pElem>../../../Загрузки/mysql-connector-c++-1.1.8-linux-glibc2.5-x86-64bit/include/mysql_connection.h</pElem>
+          </incFile>
         </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibLibItem>mysqlcppconn</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
+      <item path="ConnectorDB.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ConnectorDB.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ManagerSocket.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ManagerSocket.h" ex="false" tool="3" flavor2="0">
@@ -102,6 +116,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="ConnectorDB.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ConnectorDB.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ManagerSocket.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ManagerSocket.h" ex="false" tool="3" flavor2="0">

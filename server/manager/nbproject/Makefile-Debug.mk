@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/ConnectorDB.o \
 	${OBJECTDIR}/ManagerSocket.o \
 	${OBJECTDIR}/SequenceTreatmenter.o \
 	${OBJECTDIR}/main.o
@@ -65,7 +66,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS=-lmysqlcppconn
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -75,20 +76,25 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/manager: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/manager ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/ConnectorDB.o: ConnectorDB.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -include ../../../Загрузки/mysql-connector-c++-1.1.8-linux-glibc2.5-x86-64bit/include/mysql_connection.h -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ConnectorDB.o ConnectorDB.cpp
+
 ${OBJECTDIR}/ManagerSocket.o: ManagerSocket.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ManagerSocket.o ManagerSocket.cpp
+	$(COMPILE.cc) -g -include ../../../Загрузки/mysql-connector-c++-1.1.8-linux-glibc2.5-x86-64bit/include/mysql_connection.h -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ManagerSocket.o ManagerSocket.cpp
 
 ${OBJECTDIR}/SequenceTreatmenter.o: SequenceTreatmenter.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SequenceTreatmenter.o SequenceTreatmenter.cpp
+	$(COMPILE.cc) -g -include ../../../Загрузки/mysql-connector-c++-1.1.8-linux-glibc2.5-x86-64bit/include/mysql_connection.h -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SequenceTreatmenter.o SequenceTreatmenter.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -include ../../../Загрузки/mysql-connector-c++-1.1.8-linux-glibc2.5-x86-64bit/include/mysql_connection.h -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 # Subprojects
 .build-subprojects:
@@ -105,14 +111,27 @@ ${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/newtestclass.o ${TESTDIR}/tests/newtes
 ${TESTDIR}/tests/newtestclass.o: tests/newtestclass.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/newtestclass.o tests/newtestclass.cpp
+	$(COMPILE.cc) -g -include ../../../Загрузки/mysql-connector-c++-1.1.8-linux-glibc2.5-x86-64bit/include/mysql_connection.h -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/newtestclass.o tests/newtestclass.cpp
 
 
 ${TESTDIR}/tests/newtestrunner.o: tests/newtestrunner.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/newtestrunner.o tests/newtestrunner.cpp
+	$(COMPILE.cc) -g -include ../../../Загрузки/mysql-connector-c++-1.1.8-linux-glibc2.5-x86-64bit/include/mysql_connection.h -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/newtestrunner.o tests/newtestrunner.cpp
 
+
+${OBJECTDIR}/ConnectorDB_nomain.o: ${OBJECTDIR}/ConnectorDB.o ConnectorDB.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/ConnectorDB.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -include ../../../Загрузки/mysql-connector-c++-1.1.8-linux-glibc2.5-x86-64bit/include/mysql_connection.h -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ConnectorDB_nomain.o ConnectorDB.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/ConnectorDB.o ${OBJECTDIR}/ConnectorDB_nomain.o;\
+	fi
 
 ${OBJECTDIR}/ManagerSocket_nomain.o: ${OBJECTDIR}/ManagerSocket.o ManagerSocket.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -122,7 +141,7 @@ ${OBJECTDIR}/ManagerSocket_nomain.o: ${OBJECTDIR}/ManagerSocket.o ManagerSocket.
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ManagerSocket_nomain.o ManagerSocket.cpp;\
+	    $(COMPILE.cc) -g -include ../../../Загрузки/mysql-connector-c++-1.1.8-linux-glibc2.5-x86-64bit/include/mysql_connection.h -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ManagerSocket_nomain.o ManagerSocket.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/ManagerSocket.o ${OBJECTDIR}/ManagerSocket_nomain.o;\
 	fi
@@ -135,7 +154,7 @@ ${OBJECTDIR}/SequenceTreatmenter_nomain.o: ${OBJECTDIR}/SequenceTreatmenter.o Se
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SequenceTreatmenter_nomain.o SequenceTreatmenter.cpp;\
+	    $(COMPILE.cc) -g -include ../../../Загрузки/mysql-connector-c++-1.1.8-linux-glibc2.5-x86-64bit/include/mysql_connection.h -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SequenceTreatmenter_nomain.o SequenceTreatmenter.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/SequenceTreatmenter.o ${OBJECTDIR}/SequenceTreatmenter_nomain.o;\
 	fi
@@ -148,7 +167,7 @@ ${OBJECTDIR}/main_nomain.o: ${OBJECTDIR}/main.o main.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main_nomain.o main.cpp;\
+	    $(COMPILE.cc) -g -include ../../../Загрузки/mysql-connector-c++-1.1.8-linux-glibc2.5-x86-64bit/include/mysql_connection.h -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main_nomain.o main.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/main.o ${OBJECTDIR}/main_nomain.o;\
 	fi

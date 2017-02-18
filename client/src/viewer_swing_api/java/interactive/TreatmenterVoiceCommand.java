@@ -74,7 +74,8 @@ public class TreatmenterVoiceCommand extends Thread
             {
                 utterance = recognizer.getResult().getHypothesis();
                 System.out.println(utterance);
-                if(utterance.equals("новости")) sendMessageToServer("news");
+                if(utterance.equals("проводник открой блокнот")) 
+                    sendMessageToServer("проводник открой блокнот");
                 if(utterance.equals("почта")) sendMessageToServer("mail");
                 if(utterance.equals("офис")) sendMessageToServer("office");
             }
@@ -103,7 +104,7 @@ public class TreatmenterVoiceCommand extends Thread
      */
     private void sendMessageToServer(String text) throws IOException{
         text += '\0';
-        out.write(text.getBytes()); // отсылаем введенную строку текста серверу.
+        out.write((new String(text.getBytes(), "UTF-8")).getBytes()); // отсылаем введенную строку текста серверу.
         out.flush(); // заставляем поток закончить передачу данных.
     }
 }
