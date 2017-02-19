@@ -19,11 +19,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
 import org.opencv.core.Rect;
@@ -52,7 +50,9 @@ public class TreatmenterVisualCommand extends Thread
     private DataInputStream in;
     private DataOutputStream out;
     private String side = "";
-    private int state;
+    private static int state;
+    private static int palmX;
+    private static int palmY;
 
     /**
      * TreatmenterVisualCommand Конструктор обеспечивающий передачу видеопотока
@@ -87,26 +87,31 @@ public class TreatmenterVisualCommand extends Thread
             capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, 300);
             if (capture.isOpened())
             {
-                this.state = 1;
-                while (this.state > 0)
+                state = 3;
+
+                while (state > 0)
                 {
+                    Rect[] var = null;
                     capture.read(webcamMatImage);
                     if (!webcamMatImage.empty())
                     {
-                        //Rect[] var1 = searchImage("haarcascade_frontalface_default.xml");
-                        Rect[] var1 = searchImage("haarcascade/palm.xml");
-                        //Rect[] var2 = searchImage("haarcascade_eye.xml");
-                        //Rect[] var = new Rect[var1.length];
-                        //System.arraycopy(var1, 0, var, 0, var1.length);
-                        //System.arraycopy(var2, 0, var, var1.length, var2.length);
-                        try
+                        var = searchImage("haarcascade/palm.xml");
+                        if (state == 1)
                         {
-                            manager(var1[0]);
-                        } catch (ArrayIndexOutOfBoundsException e)
-                        {
-
+                            var = searchImage("haarcascade/palm.xml");
+                            if (var.length == 0)
+                            {
+                                var = searchImage("haarcascade/fist.xml");
+                                if (var.length != 0)
+                                {
+                                    sendMessageToServer("клик");
+                                }
+                            } else
+                            {
+                                manager(var[0]);
+                            }
                         }
-                        app.printPhoto(imageIcon, new MatOfRect(var1));
+                        app.printPhoto(imageIcon, new MatOfRect(var));
                     } else
                     {
                         System.out.println(" — Frame not captured — Break!");
@@ -188,24 +193,35 @@ public class TreatmenterVisualCommand extends Thread
     {
         if ((rect != null) && !rect.empty())
         {
-            if (side.equals(""))
+            if (palmX == -1 || palmY == -1)
             {
-                if (r.x + r.width / 2 < 200)
-                {
-                    side = "left";
-                } else
-                {
-                    side = "right";
-                }
-            } else if (side.equals("right") && (r.x + r.width / 2 + 20 < 200))
+                palmX = r.x;
+                palmY = r.y;
+                return;
+            } else
             {
-                side = "left";
-            } else if (side.equals("left") && (r.x + r.width / 2 - 20 > 200))
-            {
-                side = "right";
+                if(r.x > palmX) sendMessageToServer("вправо");
+                else sendMessageToServer("влево");
+                if(r.y > palmY) sendMessageToServer("вниз");
+                else sendMessageToServer("вверх");
+                palmX = r.x;
+                palmY = r.y;
             }
-            //sendMessageToServer(side);
         }
+    }
+
+    public static void onHand()
+    {
+        state = 1;
+        palmX = -1;
+        palmX = -1;
+    }
+    
+    public static void onDefault()
+    {
+        state = 3;
+        palmX = -1;
+        palmX = -1;
     }
 
     /**

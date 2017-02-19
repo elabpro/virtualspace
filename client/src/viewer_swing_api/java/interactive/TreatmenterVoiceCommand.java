@@ -77,6 +77,14 @@ public class TreatmenterVoiceCommand extends Thread
             {
                 utterance = recognizer.getResult().getHypothesis();
                 System.out.println(utterance);
+                if (utterance.equals("проводник запусти управление ладонью"))
+                {
+                    TreatmenterVisualCommand.onHand();
+                }
+                if (utterance.equals("проводник отключи управление ладонью"))
+                {
+                    TreatmenterVisualCommand.onDefault();
+                }
                 if (utterance.length() > 7)
                 {
                     sendMessageToServer(utterance);
