@@ -24,7 +24,6 @@ using namespace std;
  */
 int main(int argc, char** argv) 
 {
-    ConnectorDB::run();
     ManagerSocket *p;
     if(argc > 1){
         //cout << "Запускаем сервер по порту: " << atoi(argv[1]);

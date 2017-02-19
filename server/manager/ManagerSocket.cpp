@@ -12,50 +12,45 @@
  */
 
 #include "ManagerSocket.h"
+#include "ConnectorDB.h"
 
-ManagerSocket::ManagerSocket()
-{
+ManagerSocket::ManagerSocket() {
     this->listener = socket(AF_INET, SOCK_STREAM, 0);
     this->addr.sin_family = AF_INET;
     this->addr.sin_port = htons(5901);
     this->addr.sin_addr.s_addr = INADDR_ANY;
 }
 
-ManagerSocket::ManagerSocket(int port)
-{
+ManagerSocket::ManagerSocket(int port) {
     this->listener = socket(AF_INET, SOCK_STREAM, 0);
     this->addr.sin_family = AF_INET;
     this->addr.sin_port = htons(port);
     this->addr.sin_addr.s_addr = INADDR_ANY;
 }
 
-ManagerSocket::ManagerSocket(int ip, int port, int sock, int type_sock, int type_protocol)
-{
+ManagerSocket::ManagerSocket(int ip, int port, int sock, int type_sock, int type_protocol) {
     this->listener = socket(sock, type_sock, type_protocol);
     this->addr.sin_family = sock;
     this->addr.sin_port = htons(port);
     this->addr.sin_addr.s_addr = ip;
 }
 
-void ManagerSocket::run()
-{
-        
+void ManagerSocket::run() {
+
     /* Простаивание потоков в ожидании коннекта ~15sec*/
     int size = 1024;
     timeval timeout;
     timeout.tv_sec = 15;
     timeout.tv_usec = 0;
 
-    if(this->listener < 0)
-    {
+    if (this->listener < 0) {
         perror("socket");
         exit(1);
     }
 
     fcntl(this->listener, F_SETFL, O_NONBLOCK);
 
-    if(bind(this->listener, (struct sockaddr *)&this->addr, sizeof(this->addr)) < 0)
-    {
+    if (bind(this->listener, (struct sockaddr *) & this->addr, sizeof (this->addr)) < 0) {
         perror("bind");
         exit(2);
     }
@@ -65,14 +60,13 @@ void ManagerSocket::run()
     set<int> clients;
     clients.clear();
 
-    while(1)
-    {
+    while (1) {
         // Заполняем множество сокетов
         fd_set readset;
         FD_ZERO(&readset);
         FD_SET(listener, &readset);
 
-        for(set<int>::iterator it = clients.begin(); it != clients.end(); it++)
+        for (set<int>::iterator it = clients.begin(); it != clients.end(); it++)
             FD_SET(*it, &readset);
 
         // Задаём таймаут
@@ -80,18 +74,15 @@ void ManagerSocket::run()
 
         // Ждём события в одном из сокетов
         int mx = max(listener, *max_element(clients.begin(), clients.end()));
-        if(select(mx+1, &readset, NULL, NULL, &timeout) <= 0)
-        {
+        if (select(mx + 1, &readset, NULL, NULL, &timeout) <= 0) {
             continue;
         }
 
         // Определяем тип события и выполняем соответствующие действия
-        if(FD_ISSET(listener, &readset))
-        {
+        if (FD_ISSET(listener, &readset)) {
             // Поступил новый запрос на соединение, используем accept
             int sock = accept(listener, NULL, NULL);
-            if(sock < 0)
-            {
+            if (sock < 0) {
                 perror("accept");
                 exit(3);
             }
@@ -101,49 +92,19 @@ void ManagerSocket::run()
             clients.insert(sock);
         }
 
-        for(set<int>::iterator it = clients.begin(); it != clients.end(); it++)
-        {
-            if(FD_ISSET(*it, &readset))
-            {
-            char *data_client = new char[size];
-            // Поступили данные от клиента, читаем их
-            bytes_read = recv(*it, data_client, 1024, 0);
-            const char *comp = "news";
-            if(strcmp(data_client, comp) == 0)   {
-                system("firefox http://news.yandex.ru");
-            }
-            comp = "mail";
-            if(strcmp(data_client, comp) == 0)   {
-                system("firefox http://mail.ru");
-            }
-            comp = "office";
-            if(strcmp(data_client, comp) == 0)   {
-                system("libreoffice");
-            }
-            comp = "right";
-            if(strcmp(data_client, comp) == 0)   {
-                system("xdotool mousemove_relative -- 70 0");
-            }
-            comp = "left";
-            if(strcmp(data_client, comp) == 0)   {
-                system("xdotool mousemove_relative -- -70 0");
-            }
-            comp = "проводник открой блокнот";
-            if(strcmp(data_client, comp) == 0)   {
-                system("gedit");
-            }
-            if(bytes_read <= 0)
-            {
-                    // Соединение разорвано, удаляем сокет из множества
-                close(*it);
-                clients.erase(*it);
-                continue;
-            }
-            const char *data_answer = new char[1024];
-            data_answer = (const char*) "MY ANSWER YOU";
-            // Отправляем данные обратно клиенту
-            send(*it, data_client, 13, 0);
-            //delete data_answer;delete data_client;
+        for (set<int>::iterator it = clients.begin(); it != clients.end(); it++) {
+            if (FD_ISSET(*it, &readset)) {
+                char *data_client = new char[size];
+                bytes_read = recv(*it, data_client, 1024, 0);
+
+                if (bytes_read <= 0) {
+                    close(*it);
+                    clients.erase(*it);
+                    continue;
+                }
+                const char *data_answer = ConnectorDB::run(data_client).c_str();
+                send(*it, data_answer, 256, 0);
+                //delete data_answer;delete data_client;
             }
         }
     }

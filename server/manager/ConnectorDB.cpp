@@ -47,9 +47,9 @@ ConnectorDB::ConnectorDB(const ConnectorDB& orig) {
 ConnectorDB::~ConnectorDB() {
 }
 
-int ConnectorDB::run() {
+string ConnectorDB::run(char* condition) {
     cout << endl;
-
+    string result;
     try {
         sql::Driver *driver;
         sql::Connection *con;
@@ -61,23 +61,22 @@ int ConnectorDB::run() {
         con = driver->connect("tcp://127.0.0.1:3306", "vnc", "1111");
         /* Connect to the MySQL test database */
         con->setSchema("vncserver");
-
+        char* query = new char[256];
+        strcpy(query, "");
+        strcat(query, "SELECT * FROM commands WHERE message = '");
+        strcat(query, condition);
+        strcat(query, "'");
         stmt = con->createStatement();
-        res = stmt->executeQuery("SELECT * FROM commands");
+        res = stmt->executeQuery(query);
         while (res->next()) {
-            cout << "\t... MySQL replies: ";
-            /* Access column data by alias or column name */
-            cout << res->getString("message") << endl;
-            cout << res->getString("answer") << endl;
-            //cout << "\t... MySQL says it again: ";
-            /* Access column fata by numeric offset, 1 is the first column */
-            //cout << res->getString(1) << endl;
+            result = res->getString("answer");
+            string console = res->getString("path_script");
+            system(console.c_str());
         }
-        cout << "END";
         delete res;
         delete stmt;
         delete con;
-
+        return result;
     } catch (sql::SQLException &e) {
         cout << "# ERR: SQLException in " << __FILE__;
         cout << "# ERR: " << e.what();
@@ -85,9 +84,7 @@ int ConnectorDB::run() {
         cout << ", SQLState: " << e.getSQLState() << " )" << endl;
 
     }
-
-    cout << endl;
-
-    return EXIT_SUCCESS;
+    result = "неизвестная команда";
+    return result;
 }
 

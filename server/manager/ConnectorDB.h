@@ -13,13 +13,17 @@
 
 #ifndef CONNECTORDB_H
 #define CONNECTORDB_H
+#include <iostream>
+#include <cstring>
+
+using namespace std;
 
 class ConnectorDB {
 public:
     ConnectorDB();
     ConnectorDB(const ConnectorDB& orig);
     virtual ~ConnectorDB();
-    static int run();
+    static string run(char* condition);
 private:
     
 };

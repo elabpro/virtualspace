@@ -7,6 +7,8 @@ package interactive;
 
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
+import interactive.speech.AbstractTextToSpeech;
+import interactive.speech.TextToSpeechFactory;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -14,11 +16,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * TreatmenterVoiceCommand
- * Класс для обработки аудиопотока
- * 
+ * TreatmenterVoiceCommand Класс для обработки аудиопотока
+ *
  * Java version j8
- * 
+ *
  * @license IrGUPS
  * @author glebmillenium
  * @link https://github.com/irgups/virtualspace
@@ -35,21 +36,23 @@ public class TreatmenterVoiceCommand extends Thread
     private boolean state = false;
     DataInputStream in;
     DataOutputStream out;
-    
+
     /**
-     * TreatmenterVoiceCommand 
-     * Конструктор обеспечивающий передачу результатов 
+     * TreatmenterVoiceCommand Конструктор обеспечивающий передачу результатов
      * обработки аудиопотока через сокет
+     *
      * @param in поток входных данных
      * @param out поток выходных данных
      */
-    public TreatmenterVoiceCommand(DataInputStream in, DataOutputStream out){
+    public TreatmenterVoiceCommand(DataInputStream in, DataOutputStream out)
+    {
         this.in = in;
         this.out = out;
     }
-    
+
     /**
-     * run запуск обработки голосовых команд 
+     * run запуск обработки голосовых команд
+     *
      * @param void
      * @return void
      */
@@ -74,10 +77,7 @@ public class TreatmenterVoiceCommand extends Thread
             {
                 utterance = recognizer.getResult().getHypothesis();
                 System.out.println(utterance);
-                if(utterance.equals("проводник открой блокнот")) 
-                    sendMessageToServer("проводник открой блокнот");
-                if(utterance.equals("почта")) sendMessageToServer("mail");
-                if(utterance.equals("офис")) sendMessageToServer("office");
+                sendMessageToServer(utterance);
             }
             recognizer.stopRecognition();
         } catch (IOException ex)
@@ -88,6 +88,7 @@ public class TreatmenterVoiceCommand extends Thread
 
     /**
      * stopping остановка обработки голосовых команд
+     *
      * @param void
      * @return void
      */
@@ -95,16 +96,27 @@ public class TreatmenterVoiceCommand extends Thread
     {
         this.state = false;
     }
-    
+
     /**
      * sendMessageToServer отправка сообщения на сервер
+     *
      * @param String text текстовое сообщение
-     * @throws IOException 
+     * @throws IOException
      * @return void
      */
-    private void sendMessageToServer(String text) throws IOException{
+    private void sendMessageToServer(String text) throws IOException
+    {
         text += '\0';
         out.write((new String(text.getBytes(), "UTF-8")).getBytes()); // отсылаем введенную строку текста серверу.
         out.flush(); // заставляем поток закончить передачу данных.
+        AbstractTextToSpeech tts
+                = TextToSpeechFactory.get(TextToSpeechFactory.IVONA_SOURCE);
+        try
+        {
+            tts.textToVoice("");
+        } catch (Exception ex)
+        {
+            
+        }
     }
 }
