@@ -5,6 +5,7 @@
  */
 package interactive;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -18,7 +19,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
 import org.opencv.core.Rect;
@@ -26,13 +31,11 @@ import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.Videoio;
 
-
 /**
- * TreatmenterVisualCommand
- * Класс для обработки видеопотока
- * 
+ * TreatmenterVisualCommand Класс для обработки видеопотока
+ *
  * Java version j8
- * 
+ *
  * @license IrGUPS
  * @author sleep (Gerschevich A.S.)
  * @link https://github.com/irgups/virtualspace
@@ -52,8 +55,9 @@ public class TreatmenterVisualCommand extends Thread
     private int state;
 
     /**
-     * TreatmenterVisualCommand 
-     * Конструктор обеспечивающий передачу видеопотока через сокет
+     * TreatmenterVisualCommand Конструктор обеспечивающий передачу видеопотока
+     * через сокет
+     *
      * @param in поток входных данных
      * @param out поток выходных данных
      */
@@ -65,14 +69,14 @@ public class TreatmenterVisualCommand extends Thread
         this.out = out;
         this.state = 1;
     }
-    
+
     @Override
     /**
-     * run
-     * метод обеспечивающий отображение видеозахвата
+     * run метод обеспечивающий отображение видеозахвата
+     *
      * @var CAP_PROP_FRAME_WIDTH размер фрейма в ширину
      * @var CAP_PROP_FRAME_HEIGHT размер фрейма в длину
-     * 
+     *
      */
     public void run()
     {
@@ -95,10 +99,12 @@ public class TreatmenterVisualCommand extends Thread
                         //Rect[] var = new Rect[var1.length];
                         //System.arraycopy(var1, 0, var, 0, var1.length);
                         //System.arraycopy(var2, 0, var, var1.length, var2.length);
-                        try{
+                        try
+                        {
                             manager(var1[0]);
-                        } catch(ArrayIndexOutOfBoundsException e){
-                            
+                        } catch (ArrayIndexOutOfBoundsException e)
+                        {
+
                         }
                         app.printPhoto(imageIcon, new MatOfRect(var1));
                     } else
@@ -117,9 +123,10 @@ public class TreatmenterVisualCommand extends Thread
             Logger.getLogger(TreatmenterVisualCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
-     * toBufferedImage двумерный массив заданный в RGB
-     * отображается попиксельно
+     * toBufferedImage двумерный массив заданный в RGB отображается попиксельно
+     *
      * @param matrix двумерный массив типа Mat
      * @return image двумерный массив
      */
@@ -140,11 +147,13 @@ public class TreatmenterVisualCommand extends Thread
         System.arraycopy(buffer, 0, targetPixels, 0, buffer.length);
         return image;
     }
+
     /**
      * searchImagein поиск захваченного изображения
-     * @param cascade путь к каскаду в файловой системе 
-     * @return Rect[] 
-     * @throws InterruptedException 
+     *
+     * @param cascade путь к каскаду в файловой системе
+     * @return Rect[]
+     * @throws InterruptedException
      */
     private Rect[] searchImage(String cascade) throws InterruptedException
     {
@@ -155,55 +164,59 @@ public class TreatmenterVisualCommand extends Thread
         imageIcon = new ImageIcon(tempImage, "Captured video");
         return rect.toArray();
     }
+
     /**
      * stopping остановка обработчика видеопотока
-     * 
+     *
      * @param void
      * @return void
-     * 
+     *
      */
     public void stopping()
     {
         this.state = 0;
     }
+
     /**
-     * manager 
-     * Анализатор изображения и отправляет соответствующие команды
-     * 
+     * manager Анализатор изображения и отправляет соответствующие команды
+     *
      * @param Rect r распознанный объект
      * @return void
-     * @throws IOException 
+     * @throws IOException
      */
     private void manager(Rect r) throws IOException
     {
-        if((rect != null) && !rect.empty()){
-            if(side.equals("")){
-                if(r.x + r.width / 2 < 200){
+        if ((rect != null) && !rect.empty())
+        {
+            if (side.equals(""))
+            {
+                if (r.x + r.width / 2 < 200)
+                {
                     side = "left";
-                }
-                else {
+                } else
+                {
                     side = "right";
                 }
-            } else {
-                if(side.equals("right") && (r.x + r.width / 2 + 20 < 200)){
-                    side = "left";
-                } else {
-                    if(side.equals("left") && (r.x + r.width / 2 - 20 > 200)) {
-                        side = "right";
-                    }
-                }
+            } else if (side.equals("right") && (r.x + r.width / 2 + 20 < 200))
+            {
+                side = "left";
+            } else if (side.equals("left") && (r.x + r.width / 2 - 20 > 200))
+            {
+                side = "right";
             }
             //sendMessageToServer(side);
         }
     }
+
     /**
-     * sendMessageToServer 
-     * отправка сообщения на сервер 
+     * sendMessageToServer отправка сообщения на сервер
+     *
      * @param String text сообщение для отправки на текст
-     * @throws IOException 
+     * @throws IOException
      * @return void
      */
-    private void sendMessageToServer(String text) throws IOException{
+    private void sendMessageToServer(String text) throws IOException
+    {
         text += '\0';
         out.write(text.getBytes()); // отсылаем введенную строку текста серверу.
         out.flush(); // заставляем поток закончить передачу данных.
@@ -211,12 +224,11 @@ public class TreatmenterVisualCommand extends Thread
 }
 
 /**
- * ImagePanel
- * Класс для отображения графического интерфейса
- * а также вывод изображения с web-камеры
- * 
+ * ImagePanel Класс для отображения графического интерфейса а также вывод
+ * изображения с web-камеры
+ *
  * Java version j8
- * 
+ *
  * @license IrGUPS
  * @author ortaz (Reznitskiy M.A.)
  * @link https://github.com/irgups/virtualspace
@@ -226,9 +238,9 @@ class ImagePanel extends JPanel
 
     private Image img;
     private MatOfRect rects;
-    
+
     /**
-     * 
+     *
      * @param img инициализация картинки
      * @param rects выделенная область
      * @return void
@@ -240,10 +252,10 @@ class ImagePanel extends JPanel
         Dimension size = new Dimension(img.getHeight(null), img.getHeight(null));
         setSize(size);
     }
-    
+
     /**
-     * paintComponent метод перерисовывающий
-     * под jPanel
+     * paintComponent метод перерисовывающий под jPanel
+     *
      * @param g формирование отрисовки на изображении
      * @return void
      */
@@ -264,21 +276,21 @@ class ImagePanel extends JPanel
 }
 
 /**
- * MainFrame фрейм отбражающий изображение с web-камеры
- * Java version j8
- * 
+ * MainFrame фрейм отбражающий изображение с web-камеры Java version j8
+ *
  * @license IrGUPS
- * 
+ *
  * @author sleep (Gerschevich A.S.)
- * 
+ *
  * @link https://github.com/irgups/virtualspace
- * 
+ *
  */
 class MainFrame extends JFrame
 {
 
     private ImagePanel ip;
     MatOfRect rects;
+    public static JTextArea output;
 
     MainFrame()
     {
@@ -287,9 +299,16 @@ class MainFrame extends JFrame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         ip = new ImagePanel();
-        this.add(ip);
+        String TEXT = "Вас приветствует помощник\n"
+                + "виртуального пространства!";
+        JTextArea output = new JTextArea(10, 20);
+        output.setText(TEXT);
+        output.setCaretPosition(0);
+        final JScrollPane scrollPane = new JScrollPane(output);
+        this.add(ip, BorderLayout.NORTH);
+        this.add(scrollPane, BorderLayout.SOUTH);
         this.pack();
-        this.setSize(290, 290);
+        this.setSize(290, 480);
     }
 
     public void printPhoto(ImageIcon ico, MatOfRect rect)
