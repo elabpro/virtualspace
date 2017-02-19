@@ -23,7 +23,7 @@ public:
     ConnectorDB();
     ConnectorDB(const ConnectorDB& orig);
     virtual ~ConnectorDB();
-    static string run(char* condition);
+    static const char* run(char* condition);
 private:
     
 };

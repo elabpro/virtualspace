@@ -47,9 +47,9 @@ ConnectorDB::ConnectorDB(const ConnectorDB& orig) {
 ConnectorDB::~ConnectorDB() {
 }
 
-string ConnectorDB::run(char* condition) {
+const char* ConnectorDB::run(char* condition) {
     cout << endl;
-    string result;
+    const char* result;
     try {
         sql::Driver *driver;
         sql::Connection *con;
@@ -61,17 +61,35 @@ string ConnectorDB::run(char* condition) {
         con = driver->connect("tcp://127.0.0.1:3306", "vnc", "1111");
         /* Connect to the MySQL test database */
         con->setSchema("vncserver");
+        
         char* query = new char[256];
         strcpy(query, "");
-        strcat(query, "SELECT * FROM commands WHERE message = '");
+        strcat(query, "SELECT COUNT(*) FROM commands WHERE message = '");
         strcat(query, condition);
         strcat(query, "'");
         stmt = con->createStatement();
         res = stmt->executeQuery(query);
-        while (res->next()) {
-            result = res->getString("answer");
-            string console = res->getString("path_script");
-            system(console.c_str());
+        res->next();
+        if (res->getInt(1) == 0) {
+            result = "неизвестная команда";
+        } else {
+            query = new char[256];
+            strcpy(query, "");
+            strcat(query, "SELECT * FROM commands WHERE message = '");
+            strcat(query, condition);
+            strcat(query, "'");
+            stmt = con->createStatement();
+            res = stmt->executeQuery(query);
+            while (res->next()) {
+                sql::SQLString str = res->getString("answer");
+                char* str2 = new char[str.length()];
+                for(int i = 0; i < str.length(); i++){
+                    str2[i] = str[i];
+                }
+                result = str2;
+                string console = res->getString("path_script");
+                system(console.c_str());
+            }
         }
         delete res;
         delete stmt;

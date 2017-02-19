@@ -102,8 +102,8 @@ void ManagerSocket::run() {
                     clients.erase(*it);
                     continue;
                 }
-                const char *data_answer = ConnectorDB::run(data_client).c_str();
-                send(*it, data_answer, 256, 0);
+                const char* data_answer = ConnectorDB::run(data_client);
+                send(*it, data_answer, strlen(data_answer), 0);
                 //delete data_answer;delete data_client;
             }
         }

@@ -77,7 +77,10 @@ public class TreatmenterVoiceCommand extends Thread
             {
                 utterance = recognizer.getResult().getHypothesis();
                 System.out.println(utterance);
-                sendMessageToServer(utterance);
+                if (utterance.length() > 7)
+                {
+                    sendMessageToServer(utterance);
+                }
             }
             recognizer.stopRecognition();
         } catch (IOException ex)
@@ -109,14 +112,18 @@ public class TreatmenterVoiceCommand extends Thread
         text += '\0';
         out.write((new String(text.getBytes(), "UTF-8")).getBytes()); // отсылаем введенную строку текста серверу.
         out.flush(); // заставляем поток закончить передачу данных.
+        byte[] b = new byte[1024];
+        in.read(b);
+        String answer = new String(b, "UTF-8");
+        System.out.println("Ответ от серверной части: " + answer);
         AbstractTextToSpeech tts
                 = TextToSpeechFactory.get(TextToSpeechFactory.IVONA_SOURCE);
         try
         {
-            tts.textToVoice("");
+            tts.textToVoice(answer);
         } catch (Exception ex)
         {
-            
+
         }
     }
 }

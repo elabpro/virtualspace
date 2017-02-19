@@ -179,24 +179,21 @@ public class TreatmenterVisualCommand extends Thread
         if((rect != null) && !rect.empty()){
             if(side.equals("")){
                 if(r.x + r.width / 2 < 200){
-                    sendMessageToServer("left");
                     side = "left";
                 }
                 else {
-                    sendMessageToServer("right");
                     side = "right";
                 }
             } else {
                 if(side.equals("right") && (r.x + r.width / 2 + 20 < 200)){
-                    sendMessageToServer("left");
                     side = "left";
                 } else {
                     if(side.equals("left") && (r.x + r.width / 2 - 20 > 200)) {
-                        sendMessageToServer("right");
                         side = "right";
                     }
                 }
             }
+            //sendMessageToServer(side);
         }
     }
     /**
