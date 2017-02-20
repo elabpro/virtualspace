@@ -67,6 +67,7 @@ public class TreatmenterVoiceCommand extends Thread
             configuration.setGrammarPath(GRAMMAR_PATH);
             configuration.setUseGrammar(true);
             configuration.setGrammarName("dialog");
+            
             LiveSpeechRecognizer recognizer;
             recognizer = new LiveSpeechRecognizer(configuration);
 
@@ -76,6 +77,7 @@ public class TreatmenterVoiceCommand extends Thread
             while (this.state)
             {
                 utterance = recognizer.getResult().getHypothesis();
+                utterance = new String(utterance.getBytes(), "UTF-8");
                 System.out.println(utterance);
                 if (utterance.equals("проводник запусти управление ладонью"))
                 {
@@ -118,7 +120,7 @@ public class TreatmenterVoiceCommand extends Thread
     private void sendMessageToServer(String text) throws IOException
     {
         text += '\0';
-        out.write((new String(text.getBytes(), "UTF-8")).getBytes()); // отсылаем введенную строку текста серверу.
+        out.write(text.getBytes()); // отсылаем введенную строку текста серверу.
         out.flush(); // заставляем поток закончить передачу данных.
         byte[] b = new byte[1024];
         in.read(b);
