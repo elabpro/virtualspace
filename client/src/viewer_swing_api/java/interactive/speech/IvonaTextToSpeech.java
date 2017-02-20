@@ -38,7 +38,7 @@ public class IvonaTextToSpeech extends AbstractTextToSpeech {
         Input input = new Input();
         Voice voice = new Voice();
 
-        voice.setName("Maxim");
+        voice.setName("Tatyana");//указывается голос м - Maxim
         input.setData(text);
 
         createSpeechRequest.setInput(input);

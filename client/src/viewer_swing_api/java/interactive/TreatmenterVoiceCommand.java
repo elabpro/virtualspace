@@ -12,6 +12,7 @@ import interactive.speech.TextToSpeechFactory;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -67,7 +68,7 @@ public class TreatmenterVoiceCommand extends Thread
             configuration.setGrammarPath(GRAMMAR_PATH);
             configuration.setUseGrammar(true);
             configuration.setGrammarName("dialog");
-            
+
             LiveSpeechRecognizer recognizer;
             recognizer = new LiveSpeechRecognizer(configuration);
 
@@ -120,7 +121,7 @@ public class TreatmenterVoiceCommand extends Thread
     private void sendMessageToServer(String text) throws IOException
     {
         text += '\0';
-        out.write(text.getBytes()); // отсылаем введенную строку текста серверу.
+        out.write(text.getBytes("UTF-8"));// отсылаем введенную строку текста серверу.
         out.flush(); // заставляем поток закончить передачу данных.
         byte[] b = new byte[1024];
         in.read(b);

@@ -13,6 +13,7 @@
 
 #include "ManagerSocket.h"
 #include "ConnectorDB.h"
+#include <fstream>
 
 ManagerSocket::ManagerSocket() {
     this->listener = socket(AF_INET, SOCK_STREAM, 0);
@@ -42,7 +43,9 @@ void ManagerSocket::run() {
     timeval timeout;
     timeout.tv_sec = 15;
     timeout.tv_usec = 0;
-
+    ofstream fout;
+    
+    
     if (this->listener < 0) {
         perror("socket");
         exit(1);
@@ -95,8 +98,8 @@ void ManagerSocket::run() {
         for (set<int>::iterator it = clients.begin(); it != clients.end(); it++) {
             if (FD_ISSET(*it, &readset)) {
                 char *data_client = new char[size];
-                bytes_read = recv(*it, data_client, 1024, 0);
-
+                bytes_read = read(*it, data_client, 1024);
+                cout << data_client;
                 if (bytes_read <= 0) {
                     close(*it);
                     clients.erase(*it);
