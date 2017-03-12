@@ -54,6 +54,7 @@
           <incFile>
             <pElem>lib/mysql-connector/include/mysql_connection.h</pElem>
           </incFile>
+          <commandLine>-g -O0 --coverage</commandLine>
         </ccTool>
         <linkerTool>
           <linkerLibItems>

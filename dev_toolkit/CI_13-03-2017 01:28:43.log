@@ -1,0 +1,75 @@
+g++ -include /home/glebmillenium/virtualspace/server/manager/lib/mysql-connector/include/mysql_connection.h -std=c++11 /home/glebmillenium/virtualspace/server/manager/SequenceTreatmenter.cpp /home/glebmillenium/virtualspace/server/manager/ConnectorDB.cpp /home/glebmillenium/virtualspace/server/manager/ManagerSocket.cpp /home/glebmillenium/virtualspace/server/manager/main.cpp -lmysqlcppconn -o /home/glebmillenium/virtualspace/server/manager/servers
+Testing Results:
+
+File 'SequenceTreatmenter.cpp'
+Lines executed:100.00% of 27
+Creating 'SequenceTreatmenter.cpp.gcov'
+
+File '/usr/include/c++/5/iostream'
+Lines executed:100.00% of 1
+Creating 'iostream.gcov'
+
+File '/usr/include/c++/5/bits/stl_iterator.h'
+Lines executed:80.77% of 26
+Creating 'stl_iterator.h.gcov'
+
+File '/usr/include/c++/5/bits/stl_construct.h'
+Lines executed:100.00% of 14
+Creating 'stl_construct.h.gcov'
+
+File '/usr/include/c++/5/bits/stl_uninitialized.h'
+Lines executed:81.25% of 16
+Creating 'stl_uninitialized.h.gcov'
+
+File '/usr/include/c++/5/ext/new_allocator.h'
+Lines executed:78.57% of 14
+Creating 'new_allocator.h.gcov'
+
+File '/usr/include/c++/5/bits/move.h'
+Lines executed:100.00% of 11
+Creating 'move.h.gcov'
+
+File '/usr/include/c++/5/bits/stl_vector.h'
+Lines executed:61.22% of 98
+Creating 'stl_vector.h.gcov'
+
+File '/usr/include/c++/5/bits/alloc_traits.h'
+Lines executed:47.06% of 17
+Creating 'alloc_traits.h.gcov'
+
+File '/usr/include/c++/5/bits/stl_algobase.h'
+Lines executed:100.00% of 23
+Creating 'stl_algobase.h.gcov'
+
+File '/usr/include/c++/5/bits/stl_iterator_base_types.h'
+Lines executed:100.00% of 4
+Creating 'stl_iterator_base_types.h.gcov'
+
+File '/usr/include/c++/5/bits/allocator.h'
+Lines executed:33.33% of 6
+Creating 'allocator.h.gcov'
+
+File '/usr/include/c++/5/bits/vector.tcc'
+Lines executed:58.06% of 62
+Creating 'vector.tcc.gcov'
+
+File '/usr/include/c++/5/ext/alloc_traits.h'
+Lines executed:33.33% of 6
+Creating 'alloc_traits.h.gcov'
+
+File '/usr/include/c++/5/bits/basic_string.h'
+Lines executed:0.00% of 4
+Creating 'basic_string.h.gcov'
+
+File '/usr/include/c++/5/tuple'
+Lines executed:62.07% of 29
+Creating 'tuple.gcov'
+
+File '/usr/include/c++/5/bits/char_traits.h'
+Lines executed:0.00% of 4
+Creating 'char_traits.h.gcov'
+
+File '/usr/include/c++/5/new'
+Lines executed:0.00% of 3
+Creating 'new.gcov'
+

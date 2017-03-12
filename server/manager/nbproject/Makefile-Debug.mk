@@ -56,8 +56,8 @@ TESTOBJECTFILES= \
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=
-CXXFLAGS=
+CCFLAGS=-g -O0 --coverage
+CXXFLAGS=-g -O0 --coverage
 
 # Fortran Compiler Flags
 FFLAGS=
