@@ -52,7 +52,7 @@
         <ccTool>
           <standard>8</standard>
           <incFile>
-            <pElem>../../../Загрузки/mysql-connector-c++-1.1.8-linux-glibc2.5-x86-64bit/include/mysql_connection.h</pElem>
+            <pElem>lib/mysql-connector/include/mysql_connection.h</pElem>
           </incFile>
         </ccTool>
         <linkerTool>

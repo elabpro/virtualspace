@@ -1,0 +1,3 @@
+DIR=/home/glebmillenium/virtualspace/server/manager/
+all:
+	g++ -include $(DIR)lib/mysql-connector/include/mysql_connection.h -std=c++11 $(DIR)SequenceTreatmenter.cpp $(DIR)ConnectorDB.cpp $(DIR)ManagerSocket.cpp $(DIR)main.cpp -lmysqlcppconn -o $(DIR)servers

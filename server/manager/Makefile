@@ -59,6 +59,8 @@ build: .build-post
 .build-post: .build-impl
 # Add your post 'build' code here...
 
+gleb:
+	g++ -include lib/mysql-connector/include/mysql_connection.h -std=c++11 SequenceTreatmenter.cpp ConnectorDB.cpp ManagerSocket.cpp main.cpp -lmysqlcppconn -o servers
 
 # clean
 clean: .clean-post

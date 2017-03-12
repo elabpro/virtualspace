@@ -53,6 +53,7 @@ const char* ConnectorDB::run(char* condition) {
     try {
         sql::Driver *driver;
         sql::Connection *con;
+        
         sql::Statement *stmt;
         sql::ResultSet *res;
 
@@ -82,6 +83,14 @@ const char* ConnectorDB::run(char* condition) {
             res = stmt->executeQuery(query);
             while (res->next()) {
                 sql::SQLString str = res->getString("answer");
+                sql::SQLString command = res->getString("id_command");
+                query = new char[256];
+                /*strcpy(query, "");
+                strcat(query, "INSERT INTO history  (id_command) VALUES('");
+                strcat(query, command);
+                strcat(query, "')");
+                stmt->executeQuery(query);*/
+                
                 char* str2 = new char[str.length()];
                 for(int i = 0; i < str.length(); i++){
                     str2[i] = str[i];
