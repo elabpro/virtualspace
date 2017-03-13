@@ -1,0 +1,159 @@
+        -:    0:Source:/usr/include/cppconn/exception.h
+        -:    0:Graph:build/Debug/GNU-Linux/ConnectorDB.gcno
+        -:    0:Data:build/Debug/GNU-Linux/ConnectorDB.gcda
+        -:    0:Runs:2
+        -:    0:Programs:2
+        -:    1:/*
+        -:    2:Copyright (c) 2008, 2014, Oracle and/or its affiliates. All rights reserved.
+        -:    3:
+        -:    4:The MySQL Connector/C++ is licensed under the terms of the GPLv2
+        -:    5:<http://www.gnu.org/licenses/old-licenses/gpl-2.0.html>, like most
+        -:    6:MySQL Connectors. There are special exceptions to the terms and
+        -:    7:conditions of the GPLv2 as it is applied to this software, see the
+        -:    8:FLOSS License Exception
+        -:    9:<http://www.mysql.com/about/legal/licensing/foss-exception.html>.
+        -:   10:
+        -:   11:This program is free software; you can redistribute it and/or modify
+        -:   12:it under the terms of the GNU General Public License as published
+        -:   13:by the Free Software Foundation; version 2 of the License.
+        -:   14:
+        -:   15:This program is distributed in the hope that it will be useful, but
+        -:   16:WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+        -:   17:or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+        -:   18:for more details.
+        -:   19:
+        -:   20:You should have received a copy of the GNU General Public License along
+        -:   21:with this program; if not, write to the Free Software Foundation, Inc.,
+        -:   22:51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
+        -:   23:*/
+        -:   24:
+        -:   25:
+        -:   26:
+        -:   27:#ifndef _SQL_EXCEPTION_H_
+        -:   28:#define _SQL_EXCEPTION_H_
+        -:   29:
+        -:   30:#include "build_config.h"
+        -:   31:#include <stdexcept>
+        -:   32:#include <string>
+        -:   33:#include <memory>
+        -:   34:
+        -:   35:#define CPPCONN_PUBLIC_EXCEPTION __attribute__((visibility("default")))
+        -:   36:
+        -:   37:namespace sql
+        -:   38:{
+        -:   39:
+        -:   40:#define MEMORY_ALLOC_OPERATORS(Class) \
+        -:   41:	void* operator new(size_t size) throw (std::bad_alloc) { return ::operator new(size); }  \
+        -:   42:	void* operator new(size_t, void*) throw(); \
+        -:   43:	void* operator new(size_t, const std::nothrow_t&) throw(); \
+        -:   44:	void* operator new[](size_t) throw (std::bad_alloc); \
+        -:   45:	void* operator new[](size_t, void*) throw(); \
+        -:   46:	void* operator new[](size_t, const std::nothrow_t&) throw(); \
+        -:   47:	void* operator new(size_t N, std::allocator<Class>&);
+        -:   48:
+        -:   49:#ifdef _WIN32
+        -:   50:#pragma warning (disable : 4290)
+        -:   51://warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+        -:   52:
+        -:   53:
+        -:   54:#pragma warning(push)
+        -:   55:#pragma warning(disable: 4275)
+        -:   56:#endif
+        -:   57:class CPPCONN_PUBLIC_EXCEPTION SQLException : public std::runtime_error
+        -:   58:{
+        -:   59:#ifdef _WIN32
+        -:   60:#pragma warning(pop)
+        -:   61:#endif
+        -:   62:protected:
+        -:   63:	const std::string sql_state;
+        -:   64:	const int errNo;
+        -:   65:
+        -:   66:public:
+        -:   67:	SQLException(const SQLException& e) : std::runtime_error(e.what()), sql_state(e.sql_state), errNo(e.errNo) {}
+        -:   68:
+        -:   69:	SQLException(const std::string& reason, const std::string& SQLState, int vendorCode) :
+        -:   70:		std::runtime_error	(reason		),
+        -:   71:		sql_state			(SQLState	),
+        -:   72:		errNo				(vendorCode)
+        -:   73:	{}
+        -:   74:
+        -:   75:	SQLException(const std::string& reason, const std::string& SQLState) : std::runtime_error(reason), sql_state(SQLState), errNo(0) {}
+        -:   76:
+        -:   77:	SQLException(const std::string& reason) : std::runtime_error(reason), sql_state("HY000"), errNo(0) {}
+        -:   78:
+        -:   79:	SQLException() : std::runtime_error(""), sql_state("HY000"), errNo(0) {}
+        -:   80:
+function _ZNK3sql12SQLException11getSQLStateB5cxx11Ev called 0 returned 0% blocks executed 0%
+    #####:   81:	const std::string & getSQLState() const
+        -:   82:	{
+    #####:   83:		return sql_state;
+        -:   84:	}
+        -:   85:
+        -:   86:	const char * getSQLStateCStr() const
+        -:   87:	{
+        -:   88:		return sql_state.c_str();
+        -:   89:	}
+        -:   90:
+        -:   91:
+function _ZNK3sql12SQLException12getErrorCodeEv called 0 returned 0% blocks executed 0%
+    #####:   92:	int getErrorCode() const
+        -:   93:	{
+    #####:   94:		return errNo;
+        -:   95:	}
+        -:   96:
+        -:   97:	virtual ~SQLException() throw () {};
+        -:   98:
+        -:   99:protected:
+        -:  100:	MEMORY_ALLOC_OPERATORS(SQLException)
+        -:  101:};
+        -:  102:
+        -:  103:struct CPPCONN_PUBLIC_EXCEPTION MethodNotImplementedException : public SQLException
+        -:  104:{
+        -:  105:	MethodNotImplementedException(const MethodNotImplementedException& e) : SQLException(e.what(), e.sql_state, e.errNo) { }
+        -:  106:	MethodNotImplementedException(const std::string& reason) : SQLException(reason, "", 0) {}
+        -:  107:};
+        -:  108:
+        -:  109:struct CPPCONN_PUBLIC_EXCEPTION InvalidArgumentException : public SQLException
+        -:  110:{
+        -:  111:	InvalidArgumentException(const InvalidArgumentException& e) : SQLException(e.what(), e.sql_state, e.errNo) { }
+        -:  112:	InvalidArgumentException(const std::string& reason) : SQLException(reason, "", 0) {}
+        -:  113:};
+        -:  114:
+        -:  115:struct CPPCONN_PUBLIC_EXCEPTION InvalidInstanceException : public SQLException
+        -:  116:{
+        -:  117:	InvalidInstanceException(const InvalidInstanceException& e) : SQLException(e.what(), e.sql_state, e.errNo) { }
+        -:  118:	InvalidInstanceException(const std::string& reason) : SQLException(reason, "", 0) {}
+        -:  119:};
+        -:  120:
+        -:  121:
+        -:  122:struct CPPCONN_PUBLIC_EXCEPTION NonScrollableException : public SQLException
+        -:  123:{
+        -:  124:	NonScrollableException(const NonScrollableException& e) : SQLException(e.what(), e.sql_state, e.errNo) { }
+        -:  125:	NonScrollableException(const std::string& reason) : SQLException(reason, "", 0) {}
+        -:  126:};
+        -:  127:
+        -:  128:struct CPPCONN_PUBLIC_FUNC SQLUnsupportedOptionException : public SQLException
+        -:  129:{
+        -:  130:	SQLUnsupportedOptionException(const SQLUnsupportedOptionException& e, const std::string conn_option) :
+        -:  131:		SQLException(e.what(), e.sql_state, e.errNo),
+        -:  132:		option(conn_option )  
+        -:  133:	{}
+        -:  134:
+        -:  135:	SQLUnsupportedOptionException(const std::string& reason, const std::string conn_option) : 
+        -:  136:		SQLException(reason, "", 0),
+        -:  137:		option(conn_option )  
+        -:  138:	{}
+        -:  139:
+        -:  140:	const char *getConnectionOption() const
+        -:  141:	{
+        -:  142:		return option.c_str();
+        -:  143:	}
+        -:  144:
+        -:  145:	~SQLUnsupportedOptionException() throw () {};
+        -:  146:protected:
+        -:  147:	const std::string option;
+        -:  148:};
+        -:  149:
+        -:  150:} /* namespace sql */
+        -:  151:
+        -:  152:#endif /* _SQL_EXCEPTION_H_ */

@@ -1,0 +1,257 @@
+        -:    0:Source:/usr/include/cppconn/sqlstring.h
+        -:    0:Graph:build/Debug/GNU-Linux/ConnectorDB.gcno
+        -:    0:Data:build/Debug/GNU-Linux/ConnectorDB.gcda
+        -:    0:Runs:2
+        -:    0:Programs:2
+        -:    1:/*
+        -:    2:Copyright (c) 2009, 2014, Oracle and/or its affiliates. All rights reserved.
+        -:    3:
+        -:    4:The MySQL Connector/C++ is licensed under the terms of the GPLv2
+        -:    5:<http://www.gnu.org/licenses/old-licenses/gpl-2.0.html>, like most
+        -:    6:MySQL Connectors. There are special exceptions to the terms and
+        -:    7:conditions of the GPLv2 as it is applied to this software, see the
+        -:    8:FLOSS License Exception
+        -:    9:<http://www.mysql.com/about/legal/licensing/foss-exception.html>.
+        -:   10:
+        -:   11:This program is free software; you can redistribute it and/or modify
+        -:   12:it under the terms of the GNU General Public License as published
+        -:   13:by the Free Software Foundation; version 2 of the License.
+        -:   14:
+        -:   15:This program is distributed in the hope that it will be useful, but
+        -:   16:WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+        -:   17:or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+        -:   18:for more details.
+        -:   19:
+        -:   20:You should have received a copy of the GNU General Public License along
+        -:   21:with this program; if not, write to the Free Software Foundation, Inc.,
+        -:   22:51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
+        -:   23:*/
+        -:   24:
+        -:   25:
+        -:   26:
+        -:   27:#ifndef _SQL_STRING_H_
+        -:   28:#define _SQL_STRING_H_
+        -:   29:
+        -:   30:#include <string>
+        -:   31:#include <algorithm>
+        -:   32:#include "build_config.h"
+        -:   33:#include <iostream>
+        -:   34:
+        -:   35:namespace sql
+        -:   36:{
+        -:   37:	class CPPCONN_PUBLIC_FUNC SQLString
+        -:   38:	{
+        -:   39:		std::string realStr;
+        -:   40:
+        -:   41:	public:
+        -:   42:#ifdef _WIN32
+        -:   43:        //TODO something less dirty-hackish.
+        -:   44:        static const size_t npos = static_cast<std::string::size_type>(-1);
+        -:   45:#else
+        -:   46:		static const size_t npos = std::string::npos;
+        -:   47:#endif
+        -:   48:
+function _ZN3sql9SQLStringD2Ev called 133 returned 100% blocks executed 100%
+      133:   49:		~SQLString() {}
+call    0 returned 100%
+        -:   50:
+        -:   51:		SQLString() {}
+        -:   52:
+        -:   53:		SQLString(const SQLString & other) : realStr(other.realStr) {}
+        -:   54:
+        -:   55:		SQLString(const std::string & other) : realStr(other) {}
+        -:   56:
+function _ZN3sql9SQLStringC2EPKc called 68 returned 100% blocks executed 83%
+       68:   57:		SQLString(const char other[]) : realStr(other) {}
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 100% (fallthrough)
+branch  3 taken 0% (throw)
+call    4 returned 100%
+call    5 never executed
+        -:   58:
+        -:   59:		SQLString(const char * s, size_t n) : realStr(s, n) {}
+        -:   60:
+        -:   61:		// Needed for stuff like SQLString str= "char * string constant"
+        -:   62:		const SQLString & operator=(const char * s)
+        -:   63:		{
+        -:   64:			realStr = s;
+        -:   65:			return *this;
+        -:   66:		}
+        -:   67:
+        -:   68:		const SQLString & operator=(const std::string & rhs)
+        -:   69:		{
+        -:   70:			realStr = rhs;
+        -:   71:			return *this;
+        -:   72:		}
+        -:   73:
+        -:   74:		const SQLString & operator=(const SQLString & rhs)
+        -:   75:		{
+        -:   76:			realStr = rhs.realStr;
+        -:   77:			return *this;
+        -:   78:		}
+        -:   79:
+        -:   80:		// Conversion to st::string. Comes in play for stuff like std::string str= SQLString_var;
+function _ZNK3sql9SQLStringcvRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEB5cxx11Ev called 3 returned 100% blocks executed 100%
+        3:   81:		operator const std::string &() const
+        -:   82:		{
+        3:   83:			return realStr;
+        -:   84:		}
+        -:   85:
+        -:   86:		/** For access std::string methods. Not sure we need it. Makes it look like some smart ptr.
+        -:   87:			possibly operator* - will look even more like smart ptr */
+        -:   88:		std::string * operator ->()
+        -:   89:		{
+        -:   90:			return & realStr;
+        -:   91:		}
+        -:   92:
+        -:   93:		int compare(const SQLString& str) const
+        -:   94:		{
+        -:   95:			return realStr.compare(str.realStr);
+        -:   96:		}
+        -:   97:
+        -:   98:		int compare(const char * s) const
+        -:   99:		{
+        -:  100:			return realStr.compare(s);
+        -:  101:		}
+        -:  102:
+        -:  103:		int compare(size_t pos1, size_t n1, const char * s) const
+        -:  104:		{
+        -:  105:			return realStr.compare(pos1, n1, s);
+        -:  106:		}
+        -:  107:
+        -:  108:		int caseCompare(const SQLString &s) const
+        -:  109:		{	
+        -:  110:			std::string tmp(realStr), str(s);
+        -:  111:			std::transform(tmp.begin(), tmp.end(), tmp.begin(), ::tolower);
+        -:  112:			std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+        -:  113:			return tmp.compare(str);
+        -:  114:		}
+        -:  115:
+        -:  116:		int caseCompare(const char * s) const
+        -:  117:		{
+        -:  118:			std::string tmp(realStr), str(s);
+        -:  119:			std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+        -:  120:			std::transform(tmp.begin(), tmp.end(), tmp.begin(), ::tolower);
+        -:  121:			return tmp.compare(str);
+        -:  122:		}
+        -:  123:
+        -:  124:		int caseCompare(size_t pos1, size_t n1, const char * s) const
+        -:  125:		{
+        -:  126:			std::string tmp(realStr.c_str() + pos1, n1), str(s);
+        -:  127:			std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+        -:  128:			std::transform(tmp.begin(), tmp.end(), tmp.begin(), ::tolower);
+        -:  129:			return tmp.compare(str);
+        -:  130:		}
+        -:  131:
+        -:  132:		const std::string & asStdString() const
+        -:  133:		{
+        -:  134:			return realStr;
+        -:  135:		}
+        -:  136:
+        -:  137:		const char * c_str() const
+        -:  138:		{
+        -:  139:			return realStr.c_str();
+        -:  140:		}
+        -:  141:
+function _ZNK3sql9SQLString6lengthEv called 38 returned 100% blocks executed 100%
+       38:  142:		size_t length() const
+        -:  143:		{
+       38:  144:			return realStr.length();
+call    0 returned 100%
+        -:  145:		}
+        -:  146:
+        -:  147:		SQLString & append(const std::string & str)
+        -:  148:		{
+        -:  149:			realStr.append(str);
+        -:  150:			return *this;
+        -:  151:		}
+        -:  152:
+        -:  153:		SQLString & append(const char * s)
+        -:  154:		{
+        -:  155:			realStr.append(s);
+        -:  156:			return *this;
+        -:  157:		}
+        -:  158:
+function _ZNK3sql9SQLStringixEm called 26 returned 100% blocks executed 100%
+       26:  159:		const char& operator[](size_t pos) const
+        -:  160:		{
+       26:  161:			return realStr[pos];
+call    0 returned 100%
+        -:  162:		}
+        -:  163:
+        -:  164:		size_t find(char c, size_t pos = 0) const
+        -:  165:		{
+        -:  166:			return realStr.find(c, pos);
+        -:  167:		}
+        -:  168:
+        -:  169:		size_t find(const SQLString & s, size_t pos = 0) const
+        -:  170:		{
+        -:  171:			return realStr.find(s.realStr, pos);
+        -:  172:		}
+        -:  173:
+        -:  174:		SQLString substr(size_t pos = 0, size_t n = npos) const
+        -:  175:		{
+        -:  176:			return realStr.substr(pos, n);
+        -:  177:		}
+        -:  178:
+        -:  179:		const SQLString& replace(size_t pos1, size_t n1, const SQLString & s)
+        -:  180:		{
+        -:  181:			realStr.replace(pos1, n1, s.realStr);
+        -:  182:			return *this;
+        -:  183:		}
+        -:  184:
+        -:  185:		size_t find_first_of(char c, size_t pos = 0) const
+        -:  186:		{
+        -:  187:			return realStr.find_first_of(c, pos);
+        -:  188:		}
+        -:  189:
+        -:  190:		size_t find_last_of(char c, size_t pos = npos) const
+        -:  191:		{
+        -:  192:			return realStr.find_last_of(c, pos);
+        -:  193:		}
+        -:  194:
+        -:  195:		const SQLString & operator+=(const SQLString & op2)
+        -:  196:		{
+        -:  197:			realStr += op2.realStr;
+        -:  198:			return *this;
+        -:  199:		}
+        -:  200:};
+        -:  201:
+        -:  202:
+        -:  203:/*
+        -:  204:  Operators that can and have to be not a member.
+        -:  205:*/
+        -:  206:inline const SQLString operator+(const SQLString & op1, const SQLString & op2)
+        -:  207:{
+        -:  208:	return sql::SQLString(op1.asStdString() + op2.asStdString());
+        -:  209:}
+        -:  210:
+        -:  211:inline bool operator ==(const SQLString & op1, const SQLString & op2)
+        -:  212:{
+        -:  213:	return (op1.asStdString() == op2.asStdString());
+        -:  214:}
+        -:  215:
+        -:  216:inline bool operator !=(const SQLString & op1, const SQLString & op2)
+        -:  217:{
+        -:  218:	return (op1.asStdString() != op2.asStdString());
+        -:  219:}
+        -:  220:
+        -:  221:inline bool operator <(const SQLString & op1, const SQLString & op2)
+        -:  222:{
+        -:  223:	return op1.asStdString() < op2.asStdString();
+        -:  224:}
+        -:  225:
+        -:  226:
+        -:  227:}// namespace sql
+        -:  228:
+        -:  229:
+        -:  230:namespace std
+        -:  231:{
+        -:  232:	// operator << for SQLString output
+        -:  233:	inline ostream & operator << (ostream & os, const sql::SQLString & str )
+        -:  234:	{
+        -:  235:		return os << str.asStdString();
+        -:  236:	}
+        -:  237:}
+        -:  238:#endif

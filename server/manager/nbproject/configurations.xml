@@ -24,6 +24,14 @@
                    displayName="Файлы тестов"
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f2"
+                     displayName="TestConnectorDB"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/newtestclass1.cpp</itemPath>
+        <itemPath>tests/newtestclass1.h</itemPath>
+        <itemPath>tests/newtestrunner1.cpp</itemPath>
+      </logicalFolder>
       <logicalFolder name="f1"
                      displayName="TestSequenceTreatmenter"
                      projectFiles="true"
@@ -54,7 +62,7 @@
           <incFile>
             <pElem>lib/mysql-connector/include/mysql_connection.h</pElem>
           </incFile>
-          <commandLine>-g -O0 --coverage</commandLine>
+          <commandLine>-g -fprofile-arcs -ftest-coverage</commandLine>
         </ccTool>
         <linkerTool>
           <linkerLibItems>
@@ -88,13 +96,33 @@
           </linkerLibItems>
         </linkerTool>
       </folder>
+      <folder path="TestFiles/f2">
+        <cTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </cTool>
+        <ccTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f2</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="tests/newtestclass.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="tests/newtestclass.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="tests/newtestclass1.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/newtestclass1.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="tests/newtestrunner.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/newtestrunner1.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -143,13 +171,33 @@
           </linkerLibItems>
         </linkerTool>
       </folder>
+      <folder path="TestFiles/f2">
+        <cTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </cTool>
+        <ccTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f2</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="tests/newtestclass.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="tests/newtestclass.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="tests/newtestclass1.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/newtestclass1.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="tests/newtestrunner.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/newtestrunner1.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>
