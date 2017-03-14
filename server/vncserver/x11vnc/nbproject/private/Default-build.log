@@ -1,0 +1,983 @@
+Making all in misc
+make[1]: вход в каталог «/home/glebmillenium/virtualspace/server/vncserver/x11vnc/misc»
+Making all in turbovnc
+make[2]: вход в каталог «/home/glebmillenium/virtualspace/server/vncserver/x11vnc/misc/turbovnc»
+make[2]: Цель «all» не требует выполнения команд.
+make[2]: выход из каталога «/home/glebmillenium/virtualspace/server/vncserver/x11vnc/misc/turbovnc»
+make[2]: вход в каталог «/home/glebmillenium/virtualspace/server/vncserver/x11vnc/misc»
+make[2]: Цель «all-am» не требует выполнения команд.
+make[2]: выход из каталога «/home/glebmillenium/virtualspace/server/vncserver/x11vnc/misc»
+make[1]: выход из каталога «/home/glebmillenium/virtualspace/server/vncserver/x11vnc/misc»
+make[1]: вход в каталог «/home/glebmillenium/virtualspace/server/vncserver/x11vnc»
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-8to24.o -MD -MP -MF ".deps/x11vnc-8to24.Tpo" -c -o x11vnc-8to24.o `test -f '8to24.c' || echo './'`8to24.c; \
+then mv -f ".deps/x11vnc-8to24.Tpo" ".deps/x11vnc-8to24.Po"; else rm -f ".deps/x11vnc-8to24.Tpo"; exit 1; fi
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-appshare.o -MD -MP -MF ".deps/x11vnc-appshare.Tpo" -c -o x11vnc-appshare.o `test -f 'appshare.c' || echo './'`appshare.c; \
+then mv -f ".deps/x11vnc-appshare.Tpo" ".deps/x11vnc-appshare.Po"; else rm -f ".deps/x11vnc-appshare.Tpo"; exit 1; fi
+appshare.c: In function ‘stop’:
+appshare.c:533:2: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+  system(cmd);
+  ^
+appshare.c:537:2: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+  system(cmd);
+  ^
+appshare.c: In function ‘launch’:
+appshare.c:497:2: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+  system(cmd);
+  ^
+appshare.c: In function ‘handle_shell’:
+appshare.c:1711:6: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+      system(str+1);
+      ^
+appshare.c:1715:6: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+      system(cmd);
+      ^
+appshare.c: In function ‘appshare_cleanup’:
+appshare.c:639:3: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+   system(cmd);
+   ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-avahi.o -MD -MP -MF ".deps/x11vnc-avahi.Tpo" -c -o x11vnc-avahi.o `test -f 'avahi.c' || echo './'`avahi.c; \
+then mv -f ".deps/x11vnc-avahi.Tpo" ".deps/x11vnc-avahi.Po"; else rm -f ".deps/x11vnc-avahi.Tpo"; exit 1; fi
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-cleanup.o -MD -MP -MF ".deps/x11vnc-cleanup.Tpo" -c -o x11vnc-cleanup.o `test -f 'cleanup.c' || echo './'`cleanup.c; \
+then mv -f ".deps/x11vnc-cleanup.Tpo" ".deps/x11vnc-cleanup.Po"; else rm -f ".deps/x11vnc-cleanup.Tpo"; exit 1; fi
+cleanup.c: In function ‘crash_shell’:
+cleanup.c:506:4: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+    system(cmd);
+    ^
+cleanup.c:512:4: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+    system(cmd);
+    ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-connections.o -MD -MP -MF ".deps/x11vnc-connections.Tpo" -c -o x11vnc-connections.o `test -f 'connections.c' || echo './'`connections.c; \
+then mv -f ".deps/x11vnc-connections.Tpo" ".deps/x11vnc-connections.Po"; else rm -f ".deps/x11vnc-connections.Tpo"; exit 1; fi
+connections.c: In function ‘run_user_command’:
+connections.c:696:14: warning: variable ‘pidw’ set but not used [-Wunused-but-set-variable]
+   pid_t pid, pidw;
+              ^
+connections.c: In function ‘do_reverse_connect’:
+connections.c:2700:34: warning: variable ‘s’ set but not used [-Wunused-but-set-variable]
+  char *host, *p, *str = str_in, *s = NULL;
+                                  ^
+connections.c: In function ‘run_user_command’:
+connections.c:642:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(tmp_fd, input, len);
+    ^
+connections.c:668:5: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+     write(fileno(output), line, k+1);
+     ^
+connections.c:689:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(fileno(ph), input, len);
+   ^
+connections.c: In function ‘do_reverse_connect’:
+connections.c:2774:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(vncsock, prestring, prestring_len);
+    ^
+connections.c:2844:5: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+     write(sock, prestring, prestring_len);
+     ^
+connections.c:2855:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(sock, prestring, prestring_len);
+    ^
+connections.c: In function ‘pconnect’:
+connections.c:2302:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(psock, req, strlen(req));
+  ^
+connections.c:2306:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(psock, t, strlen(t));
+   ^
+connections.c:2319:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(psock, req, strlen(req));
+  ^
+connections.c: In function ‘socks_proxy’:
+connections.c:2201:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(sock, buf, len);
+  ^
+connections.c: In function ‘socks5_proxy’:
+connections.c:2076:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(sock, buf, 3);
+  ^
+connections.c:2104:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(sock, buf, len+2);
+  ^
+connections.c:2127:3: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+   read(sock, reply+4, 4 + 2);
+   ^
+connections.c:2131:3: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+   read(sock, reply+5, (int) reply[4] + 2);
+   ^
+connections.c:2133:3: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+   read(sock, reply+4, 16 + 2);
+   ^
+connections.c: In function ‘check_gui_inputs’:
+connections.c:3859:5: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+     write(fd, "\n", 1);
+     ^
+connections.c: In function ‘start_client_info_sock’:
+connections.c:4272:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(sock, "COOKIE:", strlen("COOKIE:"));
+    ^
+connections.c:4273:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(sock, cookie, strlen(cookie));
+    ^
+connections.c:4274:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(sock, "\n", strlen("\n"));
+    ^
+connections.c:4275:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(sock, "none\n", strlen("none\n"));
+    ^
+connections.c:4276:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(sock, "none\n", strlen("none\n"));
+    ^
+connections.c:4277:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(sock, lst, strlen(lst));
+    ^
+connections.c:4278:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(sock, "\n", strlen("\n"));
+    ^
+connections.c: In function ‘send_client_info’:
+connections.c:4346:11: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    if (0) write(sock, "\n", 1);
+           ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-cursor.o -MD -MP -MF ".deps/x11vnc-cursor.Tpo" -c -o x11vnc-cursor.o `test -f 'cursor.c' || echo './'`cursor.c; \
+then mv -f ".deps/x11vnc-cursor.Tpo" ".deps/x11vnc-cursor.Po"; else rm -f ".deps/x11vnc-cursor.Tpo"; exit 1; fi
+cursor.c: In function ‘disable_cursor_shape_updates’:
+cursor.c:1729:13: warning: variable ‘changed’ set but not used [-Wunused-but-set-variable]
+  static int changed = 0;
+             ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-gui.o -MD -MP -MF ".deps/x11vnc-gui.Tpo" -c -o x11vnc-gui.o `test -f 'gui.c' || echo './'`gui.c; \
+then mv -f ".deps/x11vnc-gui.Tpo" ".deps/x11vnc-gui.Po"; else rm -f ".deps/x11vnc-gui.Tpo"; exit 1; fi
+gui.c: In function ‘do_gui’:
+gui.c:754:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(fd, gui_code, strlen(gui_code));
+   ^
+gui.c:811:3: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+   system(cmd);
+   ^
+gui.c:818:4: warning: ignoring return value of ‘fgets’, declared with attribute warn_unused_result [-Wunused-result]
+    fgets(line, 128, fp);
+    ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-help.o -MD -MP -MF ".deps/x11vnc-help.Tpo" -c -o x11vnc-help.o `test -f 'help.c' || echo './'`help.c; \
+then mv -f ".deps/x11vnc-help.Tpo" ".deps/x11vnc-help.Po"; else rm -f ".deps/x11vnc-help.Tpo"; exit 1; fi
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-inet.o -MD -MP -MF ".deps/x11vnc-inet.Tpo" -c -o x11vnc-inet.o `test -f 'inet.c' || echo './'`inet.c; \
+then mv -f ".deps/x11vnc-inet.Tpo" ".deps/x11vnc-inet.Po"; else rm -f ".deps/x11vnc-inet.Tpo"; exit 1; fi
+inet.c: In function ‘get_host’:
+inet.c:237:6: warning: variable ‘saddr_port’ set but not used [-Wunused-but-set-variable]
+  int saddr_port;
+      ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-keyboard.o -MD -MP -MF ".deps/x11vnc-keyboard.Tpo" -c -o x11vnc-keyboard.o `test -f 'keyboard.c' || echo './'`keyboard.c; \
+then mv -f ".deps/x11vnc-keyboard.Tpo" ".deps/x11vnc-keyboard.Po"; else rm -f ".deps/x11vnc-keyboard.Tpo"; exit 1; fi
+keyboard.c: In function ‘clear_locks’:
+keyboard.c:330:6: warning: ‘XKeycodeToKeysym’ is deprecated [-Wdeprecated-declarations]
+      KeySym ks = XKeycodeToKeysym(dpy, key, 0);
+      ^
+In file included from x11vnc.h:73:0,
+                 from keyboard.c:35:
+/usr/include/X11/Xlib.h:1687:15: note: declared here
+ extern KeySym XKeycodeToKeysym(
+               ^
+keyboard.c: In function ‘delete_keycode’:
+keyboard.c:603:3: warning: ‘XKeycodeToKeysym’ is deprecated [-Wdeprecated-declarations]
+   ksym = XKeycodeToKeysym(dpy, kc, 0);
+   ^
+In file included from x11vnc.h:73:0,
+                 from keyboard.c:35:
+/usr/include/X11/Xlib.h:1687:15: note: declared here
+ extern KeySym XKeycodeToKeysym(
+               ^
+keyboard.c: In function ‘xkb_tweak_keyboard’:
+keyboard.c:1691:5: warning: ‘XKeycodeToKeysym’ is deprecated [-Wdeprecated-declarations]
+     s1 = XKeysymToString(XKeycodeToKeysym(dpy,
+     ^
+In file included from x11vnc.h:73:0,
+                 from keyboard.c:35:
+/usr/include/X11/Xlib.h:1687:15: note: declared here
+ extern KeySym XKeycodeToKeysym(
+               ^
+keyboard.c:1945:7: warning: ‘XKeycodeToKeysym’ is deprecated [-Wdeprecated-declarations]
+       KeySym ks = XKeycodeToKeysym(dpy, kc_f[l], j);
+       ^
+In file included from x11vnc.h:73:0,
+                 from keyboard.c:35:
+/usr/include/X11/Xlib.h:1687:15: note: declared here
+ extern KeySym XKeycodeToKeysym(
+               ^
+keyboard.c:2006:4: warning: ‘XKeycodeToKeysym’ is deprecated [-Wdeprecated-declarations]
+    str = XKeysymToString(XKeycodeToKeysym(dpy,kc_f[l],0));
+    ^
+In file included from x11vnc.h:73:0,
+                 from keyboard.c:35:
+/usr/include/X11/Xlib.h:1687:15: note: declared here
+ extern KeySym XKeycodeToKeysym(
+               ^
+keyboard.c: In function ‘keyboard’:
+keyboard.c:3068:16: warning: variable ‘max_keyrepeat_always’ set but not used [-Wunused-but-set-variable]
+  static double max_keyrepeat_always = -1.0;
+                ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-linuxfb.o -MD -MP -MF ".deps/x11vnc-linuxfb.Tpo" -c -o x11vnc-linuxfb.o `test -f 'linuxfb.c' || echo './'`linuxfb.c; \
+then mv -f ".deps/x11vnc-linuxfb.Tpo" ".deps/x11vnc-linuxfb.Po"; else rm -f ".deps/x11vnc-linuxfb.Tpo"; exit 1; fi
+linuxfb.c: In function ‘console_guess’:
+linuxfb.c:156:4: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+    read(fd, tmp, 4);
+    ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-macosx.o -MD -MP -MF ".deps/x11vnc-macosx.Tpo" -c -o x11vnc-macosx.o `test -f 'macosx.c' || echo './'`macosx.c; \
+then mv -f ".deps/x11vnc-macosx.Tpo" ".deps/x11vnc-macosx.Po"; else rm -f ".deps/x11vnc-macosx.Tpo"; exit 1; fi
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-macosxCG.o -MD -MP -MF ".deps/x11vnc-macosxCG.Tpo" -c -o x11vnc-macosxCG.o `test -f 'macosxCG.c' || echo './'`macosxCG.c; \
+then mv -f ".deps/x11vnc-macosxCG.Tpo" ".deps/x11vnc-macosxCG.Po"; else rm -f ".deps/x11vnc-macosxCG.Tpo"; exit 1; fi
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-macosxCGP.o -MD -MP -MF ".deps/x11vnc-macosxCGP.Tpo" -c -o x11vnc-macosxCGP.o `test -f 'macosxCGP.c' || echo './'`macosxCGP.c; \
+then mv -f ".deps/x11vnc-macosxCGP.Tpo" ".deps/x11vnc-macosxCGP.Po"; else rm -f ".deps/x11vnc-macosxCGP.Tpo"; exit 1; fi
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-macosxCGS.o -MD -MP -MF ".deps/x11vnc-macosxCGS.Tpo" -c -o x11vnc-macosxCGS.o `test -f 'macosxCGS.c' || echo './'`macosxCGS.c; \
+then mv -f ".deps/x11vnc-macosxCGS.Tpo" ".deps/x11vnc-macosxCGS.Po"; else rm -f ".deps/x11vnc-macosxCGS.Tpo"; exit 1; fi
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-macosx_opengl.o -MD -MP -MF ".deps/x11vnc-macosx_opengl.Tpo" -c -o x11vnc-macosx_opengl.o `test -f 'macosx_opengl.c' || echo './'`macosx_opengl.c; \
+then mv -f ".deps/x11vnc-macosx_opengl.Tpo" ".deps/x11vnc-macosx_opengl.Po"; else rm -f ".deps/x11vnc-macosx_opengl.Tpo"; exit 1; fi
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-options.o -MD -MP -MF ".deps/x11vnc-options.Tpo" -c -o x11vnc-options.o `test -f 'options.c' || echo './'`options.c; \
+then mv -f ".deps/x11vnc-options.Tpo" ".deps/x11vnc-options.Po"; else rm -f ".deps/x11vnc-options.Tpo"; exit 1; fi
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-pm.o -MD -MP -MF ".deps/x11vnc-pm.Tpo" -c -o x11vnc-pm.o `test -f 'pm.c' || echo './'`pm.c; \
+then mv -f ".deps/x11vnc-pm.Tpo" ".deps/x11vnc-pm.Po"; else rm -f ".deps/x11vnc-pm.Tpo"; exit 1; fi
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-pointer.o -MD -MP -MF ".deps/x11vnc-pointer.Tpo" -c -o x11vnc-pointer.o `test -f 'pointer.c' || echo './'`pointer.c; \
+then mv -f ".deps/x11vnc-pointer.Tpo" ".deps/x11vnc-pointer.Po"; else rm -f ".deps/x11vnc-pointer.Tpo"; exit 1; fi
+pointer.c: In function ‘do_button_mask_change’:
+pointer.c:428:5: warning: ‘XKeycodeToKeysym’ is deprecated [-Wdeprecated-declarations]
+     char *str = XKeysymToString(XKeycodeToKeysym(
+     ^
+In file included from x11vnc.h:73:0,
+                 from pointer.c:35:
+/usr/include/X11/Xlib.h:1687:15: note: declared here
+ extern KeySym XKeycodeToKeysym(
+               ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-rates.o -MD -MP -MF ".deps/x11vnc-rates.Tpo" -c -o x11vnc-rates.o `test -f 'rates.c' || echo './'`rates.c; \
+then mv -f ".deps/x11vnc-rates.Tpo" ".deps/x11vnc-rates.Po"; else rm -f ".deps/x11vnc-rates.Tpo"; exit 1; fi
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-remote.o -MD -MP -MF ".deps/x11vnc-remote.Tpo" -c -o x11vnc-remote.o `test -f 'remote.c' || echo './'`remote.c; \
+then mv -f ".deps/x11vnc-remote.Tpo" ".deps/x11vnc-remote.Po"; else rm -f ".deps/x11vnc-remote.Tpo"; exit 1; fi
+In file included from x11vnc.h:698:0,
+                 from remote.c:35:
+remote.c: In function ‘process_remote_cmd’:
+util.h:73:23: warning: the address of ‘vnc_desktop_name’ will always evaluate as ‘true’ [-Waddress]
+ #define NONUL(x) ((x) ? (x) : "")
+                       ^
+remote.c:5863:8: note: in expansion of macro ‘NONUL’
+        NONUL(vnc_desktop_name));
+        ^
+util.h:73:23: warning: the address of ‘lastmod’ will always evaluate as ‘true’ [-Waddress]
+ #define NONUL(x) ((x) ? (x) : "")
+                       ^
+remote.c:6065:40: note: in expansion of macro ‘NONUL’
+    snprintf(buf, bufn, "aro=%s:%s", p, NONUL(lastmod));
+                                        ^
+remote.c: In function ‘send_remote_cmd’:
+remote.c:158:5: warning: ignoring return value of ‘fgets’, declared with attribute warn_unused_result [-Wunused-result]
+     fgets(line, X11VNC_REMOTE_MAX, in);
+     ^
+remote.c: In function ‘check_httpdir’:
+remote.c:368:4: warning: ignoring return value of ‘getcwd’, declared with attribute warn_unused_result [-Wunused-result]
+    getcwd(cwd, 1024);
+    ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-scan.o -MD -MP -MF ".deps/x11vnc-scan.Tpo" -c -o x11vnc-scan.o `test -f 'scan.c' || echo './'`scan.c; \
+then mv -f ".deps/x11vnc-scan.Tpo" ".deps/x11vnc-scan.Po"; else rm -f ".deps/x11vnc-scan.Tpo"; exit 1; fi
+scan.c: In function ‘scan_for_updates’:
+scan.c:3361:9: warning: variable ‘dtmp’ set but not used [-Wunused-but-set-variable]
+  double dtmp = 0.0;
+         ^
+scan.c: In function ‘get_load’:
+scan.c:2938:5: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+     read(d, tmp, 60);
+     ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-screen.o -MD -MP -MF ".deps/x11vnc-screen.Tpo" -c -o x11vnc-screen.o `test -f 'screen.c' || echo './'`screen.c; \
+then mv -f ".deps/x11vnc-screen.Tpo" ".deps/x11vnc-screen.Po"; else rm -f ".deps/x11vnc-screen.Tpo"; exit 1; fi
+screen.c: In function ‘vnc_reflect_got_cursorshape’:
+screen.c:1281:9: warning: pointer targets in assignment differ in signedness [-Wpointer-sign]
+   psave = pixels;
+         ^
+screen.c:1282:10: warning: pointer targets in assignment differ in signedness [-Wpointer-sign]
+   pixels = pixels64;
+          ^
+screen.c: In function ‘initialize_xdisplay_fb’:
+screen.c:2511:6: warning: variable ‘subwin_bs’ set but not used [-Wunused-but-set-variable]
+  int subwin_bs;
+      ^
+screen.c: In function ‘check_cursor_changes’:
+screen.c:4162:7: warning: variable ‘cursor_shape’ set but not used [-Wunused-but-set-variable]
+   int cursor_shape, dopush = 0, link, latency, netrate;
+       ^
+screen.c: In function ‘vnc_reflect_get_password’:
+screen.c:1461:3: warning: ignoring return value of ‘fgets’, declared with attribute warn_unused_result [-Wunused-result]
+   fgets(p, 100, stdin);
+   ^
+screen.c:1466:5: warning: ignoring return value of ‘fgets’, declared with attribute warn_unused_result [-Wunused-result]
+     fgets(p, 100, f);
+     ^
+screen.c: In function ‘initialize_raw_fb’:
+screen.c:1828:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(fd, (char *)vals, 4 * w);
+    ^
+screen.c:1850:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(fd, (char *)val, 4 * w);
+    ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-selection.o -MD -MP -MF ".deps/x11vnc-selection.Tpo" -c -o x11vnc-selection.o `test -f 'selection.c' || echo './'`selection.c; \
+then mv -f ".deps/x11vnc-selection.Tpo" ".deps/x11vnc-selection.Po"; else rm -f ".deps/x11vnc-selection.Tpo"; exit 1; fi
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-solid.o -MD -MP -MF ".deps/x11vnc-solid.Tpo" -c -o x11vnc-solid.o `test -f 'solid.c' || echo './'`solid.c; \
+then mv -f ".deps/x11vnc-solid.Tpo" ".deps/x11vnc-solid.Po"; else rm -f ".deps/x11vnc-solid.Tpo"; exit 1; fi
+solid.c: In function ‘cmd_output’:
+solid.c:123:6: warning: variable ‘rc’ set but not used [-Wunused-but-set-variable]
+  int rc;
+      ^
+solid.c: In function ‘solid_macosx’:
+solid.c:1219:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(fd, macosx_solid_background, strlen(macosx_solid_background));
+    ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-sslcmds.o -MD -MP -MF ".deps/x11vnc-sslcmds.Tpo" -c -o x11vnc-sslcmds.o `test -f 'sslcmds.c' || echo './'`sslcmds.c; \
+then mv -f ".deps/x11vnc-sslcmds.Tpo" ".deps/x11vnc-sslcmds.Po"; else rm -f ".deps/x11vnc-sslcmds.Tpo"; exit 1; fi
+sslcmds.c: In function ‘sslGenCA’:
+sslcmds.c:604:2: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+  system(cmd);
+  ^
+sslcmds.c: In function ‘sslGenCert’:
+sslcmds.c:640:2: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+  system(cmd);
+  ^
+sslcmds.c: In function ‘sslEncKey’:
+sslcmds.c:730:3: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+   system(tca);
+   ^
+sslcmds.c:744:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(tmp_fd, genCert, strlen(genCert));
+   ^
+sslcmds.c:758:3: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+   system(scr);
+   ^
+sslcmds.c:855:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(tmp_fd, genCert, strlen(genCert));
+  ^
+sslcmds.c:871:2: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+  system(scr);
+  ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-sslhelper.o -MD -MP -MF ".deps/x11vnc-sslhelper.Tpo" -c -o x11vnc-sslhelper.o `test -f 'sslhelper.c' || echo './'`sslhelper.c; \
+then mv -f ".deps/x11vnc-sslhelper.Tpo" ".deps/x11vnc-sslhelper.Po"; else rm -f ".deps/x11vnc-sslhelper.Tpo"; exit 1; fi
+sslhelper.c: In function ‘check_vnc_tls_mode’:
+sslhelper.c:1912:3: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+   ((uint32_t *)buf)[0] = Swap32IfLE(len);
+   ^
+sslhelper.c: In function ‘pr_ssl_info’:
+sslhelper.c:1940:4: warning: assignment discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+  c = SSL_get_current_cipher(ssl);
+    ^
+sslhelper.c: In function ‘accept_openssl’:
+sslhelper.c:4100:8: warning: the address of ‘rcookie’ will always evaluate as ‘true’ [-Waddress]
+    if (rcookie && strstr(rcookie, "VncViewer.class")) {
+        ^
+In file included from sslhelper.c:4410:0:
+enc.h: In function ‘securevnc_setup’:
+enc.h:1410:20: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘size_t {aka long unsigned int}’ [-Wformat=]
+    fprintf(stderr, "securevnc_setup: seeding with RANDSTR len=%d\n", strlen(s));
+                    ^
+sslhelper.c: In function ‘create_tmp_pem’:
+sslhelper.c:346:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(cnf_fd, str, strlen(str));
+  ^
+sslhelper.c:505:4: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+    system(cmd);
+    ^
+sslhelper.c: In function ‘pem_passwd_callback’:
+sslhelper.c:810:3: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+   system("stty -echo");
+   ^
+sslhelper.c:813:4: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+    system("stty echo");
+    ^
+sslhelper.c:816:3: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+   system("stty echo");
+   ^
+sslhelper.c: In function ‘add_anon_dh’:
+sslhelper.c:1459:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(cnf_fd, new_dh_params, strlen(new_dh_params));
+    ^
+sslhelper.c:1513:8: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+        write(d, new_dh_params, strlen(new_dh_params));
+        ^
+sslhelper.c:1521:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(cnf_fd, fixed_dh_params, strlen(fixed_dh_params));
+   ^
+sslhelper.c: In function ‘accept_openssl’:
+sslhelper.c:3641:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(vncsock, tbuf, strlen(cookie));
+    ^
+sslhelper.c:3647:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(vncsock, tbuf, strlen(cookie));
+    ^
+sslhelper.c:3721:5: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+     write(vncsock, cookie, strlen(cookie));
+     ^
+sslhelper.c:3723:6: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+      write(vncsock, buf, n);
+      ^
+sslhelper.c:3795:5: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+     write(vncsock, tbuf, strlen(tbuf));
+     ^
+sslhelper.c:3869:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(vncsock, tbuf, strlen(tbuf));
+    ^
+sslhelper.c:3916:7: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+       write(httpsock, buf, m);
+       ^
+sslhelper.c:3917:7: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+       write(httpsock, s, strlen(s));
+       ^
+sslhelper.c:3919:7: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+       write(httpsock, q, n-m);
+       ^
+sslhelper.c:3924:6: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+      write(httpsock, buf, n);
+      ^
+sslhelper.c:3939:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(vncsock, cookie, strlen(cookie));
+   ^
+sslhelper.c:4007:4: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+    read(certret_fd, certret_str, sbuf.st_size);
+    ^
+sslhelper.c:4030:4: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+    read(dhret_fd, dhret_str, sbuf.st_size);
+    ^
+sslhelper.c: In function ‘watch_for_http_traffic’:
+sslhelper.c:3244:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(2, buf_a, *n_a);
+   ^
+sslhelper.c: In function ‘ssl_xfer’:
+sslhelper.c:2285:3: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+   read(csock, tmp, 12);
+   ^
+sslhelper.c: In function ‘raw_xfer’:
+sslhelper.c:4337:17: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+     if (db > 1) write(2, buf, n);
+                 ^
+sslhelper.c:4369:17: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+     if (db > 1) write(2, buf, n);
+                 ^
+In file included from sslhelper.c:4410:0:
+enc.h: In function ‘securevnc_setup’:
+enc.h:1318:2: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+  read(server, (char *) &b1, 1);
+  ^
+enc.h:1319:2: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+  read(server, (char *) &b2, 1);
+  ^
+enc.h:1320:2: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+  read(server, (char *) &b3, 1);
+  ^
+enc.h:1321:2: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+  read(server, (char *) &b4, 1);
+  ^
+enc.h:1394:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(2, to_viewer, 12); /* and first 12 bytes 'RFB ...' as message */
+  ^
+enc.h:1427:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(server, encrypted_keybuf, n);
+  ^
+enc.h:1437:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(server, (char *)&zero, 1);
+   ^
+enc.h:1439:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(server, (char *)&one, 1);
+   ^
+enc.h:1441:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(server, (char *)&zero, 1);
+  ^
+enc.h:1442:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(server, (char *)&zero, 1);
+  ^
+enc.h:1444:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(server, (char *)&sig, 1);
+   ^
+enc.h:1446:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(server, (char *)&zero, 1);
+   ^
+enc.h:1506:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(server, signature, nsig);
+   ^
+enc.h:1516:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(viewer, to_viewer, to_viewer_len);
+   ^
+enc.h: In function ‘securevnc_server_rsa_save_dialog’:
+enc.h:1094:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(fileno(p), rsabuf, SECUREVNC_RSA_PUBKEY_SIZE);
+   ^
+enc.h: In function ‘doloop’:
+enc.h:2050:4: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+    system(cmd);
+    ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-uinput.o -MD -MP -MF ".deps/x11vnc-uinput.Tpo" -c -o x11vnc-uinput.o `test -f 'uinput.c' || echo './'`uinput.c; \
+then mv -f ".deps/x11vnc-uinput.Tpo" ".deps/x11vnc-uinput.Po"; else rm -f ".deps/x11vnc-uinput.Tpo"; exit 1; fi
+uinput.c: In function ‘initialize_uinput’:
+uinput.c:490:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(fd, &udev, sizeof(udev));
+  ^
+uinput.c: In function ‘ptr_move’:
+uinput.c:727:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(d, &ev, sizeof(ev));
+  ^
+uinput.c:732:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(d, &ev, sizeof(ev));
+  ^
+uinput.c:737:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(d, &ev, sizeof(ev));
+  ^
+uinput.c: In function ‘button_click’:
+uinput.c:976:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(d, &ev, sizeof(ev));
+  ^
+uinput.c:981:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(d, &ev, sizeof(ev));
+  ^
+uinput.c: In function ‘ptr_abs’:
+uinput.c:780:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(d, &ev, sizeof(ev));
+  ^
+uinput.c:785:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(d, &ev, sizeof(ev));
+  ^
+uinput.c:791:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(d, &ev, sizeof(ev));
+   ^
+uinput.c:797:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(d, &ev, sizeof(ev));
+  ^
+uinput.c: In function ‘uinput_key_command’:
+uinput.c:1253:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(d, &ev, sizeof(ev));
+  ^
+uinput.c:1258:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(d, &ev, sizeof(ev));
+  ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-unixpw.o -MD -MP -MF ".deps/x11vnc-unixpw.Tpo" -c -o x11vnc-unixpw.o `test -f 'unixpw.c' || echo './'`unixpw.c; \
+then mv -f ".deps/x11vnc-unixpw.Tpo" ".deps/x11vnc-unixpw.Po"; else rm -f ".deps/x11vnc-unixpw.Tpo"; exit 1; fi
+unixpw.c: In function ‘white_pixel’:
+unixpw.c:361:23: warning: variable ‘black_pix’ set but not used [-Wunused-but-set-variable]
+  static unsigned long black_pix = 0, white_pix = 1, set = 0;
+                       ^
+unixpw.c: In function ‘black_pixel’:
+unixpw.c:382:38: warning: variable ‘white_pix’ set but not used [-Wunused-but-set-variable]
+  static unsigned long black_pix = 0, white_pix = 1, set = 0;
+                                      ^
+unixpw.c: In function ‘su_verify’:
+unixpw.c:1059:7: warning: variable ‘ttyfd’ set but not used [-Wunused-but-set-variable]
+   int ttyfd;
+       ^
+unixpw.c:1356:27: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘size_t {aka long unsigned int}’ [-Wformat=]
+   if (db) fprintf(stderr, "\nwriting input len: %d\n", strlen(input));
+                           ^
+unixpw.c: In function ‘apply_opts’:
+unixpw.c:2071:9: warning: variable ‘notmode’ set but not used [-Wunused-but-set-variable]
+  int i, notmode = 0;
+         ^
+unixpw.c: In function ‘try_to_be_nobody’:
+unixpw.c:648:3: warning: ignoring return value of ‘setuid’, declared with attribute warn_unused_result [-Wunused-result]
+   setuid(pw->pw_uid);
+   ^
+unixpw.c:651:3: warning: ignoring return value of ‘seteuid’, declared with attribute warn_unused_result [-Wunused-result]
+   seteuid(pw->pw_uid);
+   ^
+unixpw.c:654:3: warning: ignoring return value of ‘setgid’, declared with attribute warn_unused_result [-Wunused-result]
+   setgid(pw->pw_gid);
+   ^
+unixpw.c:657:3: warning: ignoring return value of ‘setegid’, declared with attribute warn_unused_result [-Wunused-result]
+   setegid(pw->pw_gid);
+   ^
+unixpw.c: In function ‘su_verify’:
+unixpw.c:1124:5: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+     system(nam);
+     ^
+unixpw.c:1126:5: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+     write(tfd, "NOTTTY\n", 7);
+     ^
+unixpw.c:1131:3: warning: ignoring return value of ‘chdir’, declared with attribute warn_unused_result [-Wunused-result]
+   chdir("/");
+   ^
+unixpw.c:1161:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(2, "C", 1);
+   ^
+unixpw.c:1256:5: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+     system(cmd0);
+     ^
+unixpw.c:1258:5: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+     system(cmd0);
+     ^
+unixpw.c:1343:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(fd, pass+k, 1); 
+    ^
+unixpw.c:1347:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(fd, pass, strlen(pass)); 
+   ^
+unixpw.c:1357:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(fd, input, strlen(input)); 
+   ^
+unixpw.c: In function ‘check_unixpw_userprefs’:
+unixpw.c:1551:5: warning: ignoring return value of ‘fgets’, declared with attribute warn_unused_result [-Wunused-result]
+     fgets(buf, 1024, f);
+     ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-user.o -MD -MP -MF ".deps/x11vnc-user.Tpo" -c -o x11vnc-user.o `test -f 'user.c' || echo './'`user.c; \
+then mv -f ".deps/x11vnc-user.Tpo" ".deps/x11vnc-user.Po"; else rm -f ".deps/x11vnc-user.Tpo"; exit 1; fi
+user.c: In function ‘do_run_cmd’:
+user.c:2467:6: warning: variable ‘internal_cmd’ set but not used [-Wunused-but-set-variable]
+  int internal_cmd = 0;
+      ^
+user.c: In function ‘setup_cmd’:
+user.c:1902:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(fd, find_display, strlen(find_display));
+    ^
+user.c:1911:7: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+       system(com);
+       ^
+user.c: In function ‘vnc_redirect_timeout’:
+user.c:1395:2: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  write(2, "timeout: no clients connected.\n", 31);
+  ^
+user.c: In function ‘do_run_cmd’:
+user.c:2508:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(tmp_fd, s, strlen(s));
+    ^
+user.c:2510:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(tmp_fd, find_display, strlen(find_display));
+    ^
+user.c:2573:37: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+ if (db) {fprintf(stderr, "line: "); write(2, line, n); write(2, "\n", 1); fprintf(stderr, "res=%d n=%d\n", res, n);}
+                                     ^
+user.c:2573:56: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+ if (db) {fprintf(stderr, "line: "); write(2, line, n); write(2, "\n", 1); fprintf(stderr, "res=%d n=%d\n", res, n);}
+                                                        ^
+user.c:2678:9: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+ if (db) write(2, line, 100);
+         ^
+user.c:2854:1: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+ write(2, xauth_raw_data, n);
+ ^
+user.c: In function ‘do_chvt’:
+user.c:1404:2: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+  system(chvt);
+  ^
+user.c: In function ‘do_vnc_redirect’:
+user.c:1873:3: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+   write(vnc_redirect_sock, vnc_redirect_test, vnc_redirect_cnt);
+   ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-userinput.o -MD -MP -MF ".deps/x11vnc-userinput.Tpo" -c -o x11vnc-userinput.o `test -f 'userinput.c' || echo './'`userinput.c; \
+then mv -f ".deps/x11vnc-userinput.Tpo" ".deps/x11vnc-userinput.Po"; else rm -f ".deps/x11vnc-userinput.Tpo"; exit 1; fi
+userinput.c: In function ‘initialize_scroll_term’:
+userinput.c:761:9: warning: variable ‘s’ set but not used [-Wunused-but-set-variable]
+   char *s = scroll_good_all[n++];
+         ^
+userinput.c: In function ‘set_ypad’:
+userinput.c:1308:30: warning: the address of ‘xrecord_name_info’ will always evaluate as ‘true’ [-Waddress]
+  if (!xrecord_set_by_keys || !xrecord_name_info) {
+                              ^
+userinput.c: In function ‘push_scr_ev’:
+userinput.c:1797:11: warning: variable ‘trate’ set but not used [-Wunused-but-set-variable]
+    double trate;
+           ^
+userinput.c: In function ‘check_xrecord_keys’:
+userinput.c:2693:17: warning: variable ‘last_scr_ev’ set but not used [-Wunused-but-set-variable]
+   static double last_scr_ev = 0.0;
+                 ^
+userinput.c:2539:6: warning: variable ‘link’ set but not used [-Wunused-but-set-variable]
+  int link, latency, netrate;
+      ^
+userinput.c:2535:30: warning: variable ‘scroll_rep’ set but not used [-Wunused-but-set-variable]
+  int scr_cnt = 0, input = 0, scroll_rep;
+                              ^
+userinput.c: In function ‘check_xrecord_mouse’:
+userinput.c:2785:16: warning: variable ‘last_mouse_scroll’ set but not used [-Wunused-but-set-variable]
+  static double last_mouse_scroll = 0.0;
+                ^
+userinput.c: In function ‘try_copyrect’:
+userinput.c:3181:6: warning: variable ‘db’ set but not used [-Wunused-but-set-variable]
+  int db  = 0; \
+      ^
+userinput.c:3206:2: note: in expansion of macro ‘DB_SET’
+  DB_SET
+  ^
+userinput.c: In function ‘check_fixscreen’:
+userinput.c:3620:17: warning: variable ‘last’ set but not used [-Wunused-but-set-variable]
+   static double last = 0.0;
+                 ^
+userinput.c: In function ‘ncache_pre_portions’:
+userinput.c:3842:7: warning: variable ‘bs_h’ set but not used [-Wunused-but-set-variable]
+   int bs_h = cache_list[nidx].bs_h; 
+       ^
+userinput.c:3841:7: warning: variable ‘bs_w’ set but not used [-Wunused-but-set-variable]
+   int bs_w = cache_list[nidx].bs_w; 
+       ^
+userinput.c: In function ‘check_wireframe’:
+userinput.c:4418:16: warning: variable ‘last_save_stacklist’ set but not used [-Wunused-but-set-variable]
+  static time_t last_save_stacklist = 0;
+                ^
+userinput.c: In function ‘check_user_input3’:
+userinput.c:5375:7: warning: variable ‘got_input’ set but not used [-Wunused-but-set-variable]
+   int got_input = 0;
+       ^
+userinput.c:5334:29: warning: variable ‘to’ set but not used [-Wunused-but-set-variable]
+  double spin, spin_max, tm, to, dtm;
+                             ^
+userinput.c: In function ‘check_user_input4’:
+userinput.c:5611:7: warning: variable ‘got_input’ set but not used [-Wunused-but-set-variable]
+   int got_input = 0;
+       ^
+userinput.c:5499:13: warning: variable ‘ssec’ set but not used [-Wunused-but-set-variable]
+  static int ssec = 0, total_calls = 0;
+             ^
+userinput.c:5486:32: warning: variable ‘rpe_last’ set but not used [-Wunused-but-set-variable]
+  double spin, tm, to, tc, dtm, rpe_last;
+                                ^
+userinput.c: In function ‘snapshot_cache_list’:
+userinput.c:5817:33: warning: variable ‘last_free’ set but not used [-Wunused-but-set-variable]
+  static double last_snap = 0.0, last_free = 0.0;
+                                 ^
+userinput.c: In function ‘bs_save’:
+userinput.c:7194:15: warning: variable ‘h’ set but not used [-Wunused-but-set-variable]
+  int x, y, w, h;
+               ^
+userinput.c:7194:12: warning: variable ‘w’ set but not used [-Wunused-but-set-variable]
+  int x, y, w, h;
+            ^
+userinput.c: In function ‘su_save’:
+userinput.c:7300:15: warning: variable ‘h’ set but not used [-Wunused-but-set-variable]
+  int x, y, w, h;
+               ^
+userinput.c:7300:12: warning: variable ‘w’ set but not used [-Wunused-but-set-variable]
+  int x, y, w, h;
+            ^
+userinput.c: In function ‘try_to_fix_resize_su’:
+userinput.c:7847:21: warning: variable ‘bh1’ set but not used [-Wunused-but-set-variable]
+  int bx1, by1, bw1, bh1;
+                     ^
+userinput.c:7847:16: warning: variable ‘bw1’ set but not used [-Wunused-but-set-variable]
+  int bx1, by1, bw1, bh1;
+                ^
+userinput.c:7847:11: warning: variable ‘by1’ set but not used [-Wunused-but-set-variable]
+  int bx1, by1, bw1, bh1;
+           ^
+userinput.c:7847:6: warning: variable ‘bx1’ set but not used [-Wunused-but-set-variable]
+  int bx1, by1, bw1, bh1;
+      ^
+userinput.c:7846:21: warning: variable ‘sh1’ set but not used [-Wunused-but-set-variable]
+  int sx1, sy1, sw1, sh1, dx, dy;
+                     ^
+userinput.c:7846:16: warning: variable ‘sw1’ set but not used [-Wunused-but-set-variable]
+  int sx1, sy1, sw1, sh1, dx, dy;
+                ^
+userinput.c: In function ‘try_to_fix_su’:
+userinput.c:7981:6: warning: variable ‘moved’ set but not used [-Wunused-but-set-variable]
+  int moved = 0;
+      ^
+userinput.c:7978:18: warning: variable ‘h1’ set but not used [-Wunused-but-set-variable]
+  int x1, y1, w1, h1;
+                  ^
+userinput.c:7978:14: warning: variable ‘w1’ set but not used [-Wunused-but-set-variable]
+  int x1, y1, w1, h1;
+              ^
+userinput.c:7977:18: warning: variable ‘h0’ set but not used [-Wunused-but-set-variable]
+  int x0, y0, w0, h0;
+                  ^
+userinput.c:7977:14: warning: variable ‘w0’ set but not used [-Wunused-but-set-variable]
+  int x0, y0, w0, h0;
+              ^
+userinput.c: In function ‘try_to_synthesize_su’:
+userinput.c:8526:18: warning: variable ‘h3’ set but not used [-Wunused-but-set-variable]
+  int x3, y3, w3, h3;
+                  ^
+userinput.c:8526:14: warning: variable ‘w3’ set but not used [-Wunused-but-set-variable]
+  int x3, y3, w3, h3;
+              ^
+userinput.c:8524:18: warning: variable ‘h1’ set but not used [-Wunused-but-set-variable]
+  int x1, y1, w1, h1;
+                  ^
+userinput.c:8524:14: warning: variable ‘w1’ set but not used [-Wunused-but-set-variable]
+  int x1, y1, w1, h1;
+              ^
+userinput.c:8523:18: warning: variable ‘h0’ set but not used [-Wunused-but-set-variable]
+  int x0, y0, w0, h0;
+                  ^
+userinput.c:8523:14: warning: variable ‘w0’ set but not used [-Wunused-but-set-variable]
+  int x0, y0, w0, h0;
+              ^
+userinput.c: In function ‘check_ncache’:
+userinput.c:8954:18: warning: variable ‘ttot’ set but not used [-Wunused-but-set-variable]
+  int pixels = 0, ttot;
+                  ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-util.o -MD -MP -MF ".deps/x11vnc-util.Tpo" -c -o x11vnc-util.o `test -f 'util.c' || echo './'`util.c; \
+then mv -f ".deps/x11vnc-util.Tpo" ".deps/x11vnc-util.Po"; else rm -f ".deps/x11vnc-util.Tpo"; exit 1; fi
+util.c: In function ‘do_allinput’:
+util.c:513:7: warning: variable ‘usec0’ set but not used [-Wunused-but-set-variable]
+  long usec0;
+       ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-v4l.o -MD -MP -MF ".deps/x11vnc-v4l.Tpo" -c -o x11vnc-v4l.o `test -f 'v4l.c' || echo './'`v4l.c; \
+then mv -f ".deps/x11vnc-v4l.Tpo" ".deps/x11vnc-v4l.Po"; else rm -f ".deps/x11vnc-v4l.Tpo"; exit 1; fi
+v4l.c:134:12: warning: ‘v4l1_val’ defined but not used [-Wunused-function]
+ static int v4l1_val(int pct) {
+            ^
+v4l.c:146:12: warning: ‘v4l1_width’ defined but not used [-Wunused-function]
+ static int v4l1_width(int w) {
+            ^
+v4l.c:159:12: warning: ‘v4l1_height’ defined but not used [-Wunused-function]
+ static int v4l1_height(int h) {
+            ^
+v4l.c:173:12: warning: ‘v4l1_resize’ defined but not used [-Wunused-function]
+ static int v4l1_resize(int fd, int w, int h) {
+            ^
+v4l.c:214:13: warning: ‘v4l1_setfreq’ defined but not used [-Wunused-function]
+ static void v4l1_setfreq(int fd, unsigned long freq, int verb) {
+             ^
+v4l.c:234:13: warning: ‘v4l1_set_input’ defined but not used [-Wunused-function]
+ static void v4l1_set_input(int fd, int which) {
+             ^
+v4l.c:436:12: warning: ‘v4l1_dpct’ defined but not used [-Wunused-function]
+ static int v4l1_dpct(int old, int d) {
+            ^
+v4l.c:750:14: warning: ‘v4l1_lu_palette’ defined but not used [-Wunused-function]
+ static char *v4l1_lu_palette(unsigned short palette) {
+              ^
+v4l.c:802:14: warning: ‘v4l2_lu_palette’ defined but not used [-Wunused-function]
+ static char *v4l2_lu_palette(unsigned int fmt) {
+              ^
+v4l.c:1067:12: warning: ‘open_dev’ defined but not used [-Wunused-function]
+ static int open_dev(char *dev) {
+            ^
+v4l.c:1409:22: warning: ‘lookup_freq’ defined but not used [-Wunused-function]
+ static unsigned long lookup_freq(int sta) {
+                      ^
+v4l.c:1422:12: warning: ‘lookup_station’ defined but not used [-Wunused-function]
+ static int lookup_station(unsigned long freq) {
+            ^
+v4l.c:132:12: warning: ‘last_channel’ defined but not used [-Wunused-variable]
+ static int last_channel = 0;
+            ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-win_utils.o -MD -MP -MF ".deps/x11vnc-win_utils.Tpo" -c -o x11vnc-win_utils.o `test -f 'win_utils.c' || echo './'`win_utils.c; \
+then mv -f ".deps/x11vnc-win_utils.Tpo" ".deps/x11vnc-win_utils.Po"; else rm -f ".deps/x11vnc-win_utils.Tpo"; exit 1; fi
+win_utils.c: In function ‘snapshot_stack_list’:
+win_utils.c:207:33: warning: variable ‘last_free’ set but not used [-Wunused-but-set-variable]
+  static double last_snap = 0.0, last_free = 0.0;
+                                 ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-x11vnc.o -MD -MP -MF ".deps/x11vnc-x11vnc.Tpo" -c -o x11vnc-x11vnc.o `test -f 'x11vnc.c' || echo './'`x11vnc.c; \
+then mv -f ".deps/x11vnc-x11vnc.Tpo" ".deps/x11vnc-x11vnc.Po"; else rm -f ".deps/x11vnc-x11vnc.Tpo"; exit 1; fi
+x11vnc.c: In function ‘check_guess_auth_file’:
+x11vnc.c:2005:7: warning: variable ‘n’ set but not used [-Wunused-but-set-variable]
+   int n;
+       ^
+x11vnc.c: In function ‘main’:
+x11vnc.c:4695:8: warning: variable ‘message’ set but not used [-Wunused-but-set-variable]
+   char message[] = "-rfbauth, -passwdfile, -passwd password, "
+        ^
+x11vnc.c:2106:6: warning: variable ‘got_rfbport_force_auto’ set but not used [-Wunused-but-set-variable]
+  int got_rfbport_force_auto = 0;
+      ^
+x11vnc.c: In function ‘terminal_services’:
+x11vnc.c:554:7: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+       system(dcmd);
+       ^
+x11vnc.c:561:7: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+       system(dcmd);
+       ^
+x11vnc.c: In function ‘do_tsd’:
+x11vnc.c:717:3: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+   system(cmd);
+   ^
+x11vnc.c:728:3: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+   system(cmd);
+   ^
+x11vnc.c: In function ‘quick_pw’:
+x11vnc.c:1430:3: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+   system("stty -echo");
+   ^
+x11vnc.c:1433:4: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+    system("stty echo");
+    ^
+x11vnc.c:1436:3: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+   system("stty echo");
+   ^
+x11vnc.c: In function ‘store_homedir_passwd’:
+x11vnc.c:1805:2: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+  system("stty -echo");
+  ^
+x11vnc.c:1808:3: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+   system("stty echo");
+   ^
+x11vnc.c:1816:3: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+   system("stty echo");
+   ^
+x11vnc.c:1820:2: warning: ignoring return value of ‘system’, declared with attribute warn_unused_result [-Wunused-result]
+  system("stty echo");
+  ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-x11vnc_defs.o -MD -MP -MF ".deps/x11vnc-x11vnc_defs.Tpo" -c -o x11vnc-x11vnc_defs.o `test -f 'x11vnc_defs.c' || echo './'`x11vnc_defs.c; \
+then mv -f ".deps/x11vnc-x11vnc_defs.Tpo" ".deps/x11vnc-x11vnc_defs.Po"; else rm -f ".deps/x11vnc-x11vnc_defs.Tpo"; exit 1; fi
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-xdamage.o -MD -MP -MF ".deps/x11vnc-xdamage.Tpo" -c -o x11vnc-xdamage.o `test -f 'xdamage.c' || echo './'`xdamage.c; \
+then mv -f ".deps/x11vnc-xdamage.Tpo" ".deps/x11vnc-xdamage.Po"; else rm -f ".deps/x11vnc-xdamage.Tpo"; exit 1; fi
+xdamage.c: In function ‘record_desired_xdamage_rect’:
+xdamage.c:92:6: warning: variable ‘dt_x’ set but not used [-Wunused-but-set-variable]
+  int dt_x, dt_y, nt_x1, nt_y1, nt_x2, nt_y2, nt;
+      ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-xevents.o -MD -MP -MF ".deps/x11vnc-xevents.Tpo" -c -o x11vnc-xevents.o `test -f 'xevents.c' || echo './'`xevents.c; \
+then mv -f ".deps/x11vnc-xevents.Tpo" ".deps/x11vnc-xevents.Po"; else rm -f ".deps/x11vnc-xevents.Tpo"; exit 1; fi
+xevents.c: In function ‘process_watch’:
+xevents.c:612:16: warning: variable ‘last_bust’ set but not used [-Wunused-but-set-variable]
+  static time_t last_bust = 0;
+                ^
+xevents.c: In function ‘check_autorepeat’:
+xevents.c:1141:7: warning: ‘XKeycodeToKeysym’ is deprecated [-Wdeprecated-declarations]
+       str = XKeysymToString(XKeycodeToKeysym(dpy, i, 0));
+       ^
+In file included from x11vnc.h:73:0,
+                 from xevents.c:35:
+/usr/include/X11/Xlib.h:1687:15: note: declared here
+ extern KeySym XKeycodeToKeysym(
+               ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-xinerama.o -MD -MP -MF ".deps/x11vnc-xinerama.Tpo" -c -o x11vnc-xinerama.o `test -f 'xinerama.c' || echo './'`xinerama.c; \
+then mv -f ".deps/x11vnc-xinerama.Tpo" ".deps/x11vnc-xinerama.Po"; else rm -f ".deps/x11vnc-xinerama.Tpo"; exit 1; fi
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-xkb_bell.o -MD -MP -MF ".deps/x11vnc-xkb_bell.Tpo" -c -o x11vnc-xkb_bell.o `test -f 'xkb_bell.c' || echo './'`xkb_bell.c; \
+then mv -f ".deps/x11vnc-xkb_bell.Tpo" ".deps/x11vnc-xkb_bell.Po"; else rm -f ".deps/x11vnc-xkb_bell.Tpo"; exit 1; fi
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-xrandr.o -MD -MP -MF ".deps/x11vnc-xrandr.Tpo" -c -o x11vnc-xrandr.o `test -f 'xrandr.c' || echo './'`xrandr.c; \
+then mv -f ".deps/x11vnc-xrandr.Tpo" ".deps/x11vnc-xrandr.Po"; else rm -f ".deps/x11vnc-xrandr.Tpo"; exit 1; fi
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-xrecord.o -MD -MP -MF ".deps/x11vnc-xrecord.Tpo" -c -o x11vnc-xrecord.o `test -f 'xrecord.c' || echo './'`xrecord.c; \
+then mv -f ".deps/x11vnc-xrecord.Tpo" ".deps/x11vnc-xrecord.Po"; else rm -f ".deps/x11vnc-xrecord.Tpo"; exit 1; fi
+xrecord.c: In function ‘check_xrecord_reset’:
+xrecord.c:1563:24: warning: variable ‘require_idle’ set but not used [-Wunused-but-set-variable]
+  int reset_time  = 60, require_idle  = 10;
+                        ^
+xrecord.c:1563:6: warning: variable ‘reset_time’ set but not used [-Wunused-but-set-variable]
+  int reset_time  = 60, require_idle  = 10;
+      ^
+xrecord.c: At top level:
+xrecord.c:118:13: warning: ‘xrecord_grabserver’ defined but not used [-Wunused-function]
+ static void xrecord_grabserver(int start) {
+             ^
+xrecord.c:469:12: warning: ‘lookup_attr_cache’ defined but not used [-Wunused-function]
+ static int lookup_attr_cache(Window win, int *cache_index, int *next_index) {
+            ^
+xrecord.c:534:12: warning: ‘xrecord_seq’ defined but not used [-Wunused-variable]
+ static XID xrecord_seq = 0;
+            ^
+xrecord.c:535:15: warning: ‘xrecord_start’ defined but not used [-Wunused-variable]
+ static double xrecord_start = 0.0;
+               ^
+if gcc -DHAVE_CONFIG_H -I. -I. -I..       -g -O2 -Wall -MT x11vnc-xwrappers.o -MD -MP -MF ".deps/x11vnc-xwrappers.Tpo" -c -o x11vnc-xwrappers.o `test -f 'xwrappers.c' || echo './'`xwrappers.c; \
+then mv -f ".deps/x11vnc-xwrappers.Tpo" ".deps/x11vnc-xwrappers.Po"; else rm -f ".deps/x11vnc-xwrappers.Tpo"; exit 1; fi
+xwrappers.c: In function ‘upup_downdown_warning’:
+xwrappers.c:869:3: warning: ‘XKeycodeToKeysym’ is deprecated [-Wdeprecated-declarations]
+   char *str = XKeysymToString(XKeycodeToKeysym(dpy, key, 0));
+   ^
+In file included from x11vnc.h:73:0,
+                 from xwrappers.c:35:
+/usr/include/X11/Xlib.h:1687:15: note: declared here
+ extern KeySym XKeycodeToKeysym(
+               ^
+xwrappers.c: In function ‘XTestFakeKeyEvent_wr’:
+xwrappers.c:925:3: warning: ‘XKeycodeToKeysym’ is deprecated [-Wdeprecated-declarations]
+   char *str = XKeysymToString(XKeycodeToKeysym(dpy, key, 0));
+   ^
+In file included from x11vnc.h:73:0,
+                 from xwrappers.c:35:
+/usr/include/X11/Xlib.h:1687:15: note: declared here
+ extern KeySym XKeycodeToKeysym(
+               ^
+xwrappers.c: At top level:
+xwrappers.c:862:13: warning: ‘upup_downdown_warning’ defined but not used [-Wunused-function]
+ static void upup_downdown_warning(KeyCode key, Bool down) {
+             ^
+xwrappers.c: In function ‘xauth_raw’:
+xwrappers.c:1326:4: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+    write(tmp_fd, xauth_raw_data, xauth_raw_len);
+    ^
+gcc  -g -O2 -Wall   -o x11vnc  x11vnc-8to24.o x11vnc-appshare.o x11vnc-avahi.o x11vnc-cleanup.o x11vnc-connections.o x11vnc-cursor.o x11vnc-gui.o x11vnc-help.o x11vnc-inet.o x11vnc-keyboard.o x11vnc-linuxfb.o x11vnc-macosx.o x11vnc-macosxCG.o x11vnc-macosxCGP.o x11vnc-macosxCGS.o x11vnc-macosx_opengl.o x11vnc-options.o x11vnc-pm.o x11vnc-pointer.o x11vnc-rates.o x11vnc-remote.o x11vnc-scan.o x11vnc-screen.o x11vnc-selection.o x11vnc-solid.o x11vnc-sslcmds.o x11vnc-sslhelper.o x11vnc-uinput.o x11vnc-unixpw.o x11vnc-user.o x11vnc-userinput.o x11vnc-util.o x11vnc-v4l.o x11vnc-win_utils.o x11vnc-x11vnc.o x11vnc-x11vnc_defs.o x11vnc-xdamage.o x11vnc-xevents.o x11vnc-xinerama.o x11vnc-xkb_bell.o x11vnc-xrandr.o x11vnc-xrecord.o x11vnc-xwrappers.o ../libvncserver/libvncserver.a ../libvncclient/libvncclient.a  -lssl -lcrypto -lcrypt   -lXext -lXinerama -lXrandr -lXfixes -lXdamage -lX11    -lnsl -lpthread -lz -ljpeg 
+make[1]: выход из каталога «/home/glebmillenium/virtualspace/server/vncserver/x11vnc»

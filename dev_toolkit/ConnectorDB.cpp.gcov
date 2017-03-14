@@ -1,0 +1,122 @@
+        -:    0:Source:ConnectorDB.cpp
+        -:    0:Graph:/home/glebmillenium/virtualspace/server/manager/build/Debug/GNU-Linux/ConnectorDB.gcno
+        -:    0:Data:/home/glebmillenium/virtualspace/server/manager/build/Debug/GNU-Linux/ConnectorDB.gcda
+        -:    0:Runs:2
+        -:    0:Programs:2
+        -:    1:/*
+        -:    2: * To change this license header, choose License Headers in Project Properties.
+        -:    3: * To change this template file, choose Tools | Templates
+        -:    4: * and open the template in the editor.
+        -:    5: */
+        -:    6:
+        -:    7:/* 
+        -:    8: * File:   ConnectorDB.cpp
+        -:    9: * Author: glebmillenium
+        -:   10: * 
+        -:   11: * Created on 18 февраля 2017 г., 1:58
+        -:   12: */
+        -:   13:
+        -:   14:#include "ConnectorDB.h"
+        -:   15:
+        -:   16:#include "mysql_connection.h"
+        -:   17:
+        -:   18:#include "cppconn/driver.h"
+        -:   19:#include "cppconn/exception.h"
+        -:   20:#include "cppconn/resultset.h"
+        -:   21:#include "cppconn/statement.h"
+        -:   22:
+        -:   23:using namespace std;
+        -:   24:
+    #####:   25:ConnectorDB::ConnectorDB() {
+        -:   26:    //mysql_init(&mysql);
+        -:   27:    //connection = mysql_real_connect(&mysql,"host","user",
+        -:   28:    //                   "password","database",port,"unix_socket",clientflag);
+        -:   29:    //connection = mysql_real_connect(&mysql,"localhost",
+        -:   30:    //"vnc","1111","vncserver", 3306, 0, 0);
+        -:   31:    try {
+        -:   32:        sql::Driver *driver;
+        -:   33:        sql::Connection *con;
+        -:   34:        sql::Statement *stmt;
+        -:   35:        sql::ResultSet *res;
+        -:   36:
+    #####:   37:        driver = get_driver_instance();
+        -:   38:
+    =====:   39:    } catch (sql::SQLException &e) {
+    =====:   40:        std::cout << "ERR: " << e.what();
+        -:   41:    }
+    #####:   42:}
+        -:   43:
+    #####:   44:ConnectorDB::ConnectorDB(const ConnectorDB& orig) {
+    #####:   45:}
+        -:   46:
+    #####:   47:ConnectorDB::~ConnectorDB() {
+    #####:   48:}
+        -:   49:
+        1:   50:const char* ConnectorDB::run(char* condition) {
+        1:   51:    cout << endl;
+        -:   52:    const char* result;
+        -:   53:    try {
+        -:   54:        sql::Driver *driver;
+        -:   55:        sql::Connection *con;
+        -:   56:        
+        -:   57:        sql::Statement *stmt;
+        -:   58:        sql::ResultSet *res;
+        -:   59:
+        -:   60:        /* Create a connection */
+        1:   61:        driver = get_driver_instance();
+        1:   62:        con = driver->connect("tcp://127.0.0.1:3306", "vnc", "1111");
+        -:   63:        /* Connect to the MySQL test database */
+        1:   64:        con->setSchema("vncserver");
+        -:   65:        
+        1:   66:        char* query = new char[256];
+        1:   67:        strcpy(query, "");
+        1:   68:        strcat(query, "SELECT COUNT(*) FROM commands WHERE message = '");
+        1:   69:        strcat(query, condition);
+        1:   70:        strcat(query, "'");
+        1:   71:        stmt = con->createStatement();
+        1:   72:        res = stmt->executeQuery(query);
+        1:   73:        res->next();
+        1:   74:        if (res->getInt(1) == 0) {
+    #####:   75:            result = "неизвестная команда";
+        -:   76:        } else {
+        1:   77:            query = new char[256];
+        1:   78:            strcpy(query, "");
+        1:   79:            strcat(query, "SELECT * FROM commands WHERE message = '");
+        1:   80:            strcat(query, condition);
+        1:   81:            strcat(query, "'");
+        1:   82:            stmt = con->createStatement();
+        1:   83:            res = stmt->executeQuery(query);
+        3:   84:            while (res->next()) {
+        2:   85:                sql::SQLString str = res->getString("answer");
+        2:   86:                sql::SQLString command = res->getString("id_command");
+        1:   87:                query = new char[256];
+        -:   88:                /*strcpy(query, "");
+        -:   89:                strcat(query, "INSERT INTO history  (id_command) VALUES('");
+        -:   90:                strcat(query, command);
+        -:   91:                strcat(query, "')");
+        -:   92:                stmt->executeQuery(query);*/
+        -:   93:                
+        1:   94:                char* str2 = new char[str.length()];
+       26:   95:                for(int i = 0; i < str.length(); i++){
+       25:   96:                    str2[i] = str[i];
+        -:   97:                }
+        1:   98:                result = str2;
+        2:   99:                string console = res->getString("path_script");
+        1:  100:                system(console.c_str());
+        -:  101:            }
+        -:  102:        }
+        1:  103:        delete res;
+        1:  104:        delete stmt;
+        1:  105:        delete con;
+        1:  106:        return result;
+    =====:  107:    } catch (sql::SQLException &e) {
+    =====:  108:        cout << "# ERR: SQLException in " << __FILE__;
+    =====:  109:        cout << "# ERR: " << e.what();
+    =====:  110:        cout << " (MySQL error code: " << e.getErrorCode();
+    =====:  111:        cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+        -:  112:
+        -:  113:    }
+    =====:  114:    result = "неизвестная команда";
+    =====:  115:    return result;
+        6:  116:}
+        -:  117:
