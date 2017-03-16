@@ -39,6 +39,7 @@
 #include <set>
 #include <cstring>
 #include <string>
+#include "ConnectorDB.h"
 using namespace std;
 
 /**
@@ -55,6 +56,8 @@ private:
     int listener;
     struct sockaddr_in addr;
     int bytes_read;
+    void intellectualManage(int sock);
+    ConnectorDB* connectorDB;
 public:
     ManagerSocket();
     ManagerSocket(int port);

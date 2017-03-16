@@ -12,7 +12,6 @@
  */
 
 #include "ManagerSocket.h"
-#include "ConnectorDB.h"
 #include <fstream>
 
 ManagerSocket::ManagerSocket() {
@@ -20,6 +19,7 @@ ManagerSocket::ManagerSocket() {
     this->addr.sin_family = AF_INET;
     this->addr.sin_port = htons(5901);
     this->addr.sin_addr.s_addr = INADDR_ANY;
+    connectorDB = new ConnectorDB();
 }
 
 ManagerSocket::ManagerSocket(int port) {
@@ -27,6 +27,7 @@ ManagerSocket::ManagerSocket(int port) {
     this->addr.sin_family = AF_INET;
     this->addr.sin_port = htons(port);
     this->addr.sin_addr.s_addr = INADDR_ANY;
+    connectorDB = new ConnectorDB();
 }
 
 ManagerSocket::ManagerSocket(int ip, int port, int sock, int type_sock, int type_protocol) {
@@ -34,18 +35,16 @@ ManagerSocket::ManagerSocket(int ip, int port, int sock, int type_sock, int type
     this->addr.sin_family = sock;
     this->addr.sin_port = htons(port);
     this->addr.sin_addr.s_addr = ip;
+    connectorDB = new ConnectorDB();
 }
 
 void ManagerSocket::run() {
 
     /* Простаивание потоков в ожидании коннекта ~15sec*/
-    int size = 1024;
     timeval timeout;
     timeout.tv_sec = 15;
     timeout.tv_usec = 0;
-    ofstream fout;
-    
-    
+
     if (this->listener < 0) {
         perror("socket");
         exit(1);
@@ -73,8 +72,6 @@ void ManagerSocket::run() {
             FD_SET(*it, &readset);
 
         // Задаём таймаут
-
-
         // Ждём события в одном из сокетов
         int mx = max(listener, *max_element(clients.begin(), clients.end()));
         if (select(mx + 1, &readset, NULL, NULL, &timeout) <= 0) {
@@ -92,27 +89,28 @@ void ManagerSocket::run() {
 
             fcntl(sock, F_SETFL, O_NONBLOCK);
 
+            //intellectualManage(sock);
+            //send(sock, data_answer, strlen(data_answer), 0);
+
             clients.insert(sock);
         }
 
         for (set<int>::iterator it = clients.begin(); it != clients.end(); it++) {
             if (FD_ISSET(*it, &readset)) {
-                char *data_client = new char[size];
+                char* data_client = new char[1024];
                 bytes_read = read(*it, data_client, 1024);
-                cout << data_client;
                 if (bytes_read <= 0) {
                     close(*it);
                     clients.erase(*it);
                     continue;
                 }
-                const char* data_answer = ConnectorDB::run(data_client);
-                send(*it, data_answer, strlen(data_answer), 0);
-                //delete data_answer;delete data_client;
+                char* data_answer = connectorDB->run(data_client);
+                send(*it, data_answer, strlen(data_answer), 0); 
             }
         }
     }
 }
 
-
-
-
+void ManagerSocket::intellectualManage(int sock) {
+    char* p;
+}
