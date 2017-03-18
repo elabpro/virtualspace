@@ -4,6 +4,8 @@ import interactive.speech.AbstractTextToSpeech;
 import interactive.speech.TextToSpeechFactory;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 
@@ -65,6 +67,25 @@ public class ExchangeMessageWithServer
             }
             //default answer from system
             speech(answerArray[0]);
+            for(int i = 1; i < answerArray.length; i++)
+            {
+                String[] dictionaryConverterWIN = answerArray[i].split(" ");
+                String temp = "";
+                for(int j = 0; j < dictionaryConverterWIN.length; j++)
+                {
+                    temp += " \"" + dictionaryConverterWIN[j] + "\"";
+                }
+                answerArray[i] = temp;
+            }
+            File file = new File("resources", "dialog.gram");
+            FileWriter writer  = new FileWriter(file, false); // false - перезапись
+            writer.write("#JSGF V1.0;\n" +  "grammar dialog;\n" + "public <command> = ");
+            for(int i = 1; i < answerArray.length - 1; i++)
+            {
+                writer.write(answerArray[i] + " | ");
+            }
+            writer.write("\"\";");
+            writer.flush();
         }
     }
 
@@ -79,6 +100,11 @@ public class ExchangeMessageWithServer
         {
             System.out.println(ex.toString());
         }
+    }
+
+    private static void FileWriter(File file, boolean b)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

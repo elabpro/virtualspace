@@ -74,6 +74,7 @@ char* ConnectorDB::getAnswerToClient(char* condition) {
                 command = res->getString("message");
                 strcat(result, SQLStringToChar(command));
             }
+            strcat(result, "\n\0");
         }
         delete res;
         delete stmt;
