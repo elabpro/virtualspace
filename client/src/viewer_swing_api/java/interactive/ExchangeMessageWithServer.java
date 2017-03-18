@@ -5,6 +5,7 @@ import interactive.speech.TextToSpeechFactory;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,7 +25,7 @@ public class ExchangeMessageWithServer
      */
     public static synchronized void sendMessage(String text,
             DataOutputStream out,
-            DataInputStream in) throws IOException
+            DataInputStream in) throws IOException, InterruptedException
     {
         System.out.println("Текст отправки: " + text);
         out.write(text.getBytes("UTF-8"));// отсылаем введенную строку текста серверу.
@@ -34,38 +35,50 @@ public class ExchangeMessageWithServer
         String answer = new String(b, "UTF-8");
         if (answer.length() > 1)
         {
+            String[] answerArray = answer.split("\n");
             if (text.equals("--intellectual"))
             {
-                System.out.println("Ответ от серверной части -i: " + answer);
+                Thread.sleep(10000);
+                speech("Интеллектуальное управление "
+                        + "предлагает произвести "
+                        + "следующие действия");
+                if (JOptionPane.showConfirmDialog(null,
+                        "Система интеллектуального"
+                        + " управления Ева предлагает "
+                        + "вам выполнить следующие действия:\n" + answer,
+                        "Интеллектуальное управление",
+                        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                {
+
+                    for (String send : answerArray)
+                    {
+                        out.write(send.getBytes("UTF-8"));// отсылаем введенную строку текста серверу.
+                        out.flush(); // заставляем поток закончить передачу данных.
+                        in.read(b);
+                        String[] intellectualAnswer
+                                = (new String(b, "UTF-8")).split("\n");
+                        speech(intellectualAnswer[0]);
+                        Thread.sleep(2500);
+                    }
+                };
                 return;
             }
-            System.out.println("Ответ от серверной части -d: " + answer);
-            AbstractTextToSpeech tts
-                    = TextToSpeechFactory.get(TextToSpeechFactory.IVONA_SOURCE);
-            try
-            {
-                tts.textToVoice(answer);
-            } catch (Exception ex)
-            {
-                System.out.println(ex.toString());
-            }
+            //default answer from system
+            speech(answerArray[0]);
         }
     }
 
-    private static void getOfferApplicationLaunch(DataOutputStream out,
-            DataInputStream in) throws IOException
+    private static void speech(String text)
     {
-        String text;
-        String answer;
-        do
+        AbstractTextToSpeech tts
+                = TextToSpeechFactory.get(TextToSpeechFactory.IVONA_SOURCE);
+        try
         {
-            text = "\0";
-            out.write(text.getBytes("UTF-8"));// отсылаем введенную строку текста серверу.
-            out.flush();
-            byte[] b = new byte[1024];
-            in.read(b);
-            answer = new String(b, "UTF-8");
-            System.out.println(answer + "\n");
-        } while (!answer.equals("--end"));
+            tts.textToVoice(text);
+        } catch (Exception ex)
+        {
+            System.out.println(ex.toString());
+        }
     }
+
 }

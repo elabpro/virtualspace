@@ -94,6 +94,9 @@ public class TreatmenterVoiceCommand extends Thread
         } catch (IOException ex)
         {
             Logger.getLogger(TreatmenterVoiceCommand.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex)
+        {
+            Logger.getLogger(TreatmenterVoiceCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

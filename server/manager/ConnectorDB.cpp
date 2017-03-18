@@ -44,7 +44,7 @@ char* ConnectorDB::getAnswerToClient(char* condition) {
         stmt = con->createStatement();
         res = stmt->executeQuery(query);
         if (!res->next()) {
-            strcat(result, (char *) "неизвестная команда");
+            strcat(result, (char *) "неизвестная команда\0");
         } else {
             sql::SQLString command;
             sql::SQLString str = res->getString("answer");

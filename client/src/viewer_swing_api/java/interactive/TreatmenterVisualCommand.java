@@ -189,7 +189,7 @@ public class TreatmenterVisualCommand extends Thread
      * @return void
      * @throws IOException
      */
-    private void manager(Rect r) throws IOException
+    private void manager(Rect r) throws IOException, InterruptedException
     {
         if ((rect != null) && !rect.empty())
         {
