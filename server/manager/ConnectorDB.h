@@ -15,6 +15,9 @@
 #define CONNECTORDB_H
 #include <iostream>
 #include <cstring>
+#include <vector>
+#include <string>
+
 #include "mysql_connection.h"
 
 #include "cppconn/driver.h"
@@ -30,7 +33,8 @@ public:
     ConnectorDB();
     ConnectorDB(const ConnectorDB& orig);
     virtual ~ConnectorDB();
-    char* run(char* condition);
+    char* getAnswerToClient(char* condition);
+    vector<string> getHistoryAction();
 private:
     sql::Driver *driver;
     sql::Connection *con;

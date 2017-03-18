@@ -1,4 +1,3 @@
-
 package interactive;
 
 import java.io.DataInputStream;
@@ -53,6 +52,7 @@ public class ConnectWithRemoteManagerSocket extends Thread
      * @param  void
      * @return void
      */
+    @Override
     public void run()
     {
         try
@@ -74,20 +74,14 @@ public class ConnectWithRemoteManagerSocket extends Thread
             DataInputStream in = new DataInputStream(sin);
             DataOutputStream out = new DataOutputStream(sout);
 
-            // Создаем поток для чтения с клавиатуры.
             treatmenterVoiceCommand =  new TreatmenterVoiceCommand(in, out);
             treatmenterVisualCommand = new TreatmenterVisualCommand(in, out);
             treatmenterVoiceCommand.start();
             treatmenterVisualCommand.start();
-
+            ExchangeMessageWithServer.sendMessage("--intellectual", out, in);
         } catch (Exception x)
         {
-            x.printStackTrace();
         }
-    }
-    
-    public void sendMessage(){
-        
     }
     
     public void stopping()

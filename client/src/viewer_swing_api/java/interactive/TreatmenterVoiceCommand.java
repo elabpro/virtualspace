@@ -7,12 +7,9 @@ package interactive;
 
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
-import interactive.speech.AbstractTextToSpeech;
-import interactive.speech.TextToSpeechFactory;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -90,7 +87,7 @@ public class TreatmenterVoiceCommand extends Thread
                 }
                 if (utterance.length() > 7)
                 {
-                    sendMessageToServer(utterance);
+                    ExchangeMessageWithServer.sendMessage(utterance, out, in);
                 }
             }
             recognizer.stopRecognition();
@@ -109,32 +106,5 @@ public class TreatmenterVoiceCommand extends Thread
     public void stopping()
     {
         this.state = false;
-    }
-
-    /**
-     * sendMessageToServer отправка сообщения на сервер
-     *
-     * @param String text текстовое сообщение
-     * @throws IOException
-     * @return void
-     */
-    private void sendMessageToServer(String text) throws IOException
-    {
-        text += '\0';
-        out.write(text.getBytes("UTF-8"));// отсылаем введенную строку текста серверу.
-        out.flush(); // заставляем поток закончить передачу данных.
-        byte[] b = new byte[1024];
-        in.read(b);
-        String answer = new String(b, "UTF-8");
-        System.out.println("Ответ от серверной части: " + answer);
-        AbstractTextToSpeech tts
-                = TextToSpeechFactory.get(TextToSpeechFactory.IVONA_SOURCE);
-        try
-        {
-            tts.textToVoice(answer);
-        } catch (Exception ex)
-        {
-
-        }
     }
 }

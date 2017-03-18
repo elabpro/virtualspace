@@ -31,53 +31,50 @@ ConnectorDB::ConnectorDB(const ConnectorDB& orig) {
 ConnectorDB::~ConnectorDB() {
 }
 
-char* ConnectorDB::run(char* condition) {
-    cout << endl;
-    char* result;
+char* ConnectorDB::getAnswerToClient(char* condition) {
+    char* result = new char[1024];
+    strcpy(result, (char*) "");
     try {
         sql::Statement *stmt;
         sql::ResultSet *res;
         char* query = new char[256];
-        strcpy(query, "");
-        strcat(query, "SELECT COUNT(*) FROM commands WHERE message = '");
-        strcat(query, condition);
-        strcat(query, "'");
+        sprintf(query,
+                "SELECT * FROM commands WHERE message = '%s'",
+                condition);
         stmt = con->createStatement();
         res = stmt->executeQuery(query);
-        res->next();
-        if (res->getInt(1) == 0) {
-            result = (char *) "неизвестная команда";
+        if (!res->next()) {
+            strcat(result, (char *) "неизвестная команда");
         } else {
-            query = new char[256];
-            strcpy(query, "");
-            strcat(query, "SELECT * FROM commands WHERE message = '");
-            strcat(query, condition);
-            strcat(query, "'");
-            stmt = con->createStatement();
-            res = stmt->executeQuery(query);
             sql::SQLString command;
-            while (res->next()) {
-                sql::SQLString str = res->getString("answer");
-                command = res->getString("id_command");
-                result = SQLStringToChar(str);
-                string console = res->getString("path_script");
-                system(console.c_str());
-            }
-
+            sql::SQLString str = res->getString("answer");
+            command = res->getString("id_command");
+            strcat(result, SQLStringToChar(str));
+            
+            string console = res->getString("console");
+            system(console.c_str());
             sql::PreparedStatement *pstmt;
-
-
-
             char* insert = new char[1024];
-            strcpy(insert, "");
-            strcat(insert, "INSERT INTO history  VALUES(20110101101055, '");
-            //YYYYMMDDHHMMSS
-            strcat(insert, SQLStringToChar(command));
-            strcat(insert, "', 1, 1)");
+            sprintf(insert,
+                    "INSERT INTO history(date, id_command)"
+                    " VALUES(%s, '%s')",
+                    getCurrentTime(), SQLStringToChar(command));
+            
+            //id_command = command AND 1 - all
             pstmt = con->prepareStatement(insert);
             pstmt->executeUpdate();
+            sprintf(query,
+                    "SELECT * FROM commands "
+                    "WHERE (id_application = %s) OR (id_application = 1)",
+                   SQLStringToChar(command));
+            stmt = con->createStatement();
+            res = stmt->executeQuery(query);
+            while (res->next()){
+                strcat(result, "\n");
+                command = res->getString("message");
+                strcat(result, SQLStringToChar(command));
+            }
         }
-
         delete res;
         delete stmt;
         return result;
@@ -87,6 +84,38 @@ char* ConnectorDB::run(char* condition) {
         cout << " (MySQL error code: " << e.getErrorCode();
         cout << ", SQLState: " << e.getSQLState() << " )" << endl;
         result = (char *) "ошибка";
+    }
+    return result;
+}
+
+vector<string> ConnectorDB::getHistoryAction() {
+    vector<string> result;
+    try {
+        sql::Statement *stmt;
+        sql::ResultSet *res;
+        char* query = new char[256];
+        sprintf(query, "SELECT * "
+                "FROM history JOIN commands "
+                "WHERE history.id_command = commands.id_command");
+        stmt = con->createStatement();
+        res = stmt->executeQuery(query);
+        if (!res->next()) {
+            return result;
+        } else {
+            sql::SQLString command;
+            do {
+                command = res->getString("message");
+                string str(SQLStringToChar(command));
+                result.push_back(str);
+            } while (res->next());
+        }
+        delete res;
+        delete stmt;
+    } catch (sql::SQLException &e) {
+        cout << "# ERR: SQLException in " << __FILE__;
+        cout << "# ERR: " << e.what();
+        cout << " (MySQL error code: " << e.getErrorCode();
+        cout << ", SQLState: " << e.getSQLState() << " )" << endl;
     }
     return result;
 }
@@ -112,3 +141,4 @@ char* ConnectorDB::SQLStringToChar(sql::SQLString str) {
     }
     return result;
 }
+

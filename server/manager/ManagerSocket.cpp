@@ -39,7 +39,6 @@ ManagerSocket::ManagerSocket(int ip, int port, int sock, int type_sock, int type
 }
 
 void ManagerSocket::run() {
-
     /* Простаивание потоков в ожидании коннекта ~15sec*/
     timeval timeout;
     timeout.tv_sec = 15;
@@ -88,29 +87,47 @@ void ManagerSocket::run() {
             }
 
             fcntl(sock, F_SETFL, O_NONBLOCK);
-
-            //intellectualManage(sock);
-            //send(sock, data_answer, strlen(data_answer), 0);
-
             clients.insert(sock);
         }
 
         for (set<int>::iterator it = clients.begin(); it != clients.end(); it++) {
             if (FD_ISSET(*it, &readset)) {
                 char* data_client = new char[1024];
-                bytes_read = read(*it, data_client, 1024);
+                int bytes_read = read(*it, data_client, 1024);
                 if (bytes_read <= 0) {
                     close(*it);
                     clients.erase(*it);
                     continue;
                 }
-                char* data_answer = connectorDB->run(data_client);
-                send(*it, data_answer, strlen(data_answer), 0); 
+                
+                if (!strcmp(data_client, (char*) "--intellectual")) {
+                    intellectualManage(*it);
+                    continue;
+                }
+                char* data_answer = connectorDB->getAnswerToClient(data_client);
+                send(*it, data_answer, strlen(data_answer), 0);
             }
         }
     }
 }
 
 void ManagerSocket::intellectualManage(int sock) {
-    char* p;
+    vector<string> history = connectorDB->getHistoryAction();
+
+    tuple<int, vector < string>> action =
+            SequenceTreatmenter::run(history, 3);
+    // Для начала последовательность из 3 ищем
+    vector<string> sequence = std::get<1>(action);
+    if (sequence.size() != 0) {
+        char* data_answer = new char[1024];
+        char* data_client = new char[1024];
+        strcpy(data_answer, (char*) "");
+        for (int i = 0; i < sequence.size(); i++) {
+            strcat(data_answer, (char*) sequence.at(i).c_str());
+            strcat(data_answer, (char*) "\n");
+        }
+        send(sock, data_answer, strlen(data_answer), 0);
+    } else {
+        send(sock, " ", 1, 0);
+    }
 }

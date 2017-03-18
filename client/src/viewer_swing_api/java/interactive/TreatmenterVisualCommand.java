@@ -104,7 +104,7 @@ public class TreatmenterVisualCommand extends Thread
                                 var = searchImage("haarcascade/fist.xml");
                                 if (var.length != 0)
                                 {
-                                    sendMessageToServer("клик");
+                                    ExchangeMessageWithServer.sendMessage("клик", out, in);
                                 }
                             } else
                             {
@@ -200,10 +200,10 @@ public class TreatmenterVisualCommand extends Thread
                 return;
             } else
             {
-                if(r.x > palmX) sendMessageToServer("вправо");
-                else sendMessageToServer("влево");
-                if(r.y > palmY) sendMessageToServer("вниз");
-                else sendMessageToServer("вверх");
+                if(r.x > palmX) ExchangeMessageWithServer.sendMessage("вправо", out, in);
+                else ExchangeMessageWithServer.sendMessage("влево", out, in);
+                if(r.y > palmY) ExchangeMessageWithServer.sendMessage("вниз", out, in);
+                else ExchangeMessageWithServer.sendMessage("вверх", out, in);
                 palmX = r.x;
                 palmY = r.y;
             }
@@ -224,19 +224,7 @@ public class TreatmenterVisualCommand extends Thread
         palmX = -1;
     }
 
-    /**
-     * sendMessageToServer отправка сообщения на сервер
-     *
-     * @param String text сообщение для отправки на текст
-     * @throws IOException
-     * @return void
-     */
-    private void sendMessageToServer(String text) throws IOException
-    {
-        text += '\0';
-        out.write(text.getBytes()); // отсылаем введенную строку текста серверу.
-        out.flush(); // заставляем поток закончить передачу данных.
-    }
+
 }
 
 /**

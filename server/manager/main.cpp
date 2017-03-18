@@ -32,8 +32,5 @@ int main(int argc, char** argv)
         p = new ManagerSocket(); 
     }
     p->run();
-    //vector<string> input {"CallFirefox", "CallApp", "CallFirefox", 
-            //"CallApp", "CallFirefox", "CallNote", "CallApp", "CallFirefox"};
-    //tuple<int, vector<string>> test = SequenceTreatmenter::run(input, 2);
     return 0;
 }
