@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,13 +38,27 @@ public class ExchangeMessageWithServer
         byte[] b = new byte[1024];
         in.read(b);
         String answer = new String(b, "UTF-8");
+        String cont = "неизвестная команда";
+        boolean not_unknown = true;
+        for(int i = 0; i < cont.length(); i++)
+        {
+            if(answer.charAt(i) != cont.charAt(i))
+            {
+                not_unknown = false;
+            }
+        }
         if (answer.length() > 1)
         {
             String[] answerArray = answer.split("\n");
+            if (not_unknown)
+            {
+                System.out.println("вход 2");
+                speech("неизвестная команда");
+                return;
+            }
             if (text.equals("--default\0"))
             {
                 speech("Идёт загрузка доступных команд с сервера");
-                System.out.println("Вот они" + answer);
                 for (int i = 0; i < answerArray.length - 1; i++)
                 {
                     String[] dictionaryConverterWIN = answerArray[i].split(" ");
