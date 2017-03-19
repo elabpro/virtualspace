@@ -99,9 +99,12 @@ void ManagerSocket::run() {
                     clients.erase(*it);
                     continue;
                 }
-                
                 if (!strcmp(data_client, (char*) "--intellectual")) {
                     intellectualManage(*it);
+                    continue;
+                }
+                if (!strcmp(data_client, (char*) "--default")) {
+                    loadDefault(*it);
                     continue;
                 }
                 char* data_answer = connectorDB->getAnswerToClient(data_client);
@@ -109,6 +112,11 @@ void ManagerSocket::run() {
             }
         }
     }
+}
+
+void ManagerSocket::loadDefault(int sock) {
+    char* data_answer = connectorDB->getDefaultCommands();
+    send(sock, data_answer, strlen(data_answer), 0);
 }
 
 void ManagerSocket::intellectualManage(int sock) {

@@ -34,6 +34,7 @@ public:
     ConnectorDB(const ConnectorDB& orig);
     virtual ~ConnectorDB();
     char* getAnswerToClient(char* condition);
+    char* getDefaultCommands();
     vector<string> getHistoryAction();
 private:
     sql::Driver *driver;

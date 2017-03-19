@@ -73,12 +73,12 @@ public class ConnectWithRemoteManagerSocket extends Thread
              */
             DataInputStream in = new DataInputStream(sin);
             DataOutputStream out = new DataOutputStream(sout);
-
+            ExchangeMessageWithServer.sendMessage("--default\0", out, in);
             treatmenterVoiceCommand =  new TreatmenterVoiceCommand(in, out);
             treatmenterVisualCommand = new TreatmenterVisualCommand(in, out);
             treatmenterVoiceCommand.start();
             treatmenterVisualCommand.start();
-            ExchangeMessageWithServer.sendMessage("--intellectual", out, in);
+            ExchangeMessageWithServer.sendMessage("--intellectual\0", out, in);
         } catch (Exception x)
         {
         }

@@ -48,17 +48,17 @@ using namespace std;
  * on safely chanel (SOCK_STREAM)
  *
  */
-class ManagerSocket
-{
+class ManagerSocket {
 private:
     /**
      * Field data class
      */
     int listener;
     struct sockaddr_in addr;
-    
-    void intellectualManage(int sock);
     ConnectorDB* connectorDB;
+
+    void intellectualManage(int sock);
+    void loadDefault(int sock);
 public:
     ManagerSocket();
     ManagerSocket(int port);

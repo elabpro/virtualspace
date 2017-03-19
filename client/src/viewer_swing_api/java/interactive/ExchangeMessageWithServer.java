@@ -29,7 +29,6 @@ public class ExchangeMessageWithServer
             DataOutputStream out,
             DataInputStream in) throws IOException, InterruptedException
     {
-        System.out.println("Текст отправки: " + text);
         out.write(text.getBytes("UTF-8"));// отсылаем введенную строку текста серверу.
         out.flush(); // заставляем поток закончить передачу данных.
         byte[] b = new byte[1024];
@@ -38,12 +37,36 @@ public class ExchangeMessageWithServer
         if (answer.length() > 1)
         {
             String[] answerArray = answer.split("\n");
-            if (text.equals("--intellectual"))
+            if (text.equals("--default\0"))
+            {
+                speech("Идёт загрузка доступных команд с сервера");
+                System.out.println("Вот они" + answer);
+                for (int i = 0; i < answerArray.length - 1; i++)
+                {
+                    String[] dictionaryConverterWIN = answerArray[i].split(" ");
+                    String temp = "";
+                    for (int j = 0; j < dictionaryConverterWIN.length; j++)
+                    {
+                        temp += " \"" + dictionaryConverterWIN[j] + "\"";
+                    }
+                    answerArray[i] = temp;
+                }
+                File file = new File("resources", "dialog.gram");
+                FileWriter writer = new FileWriter(file, false); // false - перезапись
+                writer.write("#JSGF V1.0;\n" + "grammar dialog;\n" + "public <command> = ");
+                for (int i = 1; i < answerArray.length - 1; i++)
+                {
+                    writer.write(answerArray[i] + " | ");
+                }
+                writer.write("\"\";");
+                writer.flush();
+                return;
+            }
+            if (text.equals("--intellectual\0"))
             {
                 Thread.sleep(10000);
                 speech("Интеллектуальное управление "
-                        + "предлагает произвести "
-                        + "следующие действия");
+                        + "предлагает произвестие следующие действия");
                 if (JOptionPane.showConfirmDialog(null,
                         "Система интеллектуального"
                         + " управления Ева предлагает "
@@ -51,7 +74,6 @@ public class ExchangeMessageWithServer
                         "Интеллектуальное управление",
                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
                 {
-
                     for (String send : answerArray)
                     {
                         out.write(send.getBytes("UTF-8"));// отсылаем введенную строку текста серверу.
@@ -65,22 +87,22 @@ public class ExchangeMessageWithServer
                 };
                 return;
             }
-            //default answer from system
+            //answer from system
             speech(answerArray[0]);
-            for(int i = 1; i < answerArray.length; i++)
+            for (int i = 1; i < answerArray.length; i++)
             {
                 String[] dictionaryConverterWIN = answerArray[i].split(" ");
                 String temp = "";
-                for(int j = 0; j < dictionaryConverterWIN.length; j++)
+                for (int j = 0; j < dictionaryConverterWIN.length; j++)
                 {
                     temp += " \"" + dictionaryConverterWIN[j] + "\"";
                 }
                 answerArray[i] = temp;
             }
             File file = new File("resources", "dialog.gram");
-            FileWriter writer  = new FileWriter(file, false); // false - перезапись
-            writer.write("#JSGF V1.0;\n" +  "grammar dialog;\n" + "public <command> = ");
-            for(int i = 1; i < answerArray.length - 1; i++)
+            FileWriter writer = new FileWriter(file, false); // false - перезапись
+            writer.write("#JSGF V1.0;\n" + "grammar dialog;\n" + "public <command> = ");
+            for (int i = 1; i < answerArray.length - 1; i++)
             {
                 writer.write(answerArray[i] + " | ");
             }
