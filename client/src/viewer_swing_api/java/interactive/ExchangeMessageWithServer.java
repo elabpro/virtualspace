@@ -2,11 +2,14 @@ package interactive;
 
 import interactive.speech.AbstractTextToSpeech;
 import interactive.speech.TextToSpeechFactory;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import javax.swing.JOptionPane;
 
 /**
@@ -52,7 +55,9 @@ public class ExchangeMessageWithServer
                     answerArray[i] = temp;
                 }
                 File file = new File("resources", "dialog.gram");
-                FileWriter writer = new FileWriter(file, false); // false - перезапись
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+                    new FileOutputStream("resources/dialog.gram"), "UTF8"));
+                //FileWriter writer = new FileWriter(file, false); // false - перезапись
                 writer.write("#JSGF V1.0;\n" + "grammar dialog;\n" + "public <command> = ");
                 for (int i = 1; i < answerArray.length - 1; i++)
                 {

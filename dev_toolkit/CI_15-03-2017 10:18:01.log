@@ -1,4 +1,0 @@
-g++ -include /home/glebmillenium/virtualspace/server/manager/lib/mysql-connector/include/mysql_connection.h -std=c++11 /home/glebmillenium/virtualspace/server/manager/SequenceTreatmenter.cpp /home/glebmillenium/virtualspace/server/manager/ConnectorDB.cpp /home/glebmillenium/virtualspace/server/manager/ManagerSocket.cpp /home/glebmillenium/virtualspace/server/manager/main.cpp -lmysqlcppconn -o /home/glebmillenium/virtualspace/server/manager/servers
-
-Testing Results:
-
