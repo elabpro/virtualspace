@@ -33,12 +33,18 @@ public:
     ConnectorDB();
     ConnectorDB(const ConnectorDB& orig);
     virtual ~ConnectorDB();
+    
     char* getAnswerToClient(char* condition);
-    char* getDefaultCommands();
+    void updateOpcode();
+    void setOpcode(int opcode);
+    char* getCurrentOpcode();
+    char* getCommandsFromAvailaibleTable();
+    int setDefaultCommandsInAvailaibleTable();
     vector<string> getHistoryAction();
 private:
     sql::Driver *driver;
     sql::Connection *con;
+    
     char* SQLStringToChar(sql::SQLString str);
     char* getCurrentTime();
 };

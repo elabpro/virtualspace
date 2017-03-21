@@ -56,13 +56,17 @@ private:
     int listener;
     struct sockaddr_in addr;
     ConnectorDB* connectorDB;
-
+    bool exchange;
     void intellectualManage(int sock);
-    void loadDefault(int sock);
+    void runExchange();
+    void runInteractive();
 public:
     ManagerSocket();
     ManagerSocket(int port);
+    ManagerSocket(int port, bool texchange);
     ManagerSocket(int ip, int port, int sock, int type_sock, int type_protocol = 0);
+    ManagerSocket(int ip, int port, int sock,
+        int type_sock, int type_protocol, bool texchange);
     ~ManagerSocket();
     void run();
 };

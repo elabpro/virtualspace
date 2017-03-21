@@ -32,6 +32,7 @@ public class TreatmenterVoiceCommand extends Thread
     private static final String GRAMMAR_PATH
             = "resources/";
     private boolean state = false;
+    private static boolean change = false;
     DataInputStream in;
     DataOutputStream out;
 
@@ -74,6 +75,13 @@ public class TreatmenterVoiceCommand extends Thread
             this.state = true;
             while (this.state)
             {
+                if(change)
+                {
+                    recognizer.stopRecognition();
+                    recognizer = new LiveSpeechRecognizer(configuration);
+                    recognizer.startRecognition(true);
+                    change = false;
+                }
                 utterance = recognizer.getResult().getHypothesis();
                 utterance = new String(utterance.getBytes(), "UTF-8");
                 System.out.println(utterance);
@@ -87,7 +95,9 @@ public class TreatmenterVoiceCommand extends Thread
                 }
                 if (utterance.length() > 7)
                 {
-                    ExchangeMessageWithServer.sendMessage(utterance, out, in);
+                    String answer = ConnectWithRemoteManagerSocket.
+                            sendMessage(utterance, in, out);
+                    ExternalSupportModuleCommands.speech(answer);
                 }
             }
             recognizer.stopRecognition();
@@ -100,6 +110,12 @@ public class TreatmenterVoiceCommand extends Thread
         }
     }
 
+    public static void updateDictionary()
+    {
+        change = true;
+    }
+    
+    
     /**
      * stopping остановка обработки голосовых команд
      *

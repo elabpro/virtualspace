@@ -59,6 +59,7 @@ public class ConnectionDialogView extends JPanel implements View, ConnectionView
 	private final boolean hasSshSupport;
     private final JTextField serverVncPortField;
     private final JTextField serverInteractivePortField;
+    private final JTextField serverExchangePortField;
 	private JCheckBox useSshTunnelingCheckbox;
 	private final JComboBox serverNameCombo;
     private JTextField sshUserField;
@@ -111,10 +112,13 @@ public class ConnectionDialogView extends JPanel implements View, ConnectionView
 
         serverVncPortField = new JTextField(COLUMNS_PORT_USER_FIELD);
         serverInteractivePortField = new JTextField("5901");
+        serverExchangePortField = new JTextField("5902");
 
         addFormFieldRow(optionsPane, gridRow, new JLabel("VNC Port:"), serverVncPortField, false);
         ++gridRow;
         addFormFieldRow(optionsPane, gridRow, new JLabel("Interactive Port:"), serverInteractivePortField, false);
+        ++gridRow;
+        addFormFieldRow(optionsPane, gridRow, new JLabel("Exchange Port:"), serverExchangePortField, false);
         ++gridRow;
 
         if (this.hasSshSupport) {
@@ -215,11 +219,17 @@ public class ConnectionDialogView extends JPanel implements View, ConnectionView
                         ((ConnectionParams) item).hostName :
                         (String) item;
                 try {
-                    ConnectWithRemoteManagerSocket connect;
-                    connect = new ConnectWithRemoteManagerSocket(
+                    ConnectWithRemoteManagerSocket connectInteractive;
+                    connectInteractive = new ConnectWithRemoteManagerSocket(
                             serverNameCombo.getSelectedItem().toString(), 
                             Integer.parseInt(serverInteractivePortField.getText()));
-                    connect.start();
+                    connectInteractive.start();
+                    ConnectWithRemoteManagerSocket connectExchange;
+                    connectExchange = new ConnectWithRemoteManagerSocket(
+                            serverNameCombo.getSelectedItem().toString(), 
+                            Integer.parseInt(serverExchangePortField.getText()),
+                            true);
+                    connectExchange.start();
                     setConnectionInProgress(true);
                     presenter.submitConnection(hostName);
                 } catch (WrongParameterException wpe) {

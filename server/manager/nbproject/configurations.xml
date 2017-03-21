@@ -8,6 +8,7 @@
       <itemPath>ManagerSocket.cpp</itemPath>
       <itemPath>SequenceTreatmenter.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
+      <itemPath>startSocket.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="HeaderFiles"
                    displayName="Файлы заголовков"
@@ -15,6 +16,7 @@
       <itemPath>ConnectorDB.h</itemPath>
       <itemPath>ManagerSocket.h</itemPath>
       <itemPath>SequenceTreatmenter.h</itemPath>
+      <itemPath>startSocket.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Файлы ресурсов"
@@ -62,7 +64,7 @@
           <incFile>
             <pElem>lib/mysql-connector/include/mysql_connection.h</pElem>
           </incFile>
-          <commandLine>-g -fprofile-arcs -ftest-coverage</commandLine>
+          <commandLine>-pthread -fprofile-arcs -ftest-coverage</commandLine>
         </ccTool>
         <linkerTool>
           <linkerLibItems>
@@ -111,6 +113,10 @@
         </linkerTool>
       </folder>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="startSocket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="startSocket.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/newtestclass.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -186,6 +192,10 @@
         </linkerTool>
       </folder>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="startSocket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="startSocket.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/newtestclass.cpp" ex="false" tool="1" flavor2="0">
       </item>

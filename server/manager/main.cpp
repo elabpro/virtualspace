@@ -14,23 +14,19 @@
 #include <cstdlib>
 #include "ManagerSocket.h"
 #include "SequenceTreatmenter.h"
+#include "startSocket.h"
 #include <iostream>
 #include "ConnectorDB.h"
-
+#include <thread>
 using namespace std;
+
+
 
 /*
  * 
  */
-int main(int argc, char** argv) 
-{
-    ManagerSocket *p;
-    if(argc > 1){
-        //cout << "Запускаем сервер по порту: " << atoi(argv[1]);
-        p = new ManagerSocket(atoi(argv[1]));
-    } else {
-        p = new ManagerSocket(); 
-    }
-    p->run();
+int main(int argc, char** argv) {
+    (new startSocket);
+    
     return 0;
 }

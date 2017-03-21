@@ -104,7 +104,8 @@ public class TreatmenterVisualCommand extends Thread
                                 var = searchImage("haarcascade/fist.xml");
                                 if (var.length != 0)
                                 {
-                                    ExchangeMessageWithServer.sendMessage("клик", out, in);
+                                    ConnectWithRemoteManagerSocket.
+                                            sendMessage("клик", in, out);
                                 }
                             } else
                             {
@@ -200,10 +201,14 @@ public class TreatmenterVisualCommand extends Thread
                 return;
             } else
             {
-                if(r.x > palmX) ExchangeMessageWithServer.sendMessage("вправо", out, in);
-                else ExchangeMessageWithServer.sendMessage("влево", out, in);
-                if(r.y > palmY) ExchangeMessageWithServer.sendMessage("вниз", out, in);
-                else ExchangeMessageWithServer.sendMessage("вверх", out, in);
+                if(r.x > palmX) ConnectWithRemoteManagerSocket.
+                                            sendMessage("вправо", in, out);
+                else ConnectWithRemoteManagerSocket.
+                                            sendMessage("влево", in, out);
+                if(r.y > palmY) ConnectWithRemoteManagerSocket.
+                                            sendMessage("вниз", in, out);
+                else ConnectWithRemoteManagerSocket.
+                                            sendMessage("вверх", in, out);
                 palmX = r.x;
                 palmY = r.y;
             }
@@ -295,6 +300,8 @@ class MainFrame extends JFrame
     private ImagePanel ip;
     MatOfRect rects;
     public static JTextArea output;
+    public static String TEXT = "";
+    public static boolean updateText = false;
 
     MainFrame()
     {
@@ -303,9 +310,9 @@ class MainFrame extends JFrame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         ip = new ImagePanel();
-        String TEXT = "Вас приветствует помощник\n"
+        TEXT = "Вас приветствует помощник\n"
                 + "виртуального пространства!";
-        JTextArea output = new JTextArea(10, 20);
+        output = new JTextArea(10, 20);
         output.setText(TEXT);
         output.setCaretPosition(0);
         final JScrollPane scrollPane = new JScrollPane(output);
@@ -315,9 +322,20 @@ class MainFrame extends JFrame
         this.setSize(290, 480);
     }
 
-    public void printPhoto(ImageIcon ico, MatOfRect rect)
+    public void printPhoto(ImageIcon ico, MatOfRect rect) throws InterruptedException
     {
+        if(updateText)
+        {
+            output.setText(TEXT);
+            updateText = false;
+            Thread.sleep(100);
+        }
         ip.Init(ico.getImage(), rect);
         ip.repaint();
+    }
+    
+    public static void updateText(String text){
+        TEXT = "Доступные команды: \n" + text;
+        updateText = true;
     }
 }
