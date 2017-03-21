@@ -39,7 +39,8 @@ public:
     void setOpcode(int opcode);
     char* getCurrentOpcode();
     char* getCommandsFromAvailaibleTable();
-    int setDefaultCommandsInAvailaibleTable();
+    void setDefaultCommandsInAvailaibleTable();
+    void setCommandsInAvailaibleTable(char* id_application);
     vector<string> getHistoryAction();
 private:
     sql::Driver *driver;

@@ -62,23 +62,11 @@ char* ConnectorDB::getAnswerToClient(char* condition) {
                     getCurrentTime(), SQLStringToChar(command));
             pstmt = con->prepareStatement(insert);
             pstmt->executeUpdate();
-            sprintf(query,
-                    "SELECT * FROM commands "
-                    "WHERE (id_application = %s)",
-                    SQLStringToChar(application));
+
             stmt = con->createStatement();
             res = stmt->executeQuery(query);
-
-            int i = setDefaultCommandsInAvailaibleTable();
-            while (res->next()) {
-                command = res->getString("id_command");
-                sprintf(insert,
-                        "INSERT INTO available_commands(id, id_command)"
-                        " VALUES(%d, %s)", i, SQLStringToChar(command));
-                pstmt = con->prepareStatement(insert);
-                pstmt->executeUpdate();
-                i++;
-            }
+            
+            setCommandsInAvailaibleTable(SQLStringToChar(application));
             updateOpcode();
         }
         delete res;
@@ -181,7 +169,32 @@ char* ConnectorDB::getCommandsFromAvailaibleTable() {
     return result;
 }
 
-int ConnectorDB::setDefaultCommandsInAvailaibleTable() {
+void ConnectorDB::setCommandsInAvailaibleTable(char* id_application) {
+    char* query = new char[128];
+    char* insert = new char[128];
+    sprintf(query,
+            "SELECT * FROM commands "
+            "WHERE (id_application = 1) OR (id_application = %s)", id_application);
+    sql::Statement *stmt = con->createStatement();
+    sql::ResultSet *res = stmt->executeQuery(query);
+
+    sql::SQLString command;
+    sql::PreparedStatement *pstmt;
+    pstmt = con->prepareStatement("TRUNCATE TABLE available_commands");
+    pstmt->executeUpdate();
+    int i = 0;
+    while (res->next()) {
+        command = res->getString("id_command");
+        sprintf(insert,
+                "INSERT INTO available_commands(id, id_command)"
+                " VALUES(%d, %s)", i, SQLStringToChar(command));
+        pstmt = con->prepareStatement(insert);
+        pstmt->executeUpdate();
+        i++;
+    }
+}
+
+void ConnectorDB::setDefaultCommandsInAvailaibleTable() {
     char* query = new char[128];
     char* insert = new char[128];
     sprintf(query,
@@ -204,7 +217,6 @@ int ConnectorDB::setDefaultCommandsInAvailaibleTable() {
         pstmt->executeUpdate();
         i++;
     }
-    return i;
 }
 
 vector<string> ConnectorDB::getHistoryAction() {
