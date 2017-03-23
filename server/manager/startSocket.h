@@ -30,6 +30,7 @@ public:
         ManagerSocket *exchange;
         exchange = new ManagerSocket(5902, true);
         exchange->run();
+        
     }
     
     startSocket();
