@@ -5,6 +5,7 @@
  */
 package interactive;
 
+import java.awt.AWTException;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,6 +18,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.event.InputEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -29,15 +33,6 @@ import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.Videoio;
 
-/**
- * TreatmenterVisualCommand Класс для обработки видеопотока
- *
- * Java version j8
- *
- * @license IrGUPS
- * @author sleep (Gerschevich A.S.)
- * @link https://github.com/irgups/virtualspace
- */
 public class TreatmenterVisualCommand extends Thread
 {
 
@@ -47,27 +42,20 @@ public class TreatmenterVisualCommand extends Thread
     private ImageIcon imageIcon = null;
     private MainFrame app = null;
     private Mat webcamMatImage;
-    private DataInputStream in;
-    private DataOutputStream out;
     private String side = "";
+    private Robot robot;
     private static int state;
-    private static int palmX;
-    private static int palmY;
 
-    /**
-     * TreatmenterVisualCommand Конструктор обеспечивающий передачу видеопотока
-     * через сокет
-     *
-     * @param in поток входных данных
-     * @param out поток выходных данных
-     */
-    public TreatmenterVisualCommand(DataInputStream in, DataOutputStream out)
+    Dimension ScreenSize; //Размеры окна компьютера
+    Dimension WindowSize;
+
+    public TreatmenterVisualCommand()
     {
         this.webcamMatImage = new Mat();
         this.app = new MainFrame();
-        this.in = in;
-        this.out = out;
         this.state = 1;
+        this.ScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.WindowSize = new Dimension(300, 400);
     }
 
     @Override
@@ -78,13 +66,16 @@ public class TreatmenterVisualCommand extends Thread
      * @var CAP_PROP_FRAME_HEIGHT размер фрейма в длину
      *
      */
+
     public void run()
     {
+
         try
         {
+            this.robot = new Robot();
             VideoCapture capture = new VideoCapture(0);
-            capture.set(Videoio.CAP_PROP_FRAME_WIDTH, 400);
-            capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, 300);
+            capture.set(Videoio.CAP_PROP_FRAME_WIDTH, WindowSize.width);
+            capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, WindowSize.height);
             if (capture.isOpened())
             {
                 state = 3;
@@ -96,16 +87,18 @@ public class TreatmenterVisualCommand extends Thread
                     if (!webcamMatImage.empty())
                     {
                         var = searchImage("haarcascade/palm.xml");
-                        if (state == 1)
+
+                        if (var != null && var.length != 0 && state > 1)
                         {
                             var = searchImage("haarcascade/palm.xml");
-                            if (var.length == 0)
+                            if (var.length == 0 && state > 2)
                             {
                                 var = searchImage("haarcascade/fist.xml");
                                 if (var.length != 0)
                                 {
-                                    ConnectWithRemoteManagerSocket.
-                                            sendMessage("клик", in, out);
+                                    robot.mousePress(InputEvent.BUTTON1_MASK);
+                                    robot.mouseRelease(InputEvent.BUTTON1_MASK);
+                                    System.out.println("клик");
                                 }
                             } else
                             {
@@ -125,6 +118,9 @@ public class TreatmenterVisualCommand extends Thread
         {
             Logger.getLogger(TreatmenterVisualCommand.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex)
+        {
+            Logger.getLogger(TreatmenterVisualCommand.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (AWTException ex)
         {
             Logger.getLogger(TreatmenterVisualCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -190,45 +186,34 @@ public class TreatmenterVisualCommand extends Thread
      * @return void
      * @throws IOException
      */
-    private void manager(Rect r) throws IOException, InterruptedException
+    private void manager(Rect r) throws IOException
     {
         if ((rect != null) && !rect.empty())
         {
-            if (palmX == -1 || palmY == -1)
-            {
-                palmX = r.x;
-                palmY = r.y;
-                return;
-            } else
-            {
-                if(r.x > palmX) ConnectWithRemoteManagerSocket.
-                                            sendMessage("вправо", in, out);
-                else ConnectWithRemoteManagerSocket.
-                                            sendMessage("влево", in, out);
-                if(r.y > palmY) ConnectWithRemoteManagerSocket.
-                                            sendMessage("вниз", in, out);
-                else ConnectWithRemoteManagerSocket.
-                                            sendMessage("вверх", in, out);
-                palmX = r.x;
-                palmY = r.y;
-            }
+            double x = r.x + ((double) r.width) / 2;
+            double y = r.y + ((double) r.height) / 2;
+
+            x = (x / this.WindowSize.width) * this.ScreenSize.width;
+            y = (y / this.WindowSize.height) * this.ScreenSize.height;
+
+            robot.mouseMove((int) x, (int) y);
         }
     }
 
     public static void onHand()
     {
-        state = 1;
-        palmX = -1;
-        palmX = -1;
-    }
-    
-    public static void onDefault()
-    {
-        state = 3;
-        palmX = -1;
-        palmX = -1;
+        state = 2;
     }
 
+    public static void onHandAndFist()
+    {
+        state = 3;
+    }
+
+    public static void onDefault()
+    {
+        state = 1;
+    }
 
 }
 
@@ -324,7 +309,7 @@ class MainFrame extends JFrame
 
     public void printPhoto(ImageIcon ico, MatOfRect rect) throws InterruptedException
     {
-        if(updateText)
+        if (updateText)
         {
             output.setText(TEXT);
             updateText = false;
@@ -333,8 +318,9 @@ class MainFrame extends JFrame
         ip.Init(ico.getImage(), rect);
         ip.repaint();
     }
-    
-    public static void updateText(String text){
+
+    public static void updateText(String text)
+    {
         TEXT = "Доступные команды: \n" + text;
         updateText = true;
     }

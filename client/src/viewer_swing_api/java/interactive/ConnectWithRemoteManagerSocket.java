@@ -1,6 +1,5 @@
 package interactive;
 
-import static interactive.ExternalSupportModuleCommands.speech;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -8,8 +7,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * подключение к удалённому сокету передавая голосовые, а также управление с
@@ -107,14 +104,17 @@ public class ConnectWithRemoteManagerSocket extends Thread
     private String CppToJavaString(String strcpp)
     {
         String result = "";
-        for(int i = 0; i < strcpp.length(); i++)
+        for (int i = 0; i < strcpp.length(); i++)
         {
-            if(strcpp.charAt(i) == '\0') break;
+            if (strcpp.charAt(i) == '\0')
+            {
+                break;
+            }
             result += strcpp.charAt(i);
         }
         return result;
     }
-    
+
     private void checkerCommand() throws IOException, InterruptedException
     {
         String answer;
@@ -125,13 +125,18 @@ public class ConnectWithRemoteManagerSocket extends Thread
         {
             answer = sendMessage("--opcode", in, out);
             opcodeFromServer = Integer.parseInt(CppToJavaString(answer));
+            System.out.println("Состояние клиента: " + opcode
+                    + " Состояние сервера: " + opcodeFromServer);
             if (opcode != opcodeFromServer)
             {
-                opcode = opcodeFromServer;
                 answer = sendMessage("--get", in, out, 16384);
-                ExternalSupportModuleCommands.
-                        updateDictionaryAndGraphicalText(answer);
-                System.out.println(answer);
+                if (answer.length() > 2)
+                {
+                    opcode = opcodeFromServer;
+                    ExternalSupportModuleCommands.
+                            updateDictionaryAndGraphicalText(answer);
+                    System.out.println(answer);
+                }
             }
             Thread.sleep(2500);
         }
@@ -140,7 +145,7 @@ public class ConnectWithRemoteManagerSocket extends Thread
     private void senderCommand() throws IOException, InterruptedException
     {
         treatmenterVoiceCommand = new TreatmenterVoiceCommand(in, out);
-        treatmenterVisualCommand = new TreatmenterVisualCommand(in, out);
+        treatmenterVisualCommand = new TreatmenterVisualCommand();
         treatmenterVisualCommand.start();
         treatmenterVoiceCommand.start();
         String answer = sendMessage("--intellectual", in, out);
@@ -158,8 +163,8 @@ public class ConnectWithRemoteManagerSocket extends Thread
         String answer = new String(b, "UTF-8");
         return answer;
     }
-    
-        public static String sendMessage(String text, DataInputStream in,
+
+    public static String sendMessage(String text, DataInputStream in,
             DataOutputStream out, int sizeByte) throws IOException, InterruptedException
     {
 

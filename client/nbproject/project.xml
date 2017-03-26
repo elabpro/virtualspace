@@ -10,7 +10,9 @@
                 <root id="java2.dir"/>
                 <root id="java3.dir"/>
             </source-roots>
-            <test-roots/>
+            <test-roots>
+                <root id="test.tests.dir"/>
+            </test-roots>
         </data>
     </configuration>
 </project>

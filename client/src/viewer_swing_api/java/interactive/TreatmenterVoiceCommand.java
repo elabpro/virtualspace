@@ -35,6 +35,7 @@ public class TreatmenterVoiceCommand extends Thread
     private static boolean change = false;
     DataInputStream in;
     DataOutputStream out;
+    private static LiveSpeechRecognizer recognizer;
 
     /**
      * TreatmenterVoiceCommand Конструктор обеспечивающий передачу результатов
@@ -67,7 +68,6 @@ public class TreatmenterVoiceCommand extends Thread
             configuration.setUseGrammar(true);
             configuration.setGrammarName("dialog");
 
-            LiveSpeechRecognizer recognizer;
             recognizer = new LiveSpeechRecognizer(configuration);
 
             String utterance;
@@ -75,16 +75,18 @@ public class TreatmenterVoiceCommand extends Thread
             this.state = true;
             while (this.state)
             {
-                if(change)
+                if (change)
                 {
+                    System.out.println("Перезагружаем словарь");
                     recognizer.stopRecognition();
                     recognizer = new LiveSpeechRecognizer(configuration);
                     recognizer.startRecognition(true);
+                    System.out.println("Словарь успешно перезагружен");
                     change = false;
                 }
                 utterance = recognizer.getResult().getHypothesis();
                 utterance = new String(utterance.getBytes(), "UTF-8");
-                System.out.println(utterance);
+                System.out.println("Распознанная команда: " + utterance);
                 if (utterance.equals("проводник запусти управление ладонью"))
                 {
                     TreatmenterVisualCommand.onHand();
@@ -93,7 +95,7 @@ public class TreatmenterVoiceCommand extends Thread
                 {
                     TreatmenterVisualCommand.onDefault();
                 }
-                if (utterance.length() > 7)
+                if (!utterance.equals("<unk>"))
                 {
                     String answer = ConnectWithRemoteManagerSocket.
                             sendMessage(utterance, in, out);
@@ -114,8 +116,7 @@ public class TreatmenterVoiceCommand extends Thread
     {
         change = true;
     }
-    
-    
+
     /**
      * stopping остановка обработки голосовых команд
      *
