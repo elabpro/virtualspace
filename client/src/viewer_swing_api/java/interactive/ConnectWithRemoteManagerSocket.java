@@ -9,14 +9,8 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 /**
- * подключение к удалённому сокету передавая голосовые, а также управление с
- * помощью жестов
- *
- * @param serverPort номер порта для подключения
- * @param address статический ip адрес для поключения сервера к клиенту
- * @param treatmenterVoiceCommand передача команд, с помощью управления голосом
- * @param treatmenterVisualCommand передача команд сделанных, с помощью жестов
- * @param socket создание ip адреса для локального узла
+ * run Метод запускающий реализацию сокет соединения по протоколу TCP в
+ * параллельном треде
  *
  * @author glebmillenium
  */
@@ -60,8 +54,6 @@ public class ConnectWithRemoteManagerSocket extends Thread
      * run Метод запускающий реализацию сокет соединения по протоколу TCP в
      * параллельном треде
      *
-     * @param void
-     * @return void
      */
     @Override
     public void run()
@@ -120,13 +112,16 @@ public class ConnectWithRemoteManagerSocket extends Thread
         String answer;
         int opcode = -1;
         int opcodeFromServer;
-        ExternalSupportModuleCommands.speech("Идёт загрузка доступных команд с сервера");
+        ExternalSupportModuleCommands.speech("Идёт загрузка доступных "
+                + "команд с сервера");
+        answer = sendMessage("--all", in, out, 16384);
+        ExternalSupportModuleCommands.
+                updateDictionary(answer);
+        System.out.println("СЛОВАРЬ: " + answer);
         while (true)
         {
             answer = sendMessage("--opcode", in, out);
             opcodeFromServer = Integer.parseInt(CppToJavaString(answer));
-            System.out.println("Состояние клиента: " + opcode
-                    + " Состояние сервера: " + opcodeFromServer);
             if (opcode != opcodeFromServer)
             {
                 answer = sendMessage("--get", in, out, 16384);
@@ -134,8 +129,7 @@ public class ConnectWithRemoteManagerSocket extends Thread
                 {
                     opcode = opcodeFromServer;
                     ExternalSupportModuleCommands.
-                            updateDictionaryAndGraphicalText(answer);
-                    System.out.println(answer);
+                            updateGraphicalText(answer);
                 }
             }
             Thread.sleep(2500);
@@ -164,6 +158,17 @@ public class ConnectWithRemoteManagerSocket extends Thread
         return answer;
     }
 
+    /**
+     * sendMessage - отправка сообщения серверу
+     *
+     * @param text
+     * @param in
+     * @param out
+     * @param sizeByte
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public static String sendMessage(String text, DataInputStream in,
             DataOutputStream out, int sizeByte) throws IOException, InterruptedException
     {

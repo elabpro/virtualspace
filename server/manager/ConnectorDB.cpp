@@ -39,7 +39,9 @@ char* ConnectorDB::getAnswerToClient(char* condition) {
         sql::ResultSet *res;
         char* query = new char[256];
         sprintf(query,
-                "SELECT * FROM commands WHERE message = '%s'",
+                "SELECT * FROM commands JOIN available_commands"
+                " WHERE commands.message = '%s' AND "
+                "available_commands.id_command = commands.id_command",
                 condition);
         stmt = con->createStatement();
         res = stmt->executeQuery(query);
@@ -270,6 +272,33 @@ char* ConnectorDB::SQLStringToChar(sql::SQLString str) {
             break;
         }
         result[i] = str[i];
+    }
+    return result;
+}
+
+char* ConnectorDB::getAllCommands()
+{
+    char* result = new char[16384];
+    strcpy(result, "");
+
+    try {
+        char* query = new char[128];
+        sql::SQLString command;
+        sprintf(query, "SELECT * FROM commands ");
+        sql::Statement *stmt = con->createStatement();
+        sql::ResultSet *res = stmt->executeQuery(query);
+        while (res->next()) {
+            command = res->getString("message");
+            strcat(result, SQLStringToChar(command));
+            strcat(result, (char*) "\n");
+        }
+    } catch (sql::SQLException &e) {
+        cout << "# ERR: SQLException in " << __FILE__;
+        cout << "# ERR: function in getAllCommands";
+        cout << "# ERR: " << e.what();
+        cout << " (MySQL error code: " << e.getErrorCode();
+        cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+        result = (char*) "";
     }
     return result;
 }

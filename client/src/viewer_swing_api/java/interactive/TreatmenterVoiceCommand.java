@@ -18,9 +18,7 @@ import java.util.logging.Logger;
  *
  * Java version j8
  *
- * @license IrGUPS
  * @author glebmillenium
- * @link https://github.com/irgups/virtualspace
  */
 public class TreatmenterVoiceCommand extends Thread
 {
@@ -53,8 +51,6 @@ public class TreatmenterVoiceCommand extends Thread
     /**
      * run запуск обработки голосовых команд
      *
-     * @param void
-     * @return void
      */
     @Override
     public void run()
@@ -84,22 +80,27 @@ public class TreatmenterVoiceCommand extends Thread
                     System.out.println("Словарь успешно перезагружен");
                     change = false;
                 }
+                System.out.println("Запущен процесс распознавания!");
                 utterance = recognizer.getResult().getHypothesis();
-                utterance = new String(utterance.getBytes(), "UTF-8");
-                System.out.println("Распознанная команда: " + utterance);
-                if (utterance.equals("проводник запусти управление ладонью"))
+                System.out.println("Процесс распознавания остановлен!");
+                if (utterance.length() > 3)
                 {
-                    TreatmenterVisualCommand.onHand();
-                }
-                if (utterance.equals("проводник отключи управление ладонью"))
-                {
-                    TreatmenterVisualCommand.onDefault();
-                }
-                if (!utterance.equals("<unk>"))
-                {
-                    String answer = ConnectWithRemoteManagerSocket.
-                            sendMessage(utterance, in, out);
-                    ExternalSupportModuleCommands.speech(answer);
+                    utterance = new String(utterance.getBytes(), "UTF-8");
+                    System.out.println("Распознанная команда: " + utterance);
+                    if (utterance.equals("ева включи жесты"))
+                    {
+                        TreatmenterVisualCommand.onHand();
+                    }
+                    if (utterance.equals("ева отключи жесты"))
+                    {
+                        TreatmenterVisualCommand.onDefault();
+                    }
+                    if (!utterance.equals("<unk>"))
+                    {
+                        String answer = ConnectWithRemoteManagerSocket.
+                                sendMessage(utterance, in, out);
+                        ExternalSupportModuleCommands.speech(answer);
+                    }
                 }
             }
             recognizer.stopRecognition();
@@ -120,8 +121,6 @@ public class TreatmenterVoiceCommand extends Thread
     /**
      * stopping остановка обработки голосовых команд
      *
-     * @param void
-     * @return void
      */
     public void stopping()
     {

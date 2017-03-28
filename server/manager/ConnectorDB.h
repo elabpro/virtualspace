@@ -39,6 +39,7 @@ public:
     void setOpcode(int opcode);
     char* getCurrentOpcode();
     char* getCommandsFromAvailaibleTable();
+    char* getAllCommands();
     void setDefaultCommandsInAvailaibleTable();
     void setCommandsInAvailaibleTable(char* id_application);
     vector<string> getHistoryAction();

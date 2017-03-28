@@ -78,7 +78,7 @@ public class TreatmenterVisualCommand extends Thread
             capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, WindowSize.height);
             if (capture.isOpened())
             {
-                state = 3;
+                state = 1;
 
                 while (state > 0)
                 {
@@ -169,10 +169,6 @@ public class TreatmenterVisualCommand extends Thread
 
     /**
      * stopping остановка обработчика видеопотока
-     *
-     * @param void
-     * @return void
-     *
      */
     public void stopping()
     {
@@ -220,12 +216,7 @@ public class TreatmenterVisualCommand extends Thread
 /**
  * ImagePanel Класс для отображения графического интерфейса а также вывод
  * изображения с web-камеры
- *
- * Java version j8
- *
- * @license IrGUPS
- * @author ortaz (Reznitskiy M.A.)
- * @link https://github.com/irgups/virtualspace
+ * @author glebmillenium
  */
 class ImagePanel extends JPanel
 {
@@ -271,13 +262,7 @@ class ImagePanel extends JPanel
 
 /**
  * MainFrame фрейм отбражающий изображение с web-камеры Java version j8
- *
- * @license IrGUPS
- *
- * @author sleep (Gerschevich A.S.)
- *
- * @link https://github.com/irgups/virtualspace
- *
+ * @author glebmillenium
  */
 class MainFrame extends JFrame
 {

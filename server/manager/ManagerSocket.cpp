@@ -119,6 +119,10 @@ void ManagerSocket::runExchange() {
                 } else if (!strcmp(data_client, (char*) "--opcode")){
                     const char* result = connectorDB->getCurrentOpcode();
                     send(*it, result, strlen(result), 0);
+                } else if(!strcmp(data_client, (char*) "--all"))
+                {
+                    char* result = connectorDB->getAllCommands();
+                    send(*it, result, strlen(result), 0);
                 }
             }
         }

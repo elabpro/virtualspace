@@ -21,8 +21,9 @@ import javax.swing.JOptionPane;
  */
 public class ExternalSupportModuleCommands
 {
+
     private static AbstractTextToSpeech tts
-                = TextToSpeechFactory.get(TextToSpeechFactory.IVONA_SOURCE);
+            = TextToSpeechFactory.get(TextToSpeechFactory.IVONA_SOURCE);
 
     public static void intellectualManage(String answer, DataInputStream in,
             DataOutputStream out) throws InterruptedException, IOException
@@ -75,10 +76,14 @@ public class ExternalSupportModuleCommands
         }
         return not_unknown;
     }
-    
-    public static void updateDictionaryAndGraphicalText(String answer) throws IOException
+
+    public static void updateGraphicalText(String answer) throws IOException
     {
         MainFrame.updateText(answer);
+    }
+
+    public static void updateDictionary(String answer) throws IOException
+    {
         String[] answerArray = answer.split("\n");
         for (int i = 0; i < answerArray.length - 1; i++)
         {
