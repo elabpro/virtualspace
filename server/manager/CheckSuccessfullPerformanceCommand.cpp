@@ -21,4 +21,3 @@ CheckSuccessfullPerformanceCommand::CheckSuccessfullPerformanceCommand(const Che
 
 CheckSuccessfullPerformanceCommand::~CheckSuccessfullPerformanceCommand() {
 }
-
