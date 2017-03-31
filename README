@@ -1,13 +1,25 @@
 virtualspace - виртуальное пространство, устанавливающее взаимодействие (через клиент) с удаленным рабочим столом компьютера (на котором запущен сервер).
 
 Для сервера необходимо, чтобы были установлены:
+	linux x64 - Версия ядра 3.13 и выше
 	библиотека mysqlcppconn (sudo apt-get install mysqlcppconn-dev;)
 	библеотека libjpeg (sudo apt-get install libjpeg-progs;)
-	для распознования кликов (xdotool) (sudo apt-get install xdotool) 
+	для распознования кликов (xdotool) (sudo apt-get install xdotool;)
+	библиотека pthread
+	библиотека std=c++11 (sudo apt install libx11-dev)
+	система управления базами данных mysql
+		пользователь vnс 
+		пароль 1111 
+		права доступа на запись, удаление, в БД vncserver; дамп находится в ./server/vncserver.sql 
 Для клиента необходимы:
-	java версии 8.121
-	openCV-3.2.0
+	java версии 8.121 x64
+	openCV-3.2.0 x64
 
 Для сборки сервера используется утилита make. Makefile находится в папке ./server/Makefile
 
-Для сборки клиента используется ant (1.8.0 или выше). Build файл находится в ./client/build.xml
+Для сборки клиента используется ant (1.8.0 или выше) (sudo apt install ant). Build файл находится в ./client/build.xml
+
+В папке уже имеются собранные дистрибутивы серверов 
+	(./server/vncserver/x11vnc - осуществляет отображение удаленного рабочего стола)
+	(./server/manager/servers - обработка жестов, голосовых комманд)
+	(./client/dist/client.sh - соединение по 3 портам, т.е. с двумя серверами одновременно)
