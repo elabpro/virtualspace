@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="EasyNote-TE11HC" name="interactive.MainFrameTest" skipped="0" tests="2" time="0.27" timestamp="2017-03-28T10:14:39">
+<testsuite errors="0" failures="0" hostname="EasyNote-TE11HC" name="interactive.MainFrameTest" skipped="0" tests="2" time="0.229" timestamp="2017-03-31T02:54:42">
   <properties>
     <property name="libs.jsp-compiler.javadoc" value="" />
     <property name="javac.test.classpath" value="lib/opencv-320.jar:lib/sphinx4-core-5prealpha-SNAPSHOT.jar:lib/trilead-ssh2-build217-jenkins-8.jar:lib/TextToSpeechFX-1.0-SNAPSHOT.jar:build/classes:/usr/share/netbeans/8.1/platform/modules/ext/junit-4.12.jar:/usr/share/netbeans/8.1/platform/modules/ext/hamcrest-core-1.3.jar" />
@@ -47,7 +47,7 @@
     <property name="ant.file.type.client-impl" value="file" />
     <property name="libs.spring-webmvc3.0.maven-pom" value="" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner interactive.MainFrameTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/home/glebmillenium/virtualspace/client/build/test/results/TEST-interactive.MainFrameTest.xml crashfile=/home/glebmillenium/virtualspace/client/build/junitvmwatcher4208879813191937473.properties propsfile=/home/glebmillenium/virtualspace/client/build/junit2371951084464479533.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner interactive.MainFrameTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/home/glebmillenium/virtualspace/client/build/test/results/TEST-interactive.MainFrameTest.xml crashfile=/home/glebmillenium/virtualspace/client/build/junitvmwatcher8240454460066457190.properties propsfile=/home/glebmillenium/virtualspace/client/build/junit2952099189786742681.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="jnlp.descriptor" value="application" />
     <property name="build.sysclasspath" value="ignore" />
@@ -366,7 +366,7 @@
     <property name="awt.toolkit" value="sun.awt.X11.XToolkit" />
   </properties>
   <testcase classname="interactive.MainFrameTest" name="testUpdateText" time="0.003" />
-  <testcase classname="interactive.MainFrameTest" name="testPrintPhoto" time="0.001" />
+  <testcase classname="interactive.MainFrameTest" name="testPrintPhoto" time="0.0" />
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

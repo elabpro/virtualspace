@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/CheckSuccessfullPerformanceCommand.o \
 	${OBJECTDIR}/ConnectorDB.o \
 	${OBJECTDIR}/ManagerSocket.o \
 	${OBJECTDIR}/SequenceTreatmenter.o \
@@ -79,6 +80,11 @@ LDLIBSOPTIONS=-lmysqlcppconn
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/manager: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/manager ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/CheckSuccessfullPerformanceCommand.o: CheckSuccessfullPerformanceCommand.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -include lib/mysql-connector/include/mysql_connection.h -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CheckSuccessfullPerformanceCommand.o CheckSuccessfullPerformanceCommand.cpp
 
 ${OBJECTDIR}/ConnectorDB.o: ConnectorDB.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -144,6 +150,19 @@ ${TESTDIR}/tests/newtestrunner.o: tests/newtestrunner.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -include lib/mysql-connector/include/mysql_connection.h -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/newtestrunner.o tests/newtestrunner.cpp
 
+
+${OBJECTDIR}/CheckSuccessfullPerformanceCommand_nomain.o: ${OBJECTDIR}/CheckSuccessfullPerformanceCommand.o CheckSuccessfullPerformanceCommand.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/CheckSuccessfullPerformanceCommand.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -include lib/mysql-connector/include/mysql_connection.h -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CheckSuccessfullPerformanceCommand_nomain.o CheckSuccessfullPerformanceCommand.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/CheckSuccessfullPerformanceCommand.o ${OBJECTDIR}/CheckSuccessfullPerformanceCommand_nomain.o;\
+	fi
 
 ${OBJECTDIR}/ConnectorDB_nomain.o: ${OBJECTDIR}/ConnectorDB.o ConnectorDB.cpp 
 	${MKDIR} -p ${OBJECTDIR}

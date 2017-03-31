@@ -1,0 +1,13 @@
+virtualspace - виртуальное пространство, устанавливающее взаимодействие (через клиент) с удаленным рабочим столом компьютера (на котором запущен сервер).
+
+Для сервера необходимо, чтобы были установлены:
+	библиотека mysqlcppconn (sudo apt-get install mysqlcppconn-dev;)
+	библеотека libjpeg (sudo apt-get install libjpeg-progs;)
+	для распознования кликов (xdotool) (sudo apt-get install xdotool) 
+Для клиента необходимы:
+	java версии 8.121
+	openCV-3.2.0
+
+Для сборки сервера используется утилита make. Makefile находится в папке ./server/Makefile
+
+Для сборки клиента используется ant (1.8.0 или выше). Build файл находится в ./client/build.xml
