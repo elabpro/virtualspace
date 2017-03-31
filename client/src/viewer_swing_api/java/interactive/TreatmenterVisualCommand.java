@@ -87,23 +87,18 @@ public class TreatmenterVisualCommand extends Thread
                     if (!webcamMatImage.empty())
                     {
                         var = searchImage("haarcascade/palm.xml");
-
-                        if (var != null && var.length != 0 && state > 1)
+                        if (var.length == 0 && state > 2)
                         {
-                            var = searchImage("haarcascade/palm.xml");
-                            if (var.length == 0 && state > 2)
+                            var = searchImage("haarcascade/fist.xml");
+                            if (var.length != 0)
                             {
-                                var = searchImage("haarcascade/fist.xml");
-                                if (var.length != 0)
-                                {
-                                    robot.mousePress(InputEvent.BUTTON1_MASK);
-                                    robot.mouseRelease(InputEvent.BUTTON1_MASK);
-                                    System.out.println("клик");
-                                }
-                            } else
-                            {
-                                manager(var[0]);
+                                robot.mousePress(InputEvent.BUTTON1_MASK);
+                                robot.mouseRelease(InputEvent.BUTTON1_MASK);
+                                System.out.println("клик");
                             }
+                        } else
+                        {
+                            manager(var[0]);
                         }
                         app.printPhoto(imageIcon, new MatOfRect(var));
                     } else
@@ -216,6 +211,7 @@ public class TreatmenterVisualCommand extends Thread
 /**
  * ImagePanel Класс для отображения графического интерфейса а также вывод
  * изображения с web-камеры
+ *
  * @author glebmillenium
  */
 class ImagePanel extends JPanel
@@ -262,6 +258,7 @@ class ImagePanel extends JPanel
 
 /**
  * MainFrame фрейм отбражающий изображение с web-камеры Java version j8
+ *
  * @author glebmillenium
  */
 class MainFrame extends JFrame
