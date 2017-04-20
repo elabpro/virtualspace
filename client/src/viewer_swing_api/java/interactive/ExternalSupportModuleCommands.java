@@ -65,6 +65,7 @@ public class ExternalSupportModuleCommands
         //Runtime runtime = Runtime.getRuntime();
         //Process proc = runtime.exec("echo '" + text + "' | RHVoice-client -s Aleksandr+CLB | aplay");
         System.out.println("Запуск синтезартора");
+        text = text.replace(" ", "_");
         System.out.println(text);
         Runtime.getRuntime().exec("sh voice.sh '" + text + "'; ");
         //"echo '" + text + "' | RHVoice-client -s Aleksandr+CLB | aplay");
