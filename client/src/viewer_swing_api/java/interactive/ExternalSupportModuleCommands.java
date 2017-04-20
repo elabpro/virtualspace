@@ -53,15 +53,22 @@ public class ExternalSupportModuleCommands
         };
     }
 
-    public static synchronized void speech(String text)
+    public static synchronized void speech(String text) throws IOException
     {
-        try
+        /*try
         {
             tts.textToVoice(text);
         } catch (Exception ex)
         {
             System.out.println(ex.toString());
-        }
+        }*/ 
+        //Runtime runtime = Runtime.getRuntime();
+        //Process proc = runtime.exec("echo '" + text + "' | RHVoice-client -s Aleksandr+CLB | aplay");
+        System.out.println("Запуск синтезартора");
+        System.out.println(text);
+        Runtime.getRuntime().exec("sh voice.sh '" + text + "'; ");
+        //"echo '" + text + "' | RHVoice-client -s Aleksandr+CLB | aplay");
+        System.out.println("Остановка синтезатора");
     }
 
     private static boolean compareString(String answerFromServer, String condition)
